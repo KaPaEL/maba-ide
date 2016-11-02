@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
     private void InitUI(){
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1024,960);
+        frame.setSize(1280,1080);
         frame.setVisible(true);
 
         this.iMenuBar = new DefaultMenuBar();
@@ -30,6 +30,8 @@ public class MainWindow extends JFrame {
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
 
+        DefaultMenu compileMenu= new DefaultMenu("Compile");
+        this.iMenuBar.AddMenu(compileMenu);
     }
 
     public static void main(String args[]){

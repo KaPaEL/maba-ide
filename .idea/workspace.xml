@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3dc37326-f862-46b2-8d82-004af4c2cb0f" name="Default" comment="JMenuBar, JMenu">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maba-IDE/Main/MainWindow.class" afterPath="$PROJECT_DIR$/out/production/Maba-IDE/Main/MainWindow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maba-IDE/MenuBar/DefaultMenuBar.class" afterPath="$PROJECT_DIR$/out/production/Maba-IDE/MenuBar/DefaultMenuBar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maba-IDE/MenuBar/IMenuBar.class" afterPath="$PROJECT_DIR$/out/production/Maba-IDE/MenuBar/IMenuBar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Maba-IDE/MenuBar/IMenuItem.class" afterPath="$PROJECT_DIR$/out/production/Maba-IDE/MenuBar/IMenuItem.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/MainWindow.java" afterPath="$PROJECT_DIR$/src/Main/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java" afterPath="$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MenuBar/IMenuBar.java" afterPath="$PROJECT_DIR$/src/MenuBar/IMenuBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MenuBar/IMenuItem.java" afterPath="$PROJECT_DIR$/src/MenuBar/IMenuItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MenuBar/DefaultMenu.java" afterPath="$PROJECT_DIR$/src/MenuBar/DefaultMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MenuBar/IMenu.java" afterPath="$PROJECT_DIR$/src/MenuBar/IMenu.java" />
     </list>
     <ignored path="Maba-IDE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,21 +28,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="DefaultMenu.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <state relative-caret-position="1">
+              <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#625#626#0" expanded="true" />
+                <element signature="e#657#658#0" expanded="true" />
+                <element signature="e#702#703#0" expanded="true" />
+                <element signature="e#734#735#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultMenuItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding>
+                <element signature="e#303#304#0" expanded="true" />
+                <element signature="e#337#338#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IMenu.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Maba-IDE.iml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Maba-IDE.iml">
+      <file leaf-file-name="IMenuBar.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+            <state relative-caret-position="108">
+              <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -58,71 +81,43 @@
         <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="14" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultMenuItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-              <folding>
-                <element signature="e#303#304#0" expanded="true" />
-                <element signature="e#337#338#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultMenu.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="8" column="38" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#510#511#0" expanded="true" />
-                <element signature="e#548#549#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IMenu.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="31" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="145">
+              <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#266#267#0" expanded="true" />
-                <element signature="e#290#291#0" expanded="true" />
-                <element signature="e#838#839#0" expanded="true" />
-                <element signature="e#894#895#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMenu.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///opt/java/jdk1.8.0_102/src.zip!/javax/swing/JMenu.java">
+      <file leaf-file-name="DefaultToolBar.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultToolBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9000">
-              <caret line="567" column="6" selection-start-line="567" selection-start-column="6" selection-end-line="567" selection-end-column="6" />
+            <state relative-caret-position="126">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultToolItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultToolItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding>
+                <element signature="e#302#303#0" expanded="false" />
+                <element signature="e#336#337#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,20 +127,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
               <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#467#468#0" expanded="true" />
-                <element signature="e#505#506#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMenuBar.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///opt/java/jdk1.8.0_102/src.zip!/javax/swing/JMenuBar.java">
+      <file leaf-file-name="DefaultTool.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2790">
-              <caret line="207" column="6" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="6" />
+            <state relative-caret-position="90">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -174,13 +165,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/Console/README.md" />
         <option value="$PROJECT_DIR$/src/MenuBar/IMenuItem.java" />
-        <option value="$PROJECT_DIR$/src/MenuBar/IMenu.java" />
         <option value="$PROJECT_DIR$/src/MenuBar/IMenuBar.java" />
-        <option value="$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java" />
         <option value="$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java" />
-        <option value="$PROJECT_DIR$/src/MenuBar/DefaultMenu.java" />
-        <option value="$PROJECT_DIR$/src/Main/MainWindow.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/MenuBar/IMenu.java" />
+        <option value="$PROJECT_DIR$/src/MenuBar/DefaultMenu.java" />
+        <option value="$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java" />
+        <option value="$PROJECT_DIR$/src/Main/MainWindow.java" />
       </list>
     </option>
   </component>
@@ -222,6 +213,7 @@
     <panes>
       <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -237,6 +229,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ToolBar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -300,6 +310,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FileExplorer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maba-ide" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="out" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -314,7 +378,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,9 +397,9 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="Main.MainWindow" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -783,25 +846,27 @@
       <workItem from="1477828409130" duration="4006000" />
       <workItem from="1477837211311" duration="6918000" />
       <workItem from="1477844217175" duration="118000" />
+      <workItem from="1478047892691" duration="1446000" />
+      <workItem from="1478054660748" duration="3416000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11281000" />
+    <option name="totallyTimeSpent" value="16143000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="747" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30092594" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30092594" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -845,7 +910,31 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/Main/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileExplorer/FileExplorer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2477#2478#0" expanded="false" />
+            <element signature="e#2514#2515#0" expanded="false" />
+            <element signature="e#2555#2556#0" expanded="false" />
+            <element signature="e#2592#2593#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultToolBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -853,11 +942,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuBar.java">
+    <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultToolItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+        <state relative-caret-position="126">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="e#302#303#0" expanded="false" />
+            <element signature="e#336#337#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///opt/java/jdk1.8.0_102/src.zip!/javax/swing/JMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10206">
+          <caret line="567" column="6" selection-start-line="567" selection-start-column="6" selection-end-line="567" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#55531#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4710#4711#0" expanded="false" />
+            <element signature="e#4734#4735#0" expanded="false" />
+            <element signature="e#4920#4921#0" expanded="false" />
+            <element signature="e#4944#4945#0" expanded="false" />
+            <element signature="e#5495#5496#0" expanded="false" />
+            <element signature="e#5518#5519#0" expanded="false" />
+            <element signature="e#6825#6826#0" expanded="false" />
+            <element signature="e#6857#6858#0" expanded="false" />
+            <element signature="e#8074#8075#0" expanded="false" />
+            <element signature="e#8120#8121#0" expanded="false" />
+            <element signature="e#17047#17048#0" expanded="false" />
+            <element signature="e#17075#17076#0" expanded="false" />
+            <element signature="e#18540#18541#0" expanded="false" />
+            <element signature="e#18581#18582#0" expanded="false" />
+            <element signature="e#20434#20435#0" expanded="false" />
+            <element signature="e#20478#20479#0" expanded="false" />
+            <element signature="e#26137#26138#0" expanded="false" />
+            <element signature="e#26183#26184#0" expanded="false" />
+            <element signature="e#26468#26469#0" expanded="false" />
+            <element signature="e#26545#26546#0" expanded="false" />
+            <element signature="e#31269#31270#0" expanded="false" />
+            <element signature="e#31322#31323#0" expanded="false" />
+            <element signature="e#32462#32463#0" expanded="false" />
+            <element signature="e#32517#32518#0" expanded="false" />
+            <element signature="e#32680#32681#0" expanded="false" />
+            <element signature="e#32738#32739#0" expanded="false" />
+            <element signature="e#33064#33065#0" expanded="false" />
+            <element signature="e#33132#33133#0" expanded="false" />
+            <element signature="e#37406#37407#0" expanded="false" />
+            <element signature="e#37453#37454#0" expanded="false" />
+            <element signature="e#37716#37717#0" expanded="false" />
+            <element signature="e#37757#37758#0" expanded="false" />
+            <element signature="e#38676#38677#0" expanded="false" />
+            <element signature="e#38718#38719#0" expanded="false" />
+            <element signature="e#38861#38862#0" expanded="false" />
+            <element signature="e#38903#38904#0" expanded="false" />
+            <element signature="e#40478#40479#0" expanded="false" />
+            <element signature="e#40505#40506#0" expanded="false" />
+            <element signature="e#45494#45495#0" expanded="false" />
+            <element signature="e#45536#45537#0" expanded="false" />
+            <element signature="e#49083#49084#0" expanded="false" />
+            <element signature="e#49133#49134#0" expanded="false" />
+            <element signature="e#49545#49546#0" expanded="false" />
+            <element signature="e#49580#49581#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Maba-IDE.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -873,10 +1051,173 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="38" />
           <folding>
-            <element signature="e#303#304#0" expanded="true" />
-            <element signature="e#337#338#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///opt/java/jdk1.8.0_102/src.zip!/javax/swing/JMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10206">
+          <caret line="567" column="6" selection-start-line="567" selection-start-column="6" selection-end-line="567" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#55531#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4710#4711#0" expanded="false" />
+            <element signature="e#4734#4735#0" expanded="false" />
+            <element signature="e#4920#4921#0" expanded="false" />
+            <element signature="e#4944#4945#0" expanded="false" />
+            <element signature="e#5495#5496#0" expanded="false" />
+            <element signature="e#5518#5519#0" expanded="false" />
+            <element signature="e#6825#6826#0" expanded="false" />
+            <element signature="e#6857#6858#0" expanded="false" />
+            <element signature="e#8074#8075#0" expanded="false" />
+            <element signature="e#8120#8121#0" expanded="false" />
+            <element signature="e#17047#17048#0" expanded="false" />
+            <element signature="e#17075#17076#0" expanded="false" />
+            <element signature="e#18540#18541#0" expanded="false" />
+            <element signature="e#18581#18582#0" expanded="false" />
+            <element signature="e#20434#20435#0" expanded="false" />
+            <element signature="e#20478#20479#0" expanded="false" />
+            <element signature="e#26137#26138#0" expanded="false" />
+            <element signature="e#26183#26184#0" expanded="false" />
+            <element signature="e#26468#26469#0" expanded="false" />
+            <element signature="e#26545#26546#0" expanded="false" />
+            <element signature="e#31269#31270#0" expanded="false" />
+            <element signature="e#31322#31323#0" expanded="false" />
+            <element signature="e#32462#32463#0" expanded="false" />
+            <element signature="e#32517#32518#0" expanded="false" />
+            <element signature="e#32680#32681#0" expanded="false" />
+            <element signature="e#32738#32739#0" expanded="false" />
+            <element signature="e#33064#33065#0" expanded="false" />
+            <element signature="e#33132#33133#0" expanded="false" />
+            <element signature="e#37406#37407#0" expanded="false" />
+            <element signature="e#37453#37454#0" expanded="false" />
+            <element signature="e#37716#37717#0" expanded="false" />
+            <element signature="e#37757#37758#0" expanded="false" />
+            <element signature="e#38676#38677#0" expanded="false" />
+            <element signature="e#38718#38719#0" expanded="false" />
+            <element signature="e#38861#38862#0" expanded="false" />
+            <element signature="e#38903#38904#0" expanded="false" />
+            <element signature="e#40478#40479#0" expanded="false" />
+            <element signature="e#40505#40506#0" expanded="false" />
+            <element signature="e#45494#45495#0" expanded="false" />
+            <element signature="e#45536#45537#0" expanded="false" />
+            <element signature="e#49083#49084#0" expanded="false" />
+            <element signature="e#49133#49134#0" expanded="false" />
+            <element signature="e#49545#49546#0" expanded="false" />
+            <element signature="e#49580#49581#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///opt/java/jdk1.8.0_102/src.zip!/javax/swing/JMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3726">
+          <caret line="207" column="6" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#24018#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3603#3604#0" expanded="false" />
+            <element signature="e#3639#3640#0" expanded="false" />
+            <element signature="e#4028#4029#0" expanded="false" />
+            <element signature="e#4059#4060#0" expanded="false" />
+            <element signature="e#4219#4220#0" expanded="false" />
+            <element signature="e#4274#4275#0" expanded="false" />
+            <element signature="e#4511#4512#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4781#4782#0" expanded="false" />
+            <element signature="e#4818#4819#0" expanded="false" />
+            <element signature="e#6356#6357#0" expanded="false" />
+            <element signature="e#6398#6399#0" expanded="false" />
+            <element signature="e#6698#6699#0" expanded="false" />
+            <element signature="e#6767#6768#0" expanded="false" />
+            <element signature="e#7024#7025#0" expanded="false" />
+            <element signature="e#7093#7094#0" expanded="false" />
+            <element signature="e#8751#8752#0" expanded="false" />
+            <element signature="e#8801#8802#0" expanded="false" />
+            <element signature="e#8992#8993#0" expanded="false" />
+            <element signature="e#9026#9027#0" expanded="false" />
+            <element signature="e#12237#12250#0" expanded="false" />
+            <element signature="e#12875#12876#0" expanded="false" />
+            <element signature="e#12902#12903#0" expanded="false" />
+            <element signature="e#15751#15752#0" expanded="false" />
+            <element signature="e#15805#15806#0" expanded="false" />
+            <element signature="e#16217#16218#0" expanded="false" />
+            <element signature="e#16252#16253#0" expanded="false" />
+            <element signature="e#17510#17511#0" expanded="false" />
+            <element signature="e#17586#17587#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -886,8 +1227,10 @@
           <caret line="8" column="38" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -906,10 +1249,6 @@
           <caret line="31" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#290#291#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-            <element signature="e#894#895#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -918,7 +1257,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10206">
           <caret line="567" column="6" selection-start-line="567" selection-start-column="6" selection-end-line="567" selection-end-column="6" />
-          <folding />
+          <folding>
+            <element signature="e#0#55531#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4710#4711#0" expanded="false" />
+            <element signature="e#4734#4735#0" expanded="false" />
+            <element signature="e#4920#4921#0" expanded="false" />
+            <element signature="e#4944#4945#0" expanded="false" />
+            <element signature="e#5495#5496#0" expanded="false" />
+            <element signature="e#5518#5519#0" expanded="false" />
+            <element signature="e#6825#6826#0" expanded="false" />
+            <element signature="e#6857#6858#0" expanded="false" />
+            <element signature="e#8074#8075#0" expanded="false" />
+            <element signature="e#8120#8121#0" expanded="false" />
+            <element signature="e#17047#17048#0" expanded="false" />
+            <element signature="e#17075#17076#0" expanded="false" />
+            <element signature="e#18540#18541#0" expanded="false" />
+            <element signature="e#18581#18582#0" expanded="false" />
+            <element signature="e#20434#20435#0" expanded="false" />
+            <element signature="e#20478#20479#0" expanded="false" />
+            <element signature="e#26137#26138#0" expanded="false" />
+            <element signature="e#26183#26184#0" expanded="false" />
+            <element signature="e#26468#26469#0" expanded="false" />
+            <element signature="e#26545#26546#0" expanded="false" />
+            <element signature="e#31269#31270#0" expanded="false" />
+            <element signature="e#31322#31323#0" expanded="false" />
+            <element signature="e#32462#32463#0" expanded="false" />
+            <element signature="e#32517#32518#0" expanded="false" />
+            <element signature="e#32680#32681#0" expanded="false" />
+            <element signature="e#32738#32739#0" expanded="false" />
+            <element signature="e#33064#33065#0" expanded="false" />
+            <element signature="e#33132#33133#0" expanded="false" />
+            <element signature="e#37406#37407#0" expanded="false" />
+            <element signature="e#37453#37454#0" expanded="false" />
+            <element signature="e#37716#37717#0" expanded="false" />
+            <element signature="e#37757#37758#0" expanded="false" />
+            <element signature="e#38676#38677#0" expanded="false" />
+            <element signature="e#38718#38719#0" expanded="false" />
+            <element signature="e#38861#38862#0" expanded="false" />
+            <element signature="e#38903#38904#0" expanded="false" />
+            <element signature="e#40478#40479#0" expanded="false" />
+            <element signature="e#40505#40506#0" expanded="false" />
+            <element signature="e#45494#45495#0" expanded="false" />
+            <element signature="e#45536#45537#0" expanded="false" />
+            <element signature="e#49083#49084#0" expanded="false" />
+            <element signature="e#49133#49134#0" expanded="false" />
+            <element signature="e#49545#49546#0" expanded="false" />
+            <element signature="e#49580#49581#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -926,11 +1312,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#467#468#0" expanded="true" />
-            <element signature="e#505#506#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -938,7 +1320,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3726">
           <caret line="207" column="6" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="6" />
-          <folding />
+          <folding>
+            <element signature="e#0#24018#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3603#3604#0" expanded="false" />
+            <element signature="e#3639#3640#0" expanded="false" />
+            <element signature="e#4028#4029#0" expanded="false" />
+            <element signature="e#4059#4060#0" expanded="false" />
+            <element signature="e#4219#4220#0" expanded="false" />
+            <element signature="e#4274#4275#0" expanded="false" />
+            <element signature="e#4511#4512#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4781#4782#0" expanded="false" />
+            <element signature="e#4818#4819#0" expanded="false" />
+            <element signature="e#6356#6357#0" expanded="false" />
+            <element signature="e#6398#6399#0" expanded="false" />
+            <element signature="e#6698#6699#0" expanded="false" />
+            <element signature="e#6767#6768#0" expanded="false" />
+            <element signature="e#7024#7025#0" expanded="false" />
+            <element signature="e#7093#7094#0" expanded="false" />
+            <element signature="e#8751#8752#0" expanded="false" />
+            <element signature="e#8801#8802#0" expanded="false" />
+            <element signature="e#8992#8993#0" expanded="false" />
+            <element signature="e#9026#9027#0" expanded="false" />
+            <element signature="e#12237#12250#0" expanded="false" />
+            <element signature="e#12875#12876#0" expanded="false" />
+            <element signature="e#12902#12903#0" expanded="false" />
+            <element signature="e#15751#15752#0" expanded="false" />
+            <element signature="e#15805#15806#0" expanded="false" />
+            <element signature="e#16217#16218#0" expanded="false" />
+            <element signature="e#16252#16253#0" expanded="false" />
+            <element signature="e#17510#17511#0" expanded="false" />
+            <element signature="e#17586#17587#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -961,7 +1375,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -979,10 +1392,6 @@
           <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#290#291#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-            <element signature="e#894#895#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -991,11 +1400,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#467#468#0" expanded="true" />
-            <element signature="e#505#506#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,57 +1426,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///opt/java/jdk1.8.0_102/src.zip!/javax/swing/JMenuBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2790">
           <caret line="207" column="6" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding>
-            <element signature="e#303#304#0" expanded="true" />
-            <element signature="e#337#338#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#467#468#0" expanded="true" />
-            <element signature="e#505#506#0" expanded="true" />
+            <element signature="e#0#24018#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3603#3604#0" expanded="false" />
+            <element signature="e#3639#3640#0" expanded="false" />
+            <element signature="e#4028#4029#0" expanded="false" />
+            <element signature="e#4059#4060#0" expanded="false" />
+            <element signature="e#4219#4220#0" expanded="false" />
+            <element signature="e#4274#4275#0" expanded="false" />
+            <element signature="e#4511#4512#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4781#4782#0" expanded="false" />
+            <element signature="e#4818#4819#0" expanded="false" />
+            <element signature="e#6356#6357#0" expanded="false" />
+            <element signature="e#6398#6399#0" expanded="false" />
+            <element signature="e#6698#6699#0" expanded="false" />
+            <element signature="e#6767#6768#0" expanded="false" />
+            <element signature="e#7024#7025#0" expanded="false" />
+            <element signature="e#7093#7094#0" expanded="false" />
+            <element signature="e#8751#8752#0" expanded="false" />
+            <element signature="e#8801#8802#0" expanded="false" />
+            <element signature="e#8992#8993#0" expanded="false" />
+            <element signature="e#9026#9027#0" expanded="false" />
+            <element signature="e#12237#12250#0" expanded="false" />
+            <element signature="e#12875#12876#0" expanded="false" />
+            <element signature="e#12902#12903#0" expanded="false" />
+            <element signature="e#15751#15752#0" expanded="false" />
+            <element signature="e#15805#15806#0" expanded="false" />
+            <element signature="e#16217#16218#0" expanded="false" />
+            <element signature="e#16252#16253#0" expanded="false" />
+            <element signature="e#17510#17511#0" expanded="false" />
+            <element signature="e#17586#17587#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1080,33 +1470,61 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9000">
           <caret line="567" column="6" selection-start-line="567" selection-start-column="6" selection-end-line="567" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#0#55531#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4710#4711#0" expanded="false" />
+            <element signature="e#4734#4735#0" expanded="false" />
+            <element signature="e#4920#4921#0" expanded="false" />
+            <element signature="e#4944#4945#0" expanded="false" />
+            <element signature="e#5495#5496#0" expanded="false" />
+            <element signature="e#5518#5519#0" expanded="false" />
+            <element signature="e#6825#6826#0" expanded="false" />
+            <element signature="e#6857#6858#0" expanded="false" />
+            <element signature="e#8074#8075#0" expanded="false" />
+            <element signature="e#8120#8121#0" expanded="false" />
+            <element signature="e#17047#17048#0" expanded="false" />
+            <element signature="e#17075#17076#0" expanded="false" />
+            <element signature="e#18540#18541#0" expanded="false" />
+            <element signature="e#18581#18582#0" expanded="false" />
+            <element signature="e#20434#20435#0" expanded="false" />
+            <element signature="e#20478#20479#0" expanded="false" />
+            <element signature="e#26137#26138#0" expanded="false" />
+            <element signature="e#26183#26184#0" expanded="false" />
+            <element signature="e#26468#26469#0" expanded="false" />
+            <element signature="e#26545#26546#0" expanded="false" />
+            <element signature="e#31269#31270#0" expanded="false" />
+            <element signature="e#31322#31323#0" expanded="false" />
+            <element signature="e#32462#32463#0" expanded="false" />
+            <element signature="e#32517#32518#0" expanded="false" />
+            <element signature="e#32680#32681#0" expanded="false" />
+            <element signature="e#32738#32739#0" expanded="false" />
+            <element signature="e#33064#33065#0" expanded="false" />
+            <element signature="e#33132#33133#0" expanded="false" />
+            <element signature="e#37406#37407#0" expanded="false" />
+            <element signature="e#37453#37454#0" expanded="false" />
+            <element signature="e#37716#37717#0" expanded="false" />
+            <element signature="e#37757#37758#0" expanded="false" />
+            <element signature="e#38676#38677#0" expanded="false" />
+            <element signature="e#38718#38719#0" expanded="false" />
+            <element signature="e#38861#38862#0" expanded="false" />
+            <element signature="e#38903#38904#0" expanded="false" />
+            <element signature="e#40478#40479#0" expanded="false" />
+            <element signature="e#40505#40506#0" expanded="false" />
+            <element signature="e#45494#45495#0" expanded="false" />
+            <element signature="e#45536#45537#0" expanded="false" />
+            <element signature="e#49083#49084#0" expanded="false" />
+            <element signature="e#49133#49134#0" expanded="false" />
+            <element signature="e#49545#49546#0" expanded="false" />
+            <element signature="e#49580#49581#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/Maba-IDE.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="31" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#290#291#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-            <element signature="e#894#895#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1118,11 +1536,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Maba-IDE.iml">
+    <entry file="file://$PROJECT_DIR$/src/FileExplorer/FileExplorer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2477#2478#0" expanded="false" />
+            <element signature="e#2514#2515#0" expanded="false" />
+            <element signature="e#2555#2556#0" expanded="false" />
+            <element signature="e#2592#2593#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultToolItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="e#302#303#0" expanded="false" />
+            <element signature="e#336#337#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultTool.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ToolBar/DefaultToolBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenuItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#303#304#0" expanded="true" />
+            <element signature="e#337#338#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/DefaultMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar/IMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
