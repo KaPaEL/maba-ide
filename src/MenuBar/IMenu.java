@@ -9,7 +9,7 @@ public interface IMenu {
     String getText();
     void setText(String text);
 
-    void AddMenu(IMenu menu);
+    void AddMenuItem(IMenuItem menu);
 //    void AddSeparator();
 
 }

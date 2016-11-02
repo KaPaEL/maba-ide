@@ -11,6 +11,7 @@ import javax.swing.border.BevelBorder;
 public class MainWindow extends JFrame {
     private IMenuBar iMenuBar;
     private IMenu iMenu;
+    private IMenuItem iMenuItem;
     public MainWindow(){
         InitUI();
     }
@@ -26,6 +27,12 @@ public class MainWindow extends JFrame {
 
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
+
+        DefaultMenuItem newMenuItem= new DefaultMenuItem("New");
+        fileMenu.AddMenuItem(newMenuItem);
+
+        DefaultMenuItem openMenuItem= new DefaultMenuItem("Open");
+        fileMenu.AddMenuItem(openMenuItem);
 
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);

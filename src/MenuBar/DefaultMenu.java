@@ -23,8 +23,8 @@ public class DefaultMenu extends JMenu implements IMenu {
 
 
     @Override
-    public void AddMenu(IMenu menu) {
-        this.add((JMenu) menu);
+    public void AddMenuItem(IMenuItem menu) {
+        this.add((JMenuItem) menu);
     }
 
     @Override
