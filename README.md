@@ -7,7 +7,7 @@ Dewangga Winardi
 M Fakhrul Razi
 Hanif Sudira
 
-#Brance
+#Branches
 
 Menu-toolbar
 =>Untuk develop bagian menu dan toolbar
