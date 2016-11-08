@@ -17,7 +17,11 @@ public class DefaultMenu extends JMenu implements IMenu {
     public DefaultMenu(String name) {
         this.setText(name);
         this.setSize(200,200);
-        this.setMenuLocation(0,0);
+        int x=this.getLocation().x;
+        int y=this.getLocation().y;
+        y=y+this.getPreferredSize().height;
+        this.setMenuLocation(x,y);
+
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
     }
 
@@ -25,6 +29,11 @@ public class DefaultMenu extends JMenu implements IMenu {
     @Override
     public void AddMenuItem(IMenuItem menu) {
         this.add((JMenuItem) menu);
+    }
+
+    @Override
+    public void AddSeparator() {
+        this.add( new JSeparator());
     }
 
     @Override

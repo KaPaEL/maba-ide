@@ -10,6 +10,8 @@ public interface IMenu {
     void setText(String text);
 
     void AddMenuItem(IMenuItem menu);
-//    void AddSeparator();
+
+    void AddSeparator();
+
 
 }

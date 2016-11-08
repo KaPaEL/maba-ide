@@ -28,11 +28,35 @@ public class MainWindow extends JFrame {
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
 
-        DefaultMenuItem newMenuItem= new DefaultMenuItem("New");
+        DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
         fileMenu.AddMenuItem(newMenuItem);
 
-        DefaultMenuItem openMenuItem= new DefaultMenuItem("Open");
-        fileMenu.AddMenuItem(openMenuItem);
+        DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
+        fileMenu.AddMenuItem(openFileMenuItem);
+
+        DefaultMenuItem openFolderMenuItem= new DefaultMenuItem("Open Folder");
+        fileMenu.AddMenuItem(openFolderMenuItem);
+
+        fileMenu.AddSeparator();
+
+        DefaultMenuItem saveMenuItem= new DefaultMenuItem("Save");
+        fileMenu.AddMenuItem(saveMenuItem);
+
+        DefaultMenuItem saveAsMenuItem= new DefaultMenuItem("Save As");
+        fileMenu.AddMenuItem(saveAsMenuItem);
+
+        fileMenu.AddSeparator();
+
+        DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
+        fileMenu.AddMenuItem(closeFileMenuItem);
+
+        DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
+        fileMenu.AddMenuItem(closeAllMenuFile);
+
+        fileMenu.AddSeparator();
+
+        DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
+        fileMenu.AddMenuItem(exitMenuFile);
 
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
