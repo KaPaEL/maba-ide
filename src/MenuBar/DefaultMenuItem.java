@@ -17,6 +17,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem{
         this.setSize(37,20);
     }
 
+
     @Override
     public void setText(String text){
         this.text = text;
