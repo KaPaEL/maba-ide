@@ -10,7 +10,7 @@ public class DefaultToolBar extends JToolBar implements IToolBar {
 
     public DefaultToolBar(){
         this.setName("ExampleToolMenuItem");
-        this.setSize(37, 20);
+        this.setSize(307, 200);
     }
 
     @Override

@@ -8,11 +8,13 @@ import javax.swing.*;
 public class DefaultTool extends JButton implements ITool{
     public DefaultTool(){
 
+
     }
 
     public DefaultTool(String imagePath){
         ImageIcon imageIcon = new ImageIcon(imagePath);
         this.setIcon(imageIcon);
+
     }
 
 
