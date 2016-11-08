@@ -10,7 +10,4 @@ public interface IMenuItem {
     String getText();
     void setText(String text);
 
-    void AddMenuItem(IMenuItem menuItem);
-    void AddSeparator();
-    //void SetCommand(ICommand command);
 }

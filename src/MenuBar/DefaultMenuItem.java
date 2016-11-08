@@ -6,25 +6,25 @@ import javax.swing.*;
  * Created by hanu on 10/30/16.
  */
 public class DefaultMenuItem extends JMenuItem implements IMenuItem{
+    String text = null;
 
     public DefaultMenuItem() {
         this.setName("ExampleToolMenuItem");
-        this.setSize(37,20);
-
     }
 
     public DefaultMenuItem(String name){
-        this.setName(name);
+        this.setText(name);
+        this.setSize(37,20);
     }
 
     @Override
-
-    public void AddMenuItem(IMenuItem menuItem) {
-
-    }
+    public void setText(String text){
+        this.text = text;
+    };
 
     @Override
-    public void AddSeparator() {
+    public String getText(){
+        return this.text;
+    };
 
-    }
 }

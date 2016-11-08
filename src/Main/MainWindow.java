@@ -15,6 +15,7 @@ public class MainWindow extends JFrame {
     private IMenuBar iMenuBar;
     private IMenu iMenu;
     private IToolBar iToolBar;
+    private IMenuItem iMenuItem;
 
     public MainWindow(){
         InitUI();
@@ -23,7 +24,7 @@ public class MainWindow extends JFrame {
     private void InitUI(){
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1024,960);
+        frame.setSize(1280,1080);
         frame.setVisible(true);
 
         this.iMenuBar = new DefaultMenuBar();
@@ -32,8 +33,17 @@ public class MainWindow extends JFrame {
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
 
+        DefaultMenuItem newMenuItem= new DefaultMenuItem("New");
+        fileMenu.AddMenuItem(newMenuItem);
+
+        DefaultMenuItem openMenuItem= new DefaultMenuItem("Open");
+        fileMenu.AddMenuItem(openMenuItem);
+
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
+
+        DefaultMenu compileMenu= new DefaultMenu("Compile");
+        this.iMenuBar.AddMenu(compileMenu);
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
