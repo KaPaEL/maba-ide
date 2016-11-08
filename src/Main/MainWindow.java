@@ -1,6 +1,9 @@
 package Main;
 
 import MenuBar.*;
+import ToolBar.DefaultTool;
+import ToolBar.DefaultToolBar;
+import ToolBar.IToolBar;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -11,6 +14,8 @@ import javax.swing.border.BevelBorder;
 public class MainWindow extends JFrame {
     private IMenuBar iMenuBar;
     private IMenu iMenu;
+    private IToolBar iToolBar;
+
     public MainWindow(){
         InitUI();
     }
@@ -30,6 +35,10 @@ public class MainWindow extends JFrame {
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
 
+        //Region Toobar
+        this.iToolBar = new DefaultToolBar();
+        DefaultTool newTool = new DefaultTool("../assets/new.png");
+        this.iToolBar.AddToolItem(newTool);
     }
 
     public static void main(String args[]){
