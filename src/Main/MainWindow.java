@@ -1,9 +1,13 @@
 package Main;
 
 import MenuBar.*;
+import ToolBar.DefaultTool;
+import ToolBar.DefaultToolBar;
+import ToolBar.IToolBar;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import java.awt.*;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -11,7 +15,9 @@ import javax.swing.border.BevelBorder;
 public class MainWindow extends JFrame {
     private IMenuBar iMenuBar;
     private IMenu iMenu;
+    private IToolBar iToolBar;
     private IMenuItem iMenuItem;
+
     public MainWindow(){
         InitUI();
     }
@@ -19,8 +25,7 @@ public class MainWindow extends JFrame {
     private void InitUI(){
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280,1080);
-        frame.setVisible(true);
+        frame.setSize(800,600);
 
         this.iMenuBar = new DefaultMenuBar();
         frame.setJMenuBar((JMenuBar) this.iMenuBar);
@@ -63,6 +68,18 @@ public class MainWindow extends JFrame {
 
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
+
+        //Region Toobar
+        this.iToolBar = new DefaultToolBar();
+        DefaultTool newTool = new DefaultTool("../../assets/new.png");
+        this.iToolBar.AddToolItem(newTool);
+
+        Container container = frame.getContentPane();
+        container.add((Component) this.iToolBar, BorderLayout.NORTH);
+
+
+        frame.setVisible(true);
+
     }
 
     public static void main(String args[]){

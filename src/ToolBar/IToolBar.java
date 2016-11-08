@@ -5,7 +5,4 @@ package ToolBar;
  */
 public interface IToolBar {
     void AddToolItem(ITool toolItem);
-
-
-
 }
