@@ -33,10 +33,10 @@ public class MainWindow extends JFrame {
         textArea.setCodeFoldingEnabled(true);
         RTextScrollPane sp = new RTextScrollPane(textArea);
         frame.add(sp);
-
-        //setContentPane(frame);
         pack();
         setLocationRelativeTo(null);
+
+        //setContentPane(frame);
 
 
         this.iMenuBar = new DefaultMenuBar();
