@@ -2,7 +2,6 @@ package MenuBar;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-
 /**
  * Created by hanu on 10/30/16.
  */

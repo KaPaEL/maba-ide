@@ -3,6 +3,9 @@ package Main;
 import MenuBar.*;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +27,16 @@ public class MainWindow extends JFrame {
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
+        RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        textArea.setCodeFoldingEnabled(true);
+        RTextScrollPane sp = new RTextScrollPane(textArea);
+        frame.add(sp);
+        pack();
+        setLocationRelativeTo(null);
+
+        //setContentPane(frame);
+
 
         this.iMenuBar = new DefaultMenuBar();
         frame.setJMenuBar((JMenuBar) this.iMenuBar);
