@@ -11,9 +11,10 @@ public class DefaultTool extends JButton implements ITool{
 
     }
 
-    public DefaultTool(String imagePath){
+    public DefaultTool(String imagePath, String toolTip){
         ImageIcon imageIcon = new ImageIcon(imagePath);
         this.setIcon(imageIcon);
+        this.setToolTipText("testing");
 
     }
 

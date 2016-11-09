@@ -1,7 +1,6 @@
 package Main;
 
 import MenuBar.*;
-import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
 
@@ -70,14 +69,18 @@ public class MainWindow extends JFrame {
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
-        DefaultTool newTool = new DefaultTool("assets/new.png");
+        DefaultTool newTool = new DefaultTool("assets/new.png","New file");
         this.iToolBar.AddToolItem(newTool);
-        DefaultTool openTool = new DefaultTool("assets/open.png");
+        DefaultTool openTool = new DefaultTool("assets/open.png","Open file");
         this.iToolBar.AddToolItem(openTool);
-        DefaultTool saveTool = new DefaultTool("assets/save.png");
+        DefaultTool saveTool = new DefaultTool("assets/save.png","save file");
         this.iToolBar.AddToolItem(saveTool);
-        DefaultTool copyTool = new DefaultTool("assets/copy.png");
+        DefaultTool copyTool = new DefaultTool("assets/copy.png","Copy text");
         this.iToolBar.AddToolItem(copyTool);
+        DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
+        this.iToolBar.AddToolItem(undoTool);
+        DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
+        this.iToolBar.AddToolItem(redoTool);
 
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
