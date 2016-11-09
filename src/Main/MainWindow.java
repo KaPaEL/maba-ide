@@ -9,7 +9,6 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 /**
@@ -84,8 +83,14 @@ public class MainWindow extends JFrame {
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
-        DefaultTool newTool = new DefaultTool("../../assets/new.png");
+        DefaultTool newTool = new DefaultTool("assets/new.png");
         this.iToolBar.AddToolItem(newTool);
+        DefaultTool openTool = new DefaultTool("assets/open.png");
+        this.iToolBar.AddToolItem(openTool);
+        DefaultTool saveTool = new DefaultTool("assets/save.png");
+        this.iToolBar.AddToolItem(saveTool);
+        DefaultTool copyTool = new DefaultTool("assets/copy.png");
+        this.iToolBar.AddToolItem(copyTool);
 
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
