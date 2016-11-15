@@ -1,5 +1,6 @@
 package Main;
 
+import Commands.CExit;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -10,6 +11,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -72,7 +74,9 @@ public class MainWindow extends JFrame {
 
         fileMenu.AddSeparator();
 
+        CExit cExit = new CExit();
         DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
+        exitMenuFile.SetCommand(cExit);
         fileMenu.AddMenuItem(exitMenuFile);
 
         DefaultMenu editMenu= new DefaultMenu("Edit");
