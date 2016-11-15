@@ -1,6 +1,7 @@
 package Main;
 
 import MenuBar.*;
+import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
