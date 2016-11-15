@@ -3,13 +3,12 @@ package Commands;
 /**
  * Created by hanu on 11/15/16.
  */
-public class CExit implements ICommand{
-    public CExit() {
+public class Exit implements ICommand{
+    public Exit() {
     }
 
     @Override
-
-    public void Execute() {
+    public void execute() {
         System.out.println("Exit Now");
         System.exit(0);
     }

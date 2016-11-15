@@ -1,6 +1,7 @@
 package Main;
 
-import Commands.CExit;
+import Commands.*;
+import Commands.ShellCommand.Compile;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -47,6 +48,7 @@ public class MainWindow extends JFrame {
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
 
+
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
         fileMenu.AddMenuItem(newMenuItem);
 
@@ -74,9 +76,9 @@ public class MainWindow extends JFrame {
 
         fileMenu.AddSeparator();
 
-        CExit cExit = new CExit();
+        Exit exit = new Exit();
         DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
-        exitMenuFile.SetCommand(cExit);
+        exitMenuFile.SetCommand(exit);
         fileMenu.AddMenuItem(exitMenuFile);
 
         DefaultMenu editMenu= new DefaultMenu("Edit");
@@ -84,6 +86,14 @@ public class MainWindow extends JFrame {
 
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
+
+        DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
+        compileMenu.AddMenuItem(runMenuItem);
+
+        Compile compile = new Compile();
+        DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
+        compileMenuItem.SetCommand(compile);
+        compileMenu.AddMenuItem(compileMenuItem);
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();

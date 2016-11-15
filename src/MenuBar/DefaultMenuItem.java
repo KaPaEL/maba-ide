@@ -1,12 +1,8 @@
 package MenuBar;
 
-import Commands.CExit;
 import Commands.ICommand;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,7 +12,6 @@ import java.awt.event.MouseListener;
 public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListener{
     String text = null;
     private ICommand command;
-
     public DefaultMenuItem() {
         this.setName("ExampleToolMenuItem");
     }
@@ -36,6 +31,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
     @Override
     public void SetCommand(ICommand command) { this.command = command; }
 
+
     @Override
     public String getText(){
         return this.text;
@@ -53,7 +49,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.command.Execute();
+        this.command.execute();
     }
 
     @Override

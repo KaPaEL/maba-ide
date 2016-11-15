@@ -1,6 +1,5 @@
 package MenuBar;
 
-import Commands.CExit;
 import Commands.ICommand;
 
 /**
