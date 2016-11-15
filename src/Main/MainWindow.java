@@ -1,5 +1,6 @@
 package Main;
 
+import Commands.ShellCommand.Compile;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -10,6 +11,8 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -45,7 +48,16 @@ public class MainWindow extends JFrame {
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
 
+        Compile compile = new Compile();
+        
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
+        newMenuItem.SetCommand(compile);
+        newMenuItem.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                newMenuItem.RunCommand();
+            }
+        });
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");

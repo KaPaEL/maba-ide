@@ -1,11 +1,13 @@
 package MenuBar;
 
+import Commands.ICommand;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 /**
  * Created by hanu on 10/30/16.
  */
-public class DefaultMenu extends JMenu implements IMenu {
+public class DefaultMenu extends JMenu implements IMenu{
     String text = null;
 
     public DefaultMenu() {
