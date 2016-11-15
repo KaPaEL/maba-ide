@@ -8,7 +8,6 @@
     <option name="KEEP_CONTROL_STATEMENT_IN_ONE_LINE" value="false" />
     <option name="BLANK_LINES_BEFORE_PACKAGE" value="1" />
     <option name="ELSE_ON_NEW_LINE" value="true" />
-    <option name="SPACE_AROUND_ASSIGNMENT_OPERATORS" value="false" />
     <option name="SPACE_AROUND_EQUALITY_OPERATORS" value="false" />
     <option name="SPACE_AROUND_RELATIONAL_OPERATORS" value="false" />
     <option name="SPACE_AROUND_BITWISE_OPERATORS" value="false" />
