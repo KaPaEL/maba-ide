@@ -17,14 +17,14 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
     }
 
     public DefaultMenuItem(String name){
-        this.setText(name);
+        this.SetText(name);
         this.setSize(37,20);
         addMouseListener(this);
     }
 
 
     @Override
-    public void setText(String text){
+    public void SetText(String text){
         this.text = text;
     }
 
@@ -62,4 +62,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
 
     }
 
+    public void SetIcon(ImageIcon icon) {
+        this.setIcon(icon);
+    }
 }

@@ -1,7 +1,5 @@
 package MenuBar;
 
-import Commands.ICommand;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 /**
@@ -16,7 +14,7 @@ public class DefaultMenu extends JMenu implements IMenu{
     }
 
     public DefaultMenu(String name) {
-        this.setText(name);
+        this.SetText(name);
         this.setSize(200,200);
         int x=this.getLocation().x;
         int y=this.getLocation().y;
@@ -38,7 +36,7 @@ public class DefaultMenu extends JMenu implements IMenu{
     }
 
     @Override
-    public void setText(String text){
+    public void SetText(String text){
         this.text = text;
     };
 

@@ -2,6 +2,7 @@ package Main;
 
 import Commands.*;
 import Commands.ShellCommand.Compile;
+import Editor.DefaultTextArea;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -31,11 +32,9 @@ public class MainWindow extends JFrame {
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
-        RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
-        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        textArea.setCodeFoldingEnabled(true);
-        RTextScrollPane sp = new RTextScrollPane(textArea);
-        frame.add(sp);
+
+        DefaultTextArea defaultTextArea = new DefaultTextArea();
+        frame.add(defaultTextArea);
         pack();
         setLocationRelativeTo(null);
 
@@ -50,9 +49,13 @@ public class MainWindow extends JFrame {
 
 
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
+        newMenuItem.SetIcon(new ImageIcon("assets/new.png"));
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
+        OpenFile openFile = new OpenFile(defaultTextArea);
+        openFileMenuItem.SetCommand(openFile);
+        openFileMenuItem.SetIcon(new ImageIcon("assets/open.png"));
         fileMenu.AddMenuItem(openFileMenuItem);
 
         DefaultMenuItem openFolderMenuItem= new DefaultMenuItem("Open Folder");
@@ -76,8 +79,8 @@ public class MainWindow extends JFrame {
 
         fileMenu.AddSeparator();
 
-        Exit exit = new Exit();
         DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
+        Exit exit = new Exit();
         exitMenuFile.SetCommand(exit);
         fileMenu.AddMenuItem(exitMenuFile);
 
