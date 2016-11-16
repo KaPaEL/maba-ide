@@ -1,6 +1,7 @@
 package Main;
 
-import Commands.*;
+import Commands.Exit;
+import Commands.OpenFile;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
 import FileExplorer.FileExplorer;
@@ -15,8 +16,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import java.awt.event.ActionEvent;
-
 /**
  * Created by Hanif Sudira on 10/30/2016.
  */
@@ -27,7 +26,21 @@ public class MainWindow extends JFrame {
     private IMenuItem iMenuItem;
 
     public MainWindow() throws IOException {
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         InitUI();
+
+
     }
 
     private void InitUI() throws IOException {
@@ -36,7 +49,8 @@ public class MainWindow extends JFrame {
         frame.setSize(800,600);
 
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
-        UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
+        //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
+
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         frame.add(defaultTextArea);
 
@@ -60,10 +74,11 @@ public class MainWindow extends JFrame {
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
         OpenFile openFile = new OpenFile(defaultTextArea);
         openFileMenuItem.SetCommand(openFile);
-        openFileMenuItem.SetIcon(new ImageIcon("assets/open.png"));
+        openFileMenuItem.SetIcon(new ImageIcon("assets/open-file.png"));
         fileMenu.AddMenuItem(openFileMenuItem);
 
         DefaultMenuItem openFolderMenuItem= new DefaultMenuItem("Open Folder");
+        openFolderMenuItem.SetIcon(new ImageIcon("assets/open.png"));
         fileMenu.AddMenuItem(openFolderMenuItem);
 
         fileMenu.AddSeparator();
@@ -73,6 +88,7 @@ public class MainWindow extends JFrame {
         fileMenu.AddMenuItem(saveMenuItem);
 
         DefaultMenuItem saveAsMenuItem= new DefaultMenuItem("Save As");
+        saveAsMenuItem.SetIcon(new ImageIcon("assets/save-as.png"));
         fileMenu.AddMenuItem(saveAsMenuItem);
 
         fileMenu.AddSeparator();
@@ -94,18 +110,53 @@ public class MainWindow extends JFrame {
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
 
+        DefaultMenuItem undoMenuItem= new DefaultMenuItem("Undo");
+        undoMenuItem.SetIcon(new ImageIcon("assets/undo.png"));
+        editMenu.AddMenuItem(undoMenuItem);
+        DefaultMenuItem redoMenuItem= new DefaultMenuItem("Redo");
+        redoMenuItem.SetIcon(new ImageIcon("assets/redo.png"));
+        editMenu.AddMenuItem(redoMenuItem);
+        editMenu.AddSeparator();
+
+        DefaultMenuItem cutMenuItem= new DefaultMenuItem("Cut");
+        cutMenuItem.SetIcon(new ImageIcon("assets/cut.png"));
+        editMenu.AddMenuItem(cutMenuItem);
+
         DefaultMenuItem copyMenuItem= new DefaultMenuItem("Copy");
         copyMenuItem.SetIcon(new ImageIcon("assets/copy.png"));
         editMenu.AddMenuItem(copyMenuItem);
 
+        DefaultMenuItem pasteMenuItem= new DefaultMenuItem("Paste");
+        pasteMenuItem.SetIcon(new ImageIcon("assets/paste.png"));
+        editMenu.AddMenuItem(pasteMenuItem);
+
+        DefaultMenuItem selectAllMenuItem= new DefaultMenuItem("Select All");
+        editMenu.AddMenuItem(selectAllMenuItem);
+
+        //MENU Search
+        DefaultMenu searchMenu= new DefaultMenu("Search");
+        this.iMenuBar.AddMenu(searchMenu);
+
+        DefaultMenuItem findMenuItem = new DefaultMenuItem("Find");
+        findMenuItem.SetIcon(new ImageIcon("assets/find.png"));
+        searchMenu.AddMenuItem(findMenuItem);
+
+        DefaultMenuItem replaceMenuItem = new DefaultMenuItem("Replace");
+        replaceMenuItem.SetIcon(new ImageIcon("assets/replace.png"));
+        searchMenu.AddMenuItem(replaceMenuItem);
+
+
+        //Menu Compile
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
 
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
+        runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
         compileMenu.AddMenuItem(runMenuItem);
 
         Compile compile = new Compile();
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
+        compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetCommand(compile);
         compileMenu.AddMenuItem(compileMenuItem);
 
@@ -114,8 +165,12 @@ public class MainWindow extends JFrame {
         this.iToolBar = new DefaultToolBar();
         DefaultTool newTool = new DefaultTool("assets/new.png","New file");
         this.iToolBar.AddToolItem(newTool);
-        DefaultTool openTool = new DefaultTool("assets/open.png","Open file");
-        this.iToolBar.AddToolItem(openTool);
+        DefaultTool openFileTool = new DefaultTool("assets/open-file.png","Open file");
+        this.iToolBar.AddToolItem(openFileTool);
+        DefaultTool openFolderTool = new DefaultTool("assets/open.png","Open folder");
+        this.iToolBar.AddToolItem(openFolderTool);
+        Container fileContainer = frame.getContentPane();
+        fileContainer.add((Component) this.iToolBar, BorderLayout.WEST);
         DefaultTool saveTool = new DefaultTool("assets/save.png","save file");
         this.iToolBar.AddToolItem(saveTool);
         DefaultTool copyTool = new DefaultTool("assets/copy.png","Copy text");
@@ -124,6 +179,8 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddToolItem(undoTool);
         DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
+        DefaultTool runTool = new DefaultTool("assets/run.png","Run");
+        this.iToolBar.AddToolItem(runTool);
 
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);

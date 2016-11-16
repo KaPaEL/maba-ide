@@ -12,6 +12,7 @@ public class DefaultTool extends JButton implements ITool{
         this.setIcon(imageIcon);
         this.AddSeparator();
         this.setBorderPainted(false);
+        this.setToolTipText(toolTip);
 
     }
 
