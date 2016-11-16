@@ -3,7 +3,7 @@ package Main;
 import Commands.*;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
-import FileExplorer.FileExplorer;
+import FileExplorer.*;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -36,8 +36,9 @@ public class MainWindow extends JFrame {
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
         UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
         DefaultTextArea defaultTextArea = new DefaultTextArea();
-        frame.add(defaultTextArea);
-
+        JScrollPane eastPanel = new JScrollPane(defaultTextArea);
+        DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
+        JScrollPane westPanel = new JScrollPane(new FileExplorer("."));
         pack();
         setLocationRelativeTo(null);
 
@@ -62,6 +63,8 @@ public class MainWindow extends JFrame {
         fileMenu.AddMenuItem(openFileMenuItem);
 
         DefaultMenuItem openFolderMenuItem= new DefaultMenuItem("Open Folder");
+        OpenFolder openFolder = new OpenFolder(defaultFileExplorer);
+        openFolderMenuItem.SetCommand(openFolder);
         fileMenu.AddMenuItem(openFolderMenuItem);
 
         fileMenu.AddSeparator();
@@ -128,8 +131,6 @@ public class MainWindow extends JFrame {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
-        JScrollPane westPanel = new JScrollPane(new FileExplorer(new File(".")));
-        JScrollPane eastPanel = new JScrollPane(defaultTextArea);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
         contentPanel.add(splitPane, BorderLayout.CENTER);
