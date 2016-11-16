@@ -1,5 +1,6 @@
 package Main;
 
+import FileExplorer.FileExplorer;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -105,9 +106,21 @@ public class MainWindow extends JFrame {
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
 
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
+        JScrollPane westPanel = new JScrollPane(new FileExplorer(new File(".")));
+        JEditorPane editor = new JEditorPane("text/plain", "Hello World");
+        JScrollPane eastPanel = new JScrollPane(editor);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
+        splitPane.setDividerLocation(148);
+        contentPanel.add(splitPane, BorderLayout.CENTER);
+        setContentPane(contentPanel);
+        frame.add(contentPanel);
+
         frame.setVisible(true);
 
     }
+
 
     public static void main(String args[]) throws IOException {
         MainWindow mainWindow = new MainWindow();
