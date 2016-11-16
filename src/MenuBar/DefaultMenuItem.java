@@ -20,6 +20,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
         this.SetText(name);
         this.setSize(37,20);
         addMouseListener(this);
+        this.setBorderPainted(false);
     }
 
 

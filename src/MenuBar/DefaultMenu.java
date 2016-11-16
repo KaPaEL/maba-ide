@@ -1,7 +1,6 @@
 package MenuBar;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 /**
  * Created by hanu on 10/30/16.
  */
@@ -21,7 +20,7 @@ public class DefaultMenu extends JMenu implements IMenu{
         y=y+this.getPreferredSize().height;
         this.setMenuLocation(x,y);
 
-        this.setBorder(new BevelBorder(BevelBorder.RAISED));
+        //this.setBorder(new BevelBorder(BevelBorder.RAISED));
     }
 
 
