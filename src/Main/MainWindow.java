@@ -47,9 +47,9 @@ public class MainWindow extends JFrame {
         this.iMenuBar = new DefaultMenuBar();
         frame.setJMenuBar((JMenuBar) this.iMenuBar);
 
+        //MENU FILE
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
-
 
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
         newMenuItem.SetIcon(new ImageIcon("assets/new.png"));
@@ -88,8 +88,13 @@ public class MainWindow extends JFrame {
         exitMenuFile.SetCommand(exit);
         fileMenu.AddMenuItem(exitMenuFile);
 
+        //MENU EDIT
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
+
+        DefaultMenuItem copyMenuItem= new DefaultMenuItem("Copy");
+        copyMenuItem.SetIcon(new ImageIcon("assets/copy.png"));
+        editMenu.AddMenuItem(copyMenuItem);
 
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
