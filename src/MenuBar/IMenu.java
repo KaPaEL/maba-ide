@@ -7,7 +7,7 @@ public interface IMenu {
     String text = null;
 
     String getText();
-    void setText(String text);
+    void SetText(String text);
 
     void AddMenuItem(IMenuItem menu);
 
