@@ -8,8 +8,11 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -20,14 +23,16 @@ public class MainWindow extends JFrame {
     private IToolBar iToolBar;
     private IMenuItem iMenuItem;
 
-    public MainWindow(){
+    public MainWindow() throws IOException {
         InitUI();
     }
 
-    private void InitUI(){
+    private void InitUI() throws IOException {
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
+        frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
+        UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
         RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
@@ -82,6 +87,7 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(compileMenu);
 
         //Region Toobar
+
         this.iToolBar = new DefaultToolBar();
         DefaultTool newTool = new DefaultTool("assets/new.png","New file");
         this.iToolBar.AddToolItem(newTool);
@@ -99,12 +105,11 @@ public class MainWindow extends JFrame {
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
 
-
         frame.setVisible(true);
 
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException {
         MainWindow mainWindow = new MainWindow();
     }
 }
