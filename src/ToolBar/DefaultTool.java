@@ -6,14 +6,12 @@ import javax.swing.*;
  * Created by ahmad on 11/1/2016.
  */
 public class DefaultTool extends JButton implements ITool{
-    public DefaultTool(){
 
-
-    }
-
-    public DefaultTool(String imagePath){
+    public DefaultTool(String imagePath, String toolTip){
         ImageIcon imageIcon = new ImageIcon(imagePath);
         this.setIcon(imageIcon);
+        this.AddSeparator();
+        this.setBorderPainted(false);
 
     }
 
