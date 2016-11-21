@@ -1,10 +1,9 @@
 package Main;
 
-import Commands.Exit;
-import Commands.OpenFile;
+import Commands.*;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
-import FileExplorer.FileExplorer;
+import FileExplorer.*;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -52,8 +51,9 @@ public class MainWindow extends JFrame {
         //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
-        frame.add(defaultTextArea);
-
+        JScrollPane eastPanel = new JScrollPane(defaultTextArea);
+        DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
+        JScrollPane westPanel = new JScrollPane(new FileExplorer("."));
         pack();
         setLocationRelativeTo(null);
 
@@ -68,32 +68,42 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(fileMenu);
 
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
+        NewFile newFile = new NewFile(defaultTextArea,defaultFileExplorer,this);
+        newMenuItem.SetCommand(newFile);
         newMenuItem.SetIcon(new ImageIcon("assets/new.png"));
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
-        OpenFile openFile = new OpenFile(defaultTextArea);
+        OpenFile openFile = new OpenFile(defaultTextArea,defaultFileExplorer);
         openFileMenuItem.SetCommand(openFile);
         openFileMenuItem.SetIcon(new ImageIcon("assets/open-file.png"));
         fileMenu.AddMenuItem(openFileMenuItem);
 
         DefaultMenuItem openFolderMenuItem= new DefaultMenuItem("Open Folder");
+        OpenFolder openFolder = new OpenFolder(defaultFileExplorer);
+        openFolderMenuItem.SetCommand(openFolder);
         openFolderMenuItem.SetIcon(new ImageIcon("assets/open.png"));
         fileMenu.AddMenuItem(openFolderMenuItem);
 
         fileMenu.AddSeparator();
 
         DefaultMenuItem saveMenuItem= new DefaultMenuItem("Save");
+        Save save = new Save(defaultTextArea,defaultFileExplorer);
+        saveMenuItem.SetCommand(save);
         saveMenuItem.SetIcon(new ImageIcon("assets/save.png"));
         fileMenu.AddMenuItem(saveMenuItem);
 
         DefaultMenuItem saveAsMenuItem= new DefaultMenuItem("Save As");
+        SaveAs saveAs = new SaveAs(defaultTextArea,defaultFileExplorer);
+        saveAsMenuItem.SetCommand(saveAs);
         saveAsMenuItem.SetIcon(new ImageIcon("assets/save-as.png"));
         fileMenu.AddMenuItem(saveAsMenuItem);
 
         fileMenu.AddSeparator();
 
         DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
+        CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
+        closeFileMenuItem.SetCommand(closeFile);
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
@@ -183,11 +193,8 @@ public class MainWindow extends JFrame {
 
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
-
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
-        JScrollPane westPanel = new JScrollPane(new FileExplorer(new File(".")));
-        JScrollPane eastPanel = new JScrollPane(defaultTextArea);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
         contentPanel.add(splitPane, BorderLayout.CENTER);

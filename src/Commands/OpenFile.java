@@ -1,9 +1,14 @@
 package Commands;
 
 import Editor.ITextArea;
+import FileExplorer.IFileExplorer;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
+
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -17,10 +22,14 @@ import java.nio.file.Paths;
 // TODO: 15/11/2016 http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FileChooserDemoProject/src/components/FileChooserDemo.java
 public class OpenFile extends JFileChooser implements ICommand{
     private String text=null;
+    private String folderPath=".";
+    private String fileName="";
     private ITextArea textArea;
+    private IFileExplorer iFileExplorer;
 
-    public OpenFile(RSyntaxTextArea textArea) {
+    public OpenFile(RSyntaxTextArea textArea,IFileExplorer iFileExplorer) {
         this.textArea = (ITextArea) textArea;
+        this.iFileExplorer = (IFileExplorer) iFileExplorer;
     }
 
     static String readFile(String path, Charset encoding)
@@ -33,6 +42,8 @@ public class OpenFile extends JFileChooser implements ICommand{
     @Override
     public void execute() {
         JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".c", "c", "c");
+        fileChooser.setFileFilter(filter);
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
@@ -41,11 +52,17 @@ public class OpenFile extends JFileChooser implements ICommand{
             try {
                 text = readFile(selectedFile.getAbsolutePath(), StandardCharsets.UTF_8);
                 this.textArea.SetText(text);
+                folderPath = fileChooser.getCurrentDirectory().getAbsolutePath();
+                this.iFileExplorer.SetPath(folderPath);
+                fileName = fileChooser.getSelectedFile().getName();
+                this.iFileExplorer.SetFileName(fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Open file");
+
+        System.out.println("Open File in Folder "+folderPath);
+        System.out.println("Open File in File Name "+fileName);
 
     }
 

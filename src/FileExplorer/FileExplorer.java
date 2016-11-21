@@ -11,12 +11,13 @@ import java.util.Vector;
 
 public class FileExplorer extends JPanel {
 	/** Construct a FileTree */
-	public FileExplorer(File dir) {
+	public FileExplorer(String folderPath) {
+		File dir = new File(folderPath);
 		setLayout(new BorderLayout());
 //		System.out.print(dir);
 		// Make a tree list with all the nodes, and make it a JTree
 		JTree tree = new JTree(addNodes(null, dir));
-		
+
 		// Add a listener
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent e) {
@@ -33,7 +34,7 @@ public class FileExplorer extends JPanel {
 		scrollpane.getViewport().add(tree);
 		add(BorderLayout.CENTER, scrollpane);
 	}
-	
+
 	/** Add nodes from under "dir" into curTop. Highly recursive. */
 	DefaultMutableTreeNode addNodes(DefaultMutableTreeNode curTop, File dir) {
 		System.out.print(dir);
@@ -80,22 +81,22 @@ public class FileExplorer extends JPanel {
 	
 	/** Main: make a Frame, add a FileTree */
 	public static void main(String[] av) {
-		
-		JFrame frame = new JFrame("FileTree");
-		frame.setForeground(Color.black);
-		frame.setBackground(Color.lightGray);
-		Container cp = frame.getContentPane();
-		
-		if (av.length == 0) {
-			cp.add(new FileExplorer(new File(".")));
-		} else {
-			cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));
-			for (int i = 0; i < av.length; i++)
-				cp.add(new FileExplorer(new File(av[i])));
-		}
-		
-		frame.pack();
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//		JFrame frame = new JFrame("FileTree");
+//		frame.setForeground(Color.black);
+//		frame.setBackground(Color.lightGray);
+//		Container cp = frame.getContentPane();
+//
+//		if (av.length == 0) {
+//			cp.add(new FileExplorer(new File(".")));
+//		} else {
+//			cp.setLayout(new BoxLayout(cp, BoxLayout.X_AXIS));
+//			for (int i = 0; i < av.length; i++)
+//				cp.add(new FileExplorer(new File(av[i])));
+//		}
+//
+//		frame.pack();
+//		frame.setVisible(true);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

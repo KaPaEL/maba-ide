@@ -11,30 +11,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Created by mfrazi on 15/11/2016.
+ * Created by HANU on 21/11/2016.
  */
-public class NewFile implements ICommand{
+public class Save  implements ICommand {
     private IFileExplorer iFileExplorer;
-    private String folderPath;
-    private JFrame mainwindow;
     private ITextArea textArea;
 
-    public NewFile(RSyntaxTextArea textArea, IFileExplorer iFileExplorer, JFrame mainwindow) {
+    public Save(RSyntaxTextArea textArea,  IFileExplorer iFileExplorer) {
         this.textArea = (ITextArea) textArea;
         this.iFileExplorer = iFileExplorer;
-        this.mainwindow = mainwindow;
     }
 
     @Override
     public void execute(){
-        String fileName = JOptionPane.showInputDialog(null,
-                "Masukkan Nama File ?",
-                "Dialog",
-                JOptionPane.QUESTION_MESSAGE);
         try {
-            String content = "";
-            this.textArea.SetText("");
-            File file = new File(this.iFileExplorer.GetPath()+"\\"+fileName+".c");
+            File file = new File(this.iFileExplorer.GetPath()+"\\"+ this.iFileExplorer.GetFileName());
 
             if (!file.exists()) {
                 file.createNewFile();
@@ -42,12 +33,13 @@ public class NewFile implements ICommand{
 
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(content);
+            bw.write(this.textArea.GetText());
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        iFileExplorer.SetFileName(fileName+".c");
-        System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+fileName+".c"+" created");
+
+        System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+this.iFileExplorer.GetFileName()+".c"+" saved");
     }
+
 }
