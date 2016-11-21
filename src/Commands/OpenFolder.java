@@ -26,7 +26,7 @@ public class OpenFolder extends JFileChooser implements ICommand {
             folder = fileChooser.getSelectedFile().getAbsolutePath();
             this.fileExplorer.SetPath(folder);
         }
-        System.out.println("Open Folder"+folder);
+        System.out.println("Open Folder "+folder);
 
     }
 }

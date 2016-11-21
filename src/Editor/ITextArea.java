@@ -8,4 +8,5 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 public interface ITextArea {
     String text = null;
     void SetText(String text);
+    String GetText();
 }

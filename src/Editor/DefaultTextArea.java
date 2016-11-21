@@ -21,4 +21,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
         this.setText(text);
     }
 
+    @Override
+    public String GetText() { return this.getText(); }
+
 }

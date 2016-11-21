@@ -11,6 +11,7 @@ import java.io.File;
 public class DefaultFileExplorer extends FileExplorer implements IFileExplorer {
 
     private String folderPath = ".";
+    private String fileName = "";
 
     /**
      * Construct a FileTree
@@ -25,6 +26,21 @@ public class DefaultFileExplorer extends FileExplorer implements IFileExplorer {
     @Override
     public void SetPath(String folderPath) {
         this.folderPath=folderPath;
+    }
+
+    @Override
+    public String GetPath() {
+        return this.folderPath;
+    }
+
+    @Override
+    public void SetFileName(String fileName) {
+        this.fileName=fileName;
+    }
+
+    @Override
+    public String GetFileName() {
+        return this.fileName;
     }
 
 

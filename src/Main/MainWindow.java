@@ -1,8 +1,6 @@
 package Main;
 
-import Commands.Exit;
-import Commands.OpenFile;
-import Commands.OpenFolder;
+import Commands.*;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
 import FileExplorer.*;
@@ -70,11 +68,13 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(fileMenu);
 
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
+        NewFile newFile = new NewFile(defaultTextArea,defaultFileExplorer,this);
+        newMenuItem.SetCommand(newFile);
         newMenuItem.SetIcon(new ImageIcon("assets/new.png"));
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
-        OpenFile openFile = new OpenFile(defaultTextArea);
+        OpenFile openFile = new OpenFile(defaultTextArea,defaultFileExplorer);
         openFileMenuItem.SetCommand(openFile);
         openFileMenuItem.SetIcon(new ImageIcon("assets/open-file.png"));
         fileMenu.AddMenuItem(openFileMenuItem);
@@ -88,16 +88,22 @@ public class MainWindow extends JFrame {
         fileMenu.AddSeparator();
 
         DefaultMenuItem saveMenuItem= new DefaultMenuItem("Save");
+        Save save = new Save(defaultTextArea,defaultFileExplorer);
+        saveMenuItem.SetCommand(save);
         saveMenuItem.SetIcon(new ImageIcon("assets/save.png"));
         fileMenu.AddMenuItem(saveMenuItem);
 
         DefaultMenuItem saveAsMenuItem= new DefaultMenuItem("Save As");
+        SaveAs saveAs = new SaveAs(defaultTextArea,defaultFileExplorer);
+        saveAsMenuItem.SetCommand(saveAs);
         saveAsMenuItem.SetIcon(new ImageIcon("assets/save-as.png"));
         fileMenu.AddMenuItem(saveAsMenuItem);
 
         fileMenu.AddSeparator();
 
         DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
+        CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
+        closeFileMenuItem.SetCommand(closeFile);
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
