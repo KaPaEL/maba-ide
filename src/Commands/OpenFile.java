@@ -4,7 +4,6 @@ import Editor.ITextArea;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -37,6 +36,8 @@ public class OpenFile extends JFileChooser implements ICommand{
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            String coba = selectedFile.getAbsolutePath();
+            System.out.println(coba);
             try {
                 text = readFile(selectedFile.getAbsolutePath(), StandardCharsets.UTF_8);
                 this.textArea.SetText(text);
@@ -44,7 +45,8 @@ public class OpenFile extends JFileChooser implements ICommand{
                 e.printStackTrace();
             }
         }
-        System.out.println("Open File");
+        System.out.println("Open file");
+
     }
 
 }
