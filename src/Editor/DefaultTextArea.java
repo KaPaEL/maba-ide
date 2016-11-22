@@ -12,27 +12,12 @@ import javax.swing.event.CaretListener;
  */
 public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
 
+
     public DefaultTextArea() {
         this.setSize(20,60);
         this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         this.setCodeFoldingEnabled(true);
         this.setAutoscrolls(true);
-        this.addCaretListener(new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                DefaultTextArea editArea = (DefaultTextArea)e.getSource();
-                int linenum = 1;
-                int columnnum = 1;
-                try {
-                    int caretpos = editArea.getCaretPosition();
-                    linenum = editArea.getLineOfOffset(caretpos);
-                    columnnum = caretpos - editArea.getLineStartOffset(linenum);
-                    linenum += 1;
-                }
-                catch(Exception ex) { }
-                updateStatus(linenum, columnnum);
-            }
-        });
     }
 
     @Override
@@ -58,8 +43,5 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
     @Override
     public void SelectAll() { this.selectAll(); }
 
-    private void updateStatus(int linenumber, int columnnumber) {
-        System.out.println("Line: " + linenumber + " Column: " + columnnumber);
-    }
 
 }

@@ -12,6 +12,8 @@ import ToolBar.IToolBar;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +26,7 @@ public class MainWindow extends JFrame {
     private IMenu iMenu;
     private IToolBar iToolBar;
     private IMenuItem iMenuItem;
-    private JTextField status;
+
     public MainWindow() throws IOException {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
@@ -53,6 +55,7 @@ public class MainWindow extends JFrame {
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
+
 
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         JScrollPane westPanel = new JScrollPane(new FileExplorer("."));
@@ -252,10 +255,30 @@ public class MainWindow extends JFrame {
         JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
         contentPanel.add(mainSplit, BorderLayout.CENTER);
-        JLabel statusBar = new JLabel("Staus:");
+
+        JLabel statusBar = new JLabel("Status:");
+        statusBar.setText("Status: Line 1 Column 1");
 
         contentPanel.add(statusBar, BorderLayout.SOUTH);
+        defaultTextArea.addCaretListener(new CaretListener() {
+            @Override
+            public void caretUpdate(CaretEvent e) {
+                int linenum = 1;
+                int columnnum = 1;
+                DefaultTextArea editArea = (DefaultTextArea)e.getSource();
+                try {
+                    int caretpos = editArea.getCaretPosition();
+                    linenum = editArea.getLineOfOffset(caretpos);
+                    columnnum = caretpos - editArea.getLineStartOffset(linenum);
+                    linenum += 1;
+                }
+                catch(Exception ex) { }
+                if(columnnum==0) columnnum=1;
+                statusBar.setText("Status: Line "+linenum+" Column "+columnnum);
+            }
+        });
 
+        //System.out.println(pos);
 
         //contentPanel.add(find, BorderLayout.SOUTH);
         setContentPane(contentPanel);
