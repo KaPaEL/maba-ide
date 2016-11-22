@@ -81,6 +81,19 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.setVisible(false);
+        //==============================================
+        //Find Replace
+        JTextField textFieldFind = new JTextField(20);
+        JButton btnFind = new JButton("Find");
+        JTextField textFieldReplace = new JTextField(20);
+        JButton btnReplace = new JButton("Replace");
+        JPanel repalcePanel = new JPanel();
+        repalcePanel.add(textFieldFind);
+        repalcePanel.add(btnFind);
+        repalcePanel.add(textFieldReplace);
+        repalcePanel.add(btnReplace);
+        repalcePanel.setVisible(true);
+        //===============================================
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
@@ -300,17 +313,18 @@ public class MainWindow extends JFrame {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
+        JSplitPane splitTextRepalce = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,repalcePanel,eastPanel);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,splitTextRepalce);
         splitPane.setDividerLocation(148);
 
         contentPanel.add(splitPane, BorderLayout.CENTER);
-        contentPanel.add(findPanel, BorderLayout.SOUTH);
 
         //printout
         JTextPane terminalText = new JTextPane();
-        terminalText.setPreferredSize(new Dimension(800,50));
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
+
+
 
         JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
@@ -318,6 +332,7 @@ public class MainWindow extends JFrame {
 
         JLabel statusBar = new JLabel("Status:");
         statusBar.setText("Status: Line 1 Column 1");
+
 
         contentPanel.add(statusBar, BorderLayout.SOUTH);
         defaultTextArea.addCaretListener(new CaretListener() {
