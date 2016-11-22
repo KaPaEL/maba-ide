@@ -52,6 +52,7 @@ public class MainWindow extends JFrame {
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
+
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         JScrollPane westPanel = new JScrollPane(new FileExplorer("."));
         pack();
@@ -193,13 +194,31 @@ public class MainWindow extends JFrame {
 
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
+
+        JEditorPane editor = new JEditorPane();
+        JScrollPane southPanel = new JScrollPane(editor);
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
         contentPanel.add(splitPane, BorderLayout.CENTER);
+        contentPanel.add(southPanel, BorderLayout.SOUTH);
+        //find panel
+        JTextField textField = new JTextField(20);
+        JButton textFind = new JButton("Find");
+
+        JPanel find = new JPanel();
+        find.add(textField);
+        find.add(textFind);
+        //find.setVisible(false);
+
+        contentPanel.add(find, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
+
+
+
+
 
         frame.setVisible(true);
 
