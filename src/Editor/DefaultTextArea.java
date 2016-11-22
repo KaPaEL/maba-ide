@@ -43,7 +43,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
 
     @Override
     public void SelectAll() { this.selectAll(); }
-    
+
     @Override
     public Document GetDocument() { return this.getDocument(); }
 

@@ -3,7 +3,8 @@ package Main;
 import Commands.*;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
-import FileExplorer.*;
+import FileExplorer.DefaultFileExplorer;
+import FileExplorer.FileExplorer;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -53,7 +54,6 @@ public class MainWindow extends JFrame {
         //find panel
         JTextField textField = new JTextField(20);
         JButton textFind = new JButton("Find");
-
         JPanel findPanel = new JPanel();
         findPanel.add(textField);
         findPanel.add(textFind);
@@ -114,14 +114,18 @@ public class MainWindow extends JFrame {
         DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
         CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
         closeFileMenuItem.SetCommand(closeFile);
+        closeFileMenuItem.SetIcon(new ImageIcon("assets/close-file.png"));
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
+        closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
         fileMenu.AddMenuItem(closeAllMenuFile);
+
 
         fileMenu.AddSeparator();
 
         DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
+        exitMenuFile.SetIcon(new ImageIcon("assets/close.png"));
         Exit exit = new Exit();
         exitMenuFile.SetCommand(exit);
         fileMenu.AddMenuItem(exitMenuFile);
@@ -159,6 +163,7 @@ public class MainWindow extends JFrame {
         DefaultMenuItem selectAllMenuItem= new DefaultMenuItem("Select All");
         SelectAll selectAll = new SelectAll(defaultTextArea);
         selectAllMenuItem.SetCommand(selectAll);
+        selectAllMenuItem.SetIcon(new ImageIcon("assets/select-all.png"));
         editMenu.AddMenuItem(selectAllMenuItem);
 
         //MENU Search
@@ -192,44 +197,73 @@ public class MainWindow extends JFrame {
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
-        DefaultTool newTool = new DefaultTool("assets/new.png","New file");
-        this.iToolBar.AddToolItem(newTool);
+        DefaultTool newFileTool = new DefaultTool("assets/new.png","New file");
+        newFileTool.SetCommand(newFile);
+        this.iToolBar.AddToolItem(newFileTool);
         DefaultTool openFileTool = new DefaultTool("assets/open-file.png","Open file");
+        openFileTool.SetCommand(openFile);
         this.iToolBar.AddToolItem(openFileTool);
         DefaultTool openFolderTool = new DefaultTool("assets/open.png","Open folder");
+        openFolderTool.SetCommand(openFolder);
         this.iToolBar.AddToolItem(openFolderTool);
-        Container fileContainer = frame.getContentPane();
-        fileContainer.add((Component) this.iToolBar, BorderLayout.WEST);
-        DefaultTool saveTool = new DefaultTool("assets/save.png","save file");
+        DefaultTool saveTool = new DefaultTool("assets/save.png","Save file");
+        saveTool.SetCommand(save);
         this.iToolBar.AddToolItem(saveTool);
-        DefaultTool copyTool = new DefaultTool("assets/copy.png","Copy text");
-        this.iToolBar.AddToolItem(copyTool);
+        DefaultTool saveAsTool = new DefaultTool("assets/save-as.png","Save As file");
+        saveAsTool.SetCommand(saveAs);
+        this.iToolBar.AddToolItem(saveAsTool);
+
+        this.iToolBar.AddSeparator();
         DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
         DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
+        DefaultTool cutTool = new DefaultTool("assets/cut.png","Cut text");
+        cutTool.SetCommand(cut);
+        this.iToolBar.AddToolItem(cutTool);
+        DefaultTool copyTool = new DefaultTool("assets/copy.png","Copy text");
+        copyTool.SetCommand(copy);
+        this.iToolBar.AddToolItem(copyTool);
+        DefaultTool pasteTool = new DefaultTool("assets/paste.png","Paste text");
+        pasteTool.SetCommand(paste);
+        this.iToolBar.AddToolItem(pasteTool);
+
+        this.iToolBar.AddSeparator();
+        DefaultTool findTool = new DefaultTool("assets/find.png","Find text");
+        this.iToolBar.AddToolItem(findTool);
+        DefaultTool replaceTool = new DefaultTool("assets/replace.png","Replace text");
+        this.iToolBar.AddToolItem(replaceTool);
+        this.iToolBar.AddSeparator();
         DefaultTool runTool = new DefaultTool("assets/run.png","Run");
         this.iToolBar.AddToolItem(runTool);
-
+        DefaultTool compileTool = new DefaultTool("assets/compile.png","Compile");
+        this.iToolBar.AddToolItem(compileTool);
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
 
-        JEditorPane editor = new JEditorPane();
-        JScrollPane southPanel = new JScrollPane(editor);
+
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
+
         contentPanel.add(splitPane, BorderLayout.CENTER);
-        contentPanel.add(southPanel, BorderLayout.SOUTH);
         contentPanel.add(findPanel, BorderLayout.SOUTH);
+
+        //printout
+        JTextPane terminalText = new JTextPane();
+        terminalText.setPreferredSize(new Dimension(800,50));
+        terminalText.setEnabled(false);
+        JScrollPane terminalPanel = new JScrollPane(terminalText);
+
+        JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
+        JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
+        contentPanel.add(mainSplit, BorderLayout.CENTER);
+        JLabel statusBar = new JLabel("Staus:");
+
+        contentPanel.add(statusBar, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
-
-
-
-
-
         frame.setVisible(true);
 
     }
