@@ -129,10 +129,14 @@ public class MainWindow extends JFrame {
         editMenu.AddSeparator();
 
         DefaultMenuItem cutMenuItem= new DefaultMenuItem("Cut");
+        Cut cut = new Cut(defaultTextArea);
+        cutMenuItem.SetCommand(cut);
         cutMenuItem.SetIcon(new ImageIcon("assets/cut.png"));
         editMenu.AddMenuItem(cutMenuItem);
 
         DefaultMenuItem copyMenuItem= new DefaultMenuItem("Copy");
+        Copy copy = new Copy(defaultTextArea);
+        copyMenuItem.SetCommand(copy);
         copyMenuItem.SetIcon(new ImageIcon("assets/copy.png"));
         editMenu.AddMenuItem(copyMenuItem);
 

@@ -24,4 +24,16 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
     @Override
     public String GetText() { return this.getText(); }
 
+    @Override
+    public String GetSelectedText() { return this.getSelectedText(); }
+
+    @Override
+    public int GetSelectionStart() { return this.getSelectionStart(); }
+
+    @Override
+    public int GetSelectionEnd() { return this.getSelectionEnd(); }
+
+    @Override
+    public void ReplaceRange(int start, int end) { this.replaceRange("",start,end); }
+
 }
