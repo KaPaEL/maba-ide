@@ -205,8 +205,8 @@ public class MainWindow extends JFrame {
         DefaultMenuItem findMenuItem = new DefaultMenuItem("Find");
         Find find = new Find(defaultTextArea,findPanel);
         findMenuItem.SetCommand(find);
+        findMenuItem.SetAcceleration(ctrlF);
         findMenuItem.SetIcon(new ImageIcon("assets/find.png"));
-//        findMenuItem.SetAcceleration(ctrlF);
         searchMenu.AddMenuItem(findMenuItem);
 
         DefaultMenuItem replaceMenuItem = new DefaultMenuItem("Replace");

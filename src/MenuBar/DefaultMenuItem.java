@@ -53,7 +53,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.command.execute();
+//        this.command.execute();
     }
 
     @Override
