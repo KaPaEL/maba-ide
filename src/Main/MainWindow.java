@@ -23,7 +23,7 @@ public class MainWindow extends JFrame {
     private IMenu iMenu;
     private IToolBar iToolBar;
     private IMenuItem iMenuItem;
-
+    private JTextField status;
     public MainWindow() throws IOException {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
@@ -46,12 +46,13 @@ public class MainWindow extends JFrame {
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
-
+        
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
         //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
+
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         JScrollPane westPanel = new JScrollPane(new FileExplorer("."));
         pack();
