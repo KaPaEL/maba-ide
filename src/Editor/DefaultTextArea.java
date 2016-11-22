@@ -3,9 +3,11 @@ package Editor;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Highlighter;
+import java.awt.*;
 
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 
 /**
  * Created by hanu on 11/16/16.
@@ -43,5 +45,10 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
     @Override
     public void SelectAll() { this.selectAll(); }
 
+    @Override
+    public Document GetDocument() { return this.getDocument(); }
+
+    @Override
+    public Highlighter GetHighlighter() { return this.getHighlighter(); }
 
 }
