@@ -14,4 +14,5 @@ public interface IMenuItem {
     void SetText(String text);
     void SetCommand(ICommand command);
     void SetIcon(ImageIcon icon);
+    void SetAcceleration(KeyStroke keyStroke);
 }
