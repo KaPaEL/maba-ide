@@ -51,6 +51,14 @@ public class MainWindow extends JFrame {
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
         //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
 
+        //find panel
+        JTextField textField = new JTextField(20);
+        JButton textFind = new JButton("Find");
+        JPanel findPanel = new JPanel();
+        findPanel.add(textField);
+        findPanel.add(textFind);
+        findPanel.setVisible(false);
+
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
 
@@ -163,6 +171,8 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(searchMenu);
 
         DefaultMenuItem findMenuItem = new DefaultMenuItem("Find");
+        Find find = new Find(defaultTextArea,findPanel);
+        findMenuItem.SetCommand(find);
         findMenuItem.SetIcon(new ImageIcon("assets/find.png"));
         searchMenu.AddMenuItem(findMenuItem);
 
@@ -236,11 +246,16 @@ public class MainWindow extends JFrame {
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
+
+        contentPanel.add(splitPane, BorderLayout.CENTER);
+        contentPanel.add(findPanel, BorderLayout.SOUTH);
+
         //printout
         JTextPane terminalText = new JTextPane();
         //terminalText.setPreferredSize(new Dimension(800,50));
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
+
 
         //find panel
         JTextField textField = new JTextField(20);
@@ -250,15 +265,13 @@ public class MainWindow extends JFrame {
         findPanel.add(textFind);
         findPanel.setVisible(true);
 
+
         JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
         contentPanel.add(mainSplit, BorderLayout.CENTER);
         JLabel statusBar = new JLabel("Staus:");
 
         contentPanel.add(statusBar, BorderLayout.SOUTH);
-
-
-        //contentPanel.add(find, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
         frame.setVisible(true);
