@@ -3,7 +3,8 @@ package Main;
 import Commands.*;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
-import FileExplorer.*;
+import FileExplorer.DefaultFileExplorer;
+import FileExplorer.FileExplorer;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
@@ -203,31 +204,35 @@ public class MainWindow extends JFrame {
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
 
-        JEditorPane editor = new JEditorPane();
-        JScrollPane southPanel = new JScrollPane(editor);
+
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
-        contentPanel.add(splitPane, BorderLayout.CENTER);
-        contentPanel.add(southPanel, BorderLayout.SOUTH);
+        //printout
+        JTextPane terminalText = new JTextPane();
+        terminalText.setPreferredSize(new Dimension(800,50));
+        terminalText.setEnabled(false);
+        JScrollPane terminalPanel = new JScrollPane(terminalText);
+
         //find panel
         JTextField textField = new JTextField(20);
         JButton textFind = new JButton("Find");
+        JPanel findPanel = new JPanel();
+        findPanel.add(textField);
+        findPanel.add(textFind);
+        findPanel.setVisible(true);
+        JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
+        JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
+        contentPanel.add(mainSplit, BorderLayout.CENTER);
+        JLabel statusBar = new JLabel("Staus:");
 
-        JPanel find = new JPanel();
-        find.add(textField);
-        find.add(textFind);
-        //find.setVisible(false);
+        contentPanel.add(statusBar, BorderLayout.SOUTH);
 
-        contentPanel.add(find, BorderLayout.SOUTH);
+
+        //contentPanel.add(find, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
-
-
-
-
-
         frame.setVisible(true);
 
     }
