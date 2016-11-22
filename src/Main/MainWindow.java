@@ -238,7 +238,7 @@ public class MainWindow extends JFrame {
         splitPane.setDividerLocation(148);
         //printout
         JTextPane terminalText = new JTextPane();
-        terminalText.setPreferredSize(new Dimension(800,50));
+        //terminalText.setPreferredSize(new Dimension(800,50));
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
@@ -249,6 +249,7 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.setVisible(true);
+
         JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
         contentPanel.add(mainSplit, BorderLayout.CENTER);
