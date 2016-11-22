@@ -9,4 +9,9 @@ public interface ITextArea {
     String text = null;
     void SetText(String text);
     String GetText();
+    String GetSelectedText();
+    int GetSelectionStart();
+    int GetSelectionEnd();
+    void ReplaceRange(String replace, int start, int end);
+    void SelectAll();
 }

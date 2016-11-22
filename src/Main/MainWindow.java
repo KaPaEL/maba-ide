@@ -130,18 +130,26 @@ public class MainWindow extends JFrame {
         editMenu.AddSeparator();
 
         DefaultMenuItem cutMenuItem= new DefaultMenuItem("Cut");
+        Cut cut = new Cut(defaultTextArea);
+        cutMenuItem.SetCommand(cut);
         cutMenuItem.SetIcon(new ImageIcon("assets/cut.png"));
         editMenu.AddMenuItem(cutMenuItem);
 
         DefaultMenuItem copyMenuItem= new DefaultMenuItem("Copy");
+        Copy copy = new Copy(defaultTextArea);
+        copyMenuItem.SetCommand(copy);
         copyMenuItem.SetIcon(new ImageIcon("assets/copy.png"));
         editMenu.AddMenuItem(copyMenuItem);
 
         DefaultMenuItem pasteMenuItem= new DefaultMenuItem("Paste");
+        Paste paste = new Paste(defaultTextArea);
+        pasteMenuItem.SetCommand(paste);
         pasteMenuItem.SetIcon(new ImageIcon("assets/paste.png"));
         editMenu.AddMenuItem(pasteMenuItem);
 
         DefaultMenuItem selectAllMenuItem= new DefaultMenuItem("Select All");
+        SelectAll selectAll = new SelectAll(defaultTextArea);
+        selectAllMenuItem.SetCommand(selectAll);
         editMenu.AddMenuItem(selectAllMenuItem);
 
         //MENU Search
