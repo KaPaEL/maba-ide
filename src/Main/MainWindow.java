@@ -175,7 +175,6 @@ public class MainWindow extends JFrame {
         compileMenu.AddMenuItem(compileMenuItem);
 
         //Region Toobar
-
         this.iToolBar = new DefaultToolBar();
         DefaultTool newTool = new DefaultTool("assets/new.png","New file");
         this.iToolBar.AddToolItem(newTool);
