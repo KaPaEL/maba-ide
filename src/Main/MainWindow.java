@@ -9,7 +9,6 @@ import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
-import com.sun.glass.events.KeyEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -107,14 +106,18 @@ public class MainWindow extends JFrame {
         DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
         CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
         closeFileMenuItem.SetCommand(closeFile);
+        closeFileMenuItem.SetIcon(new ImageIcon("assets/close-file.png"));
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
+        closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
         fileMenu.AddMenuItem(closeAllMenuFile);
+
 
         fileMenu.AddSeparator();
 
         DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
+        exitMenuFile.SetIcon(new ImageIcon("assets/close.png"));
         Exit exit = new Exit();
         exitMenuFile.SetCommand(exit);
         fileMenu.AddMenuItem(exitMenuFile);
@@ -152,6 +155,7 @@ public class MainWindow extends JFrame {
         DefaultMenuItem selectAllMenuItem= new DefaultMenuItem("Select All");
         SelectAll selectAll = new SelectAll(defaultTextArea);
         selectAllMenuItem.SetCommand(selectAll);
+        selectAllMenuItem.SetIcon(new ImageIcon("assets/select-all.png"));
         editMenu.AddMenuItem(selectAllMenuItem);
 
         //MENU Search
