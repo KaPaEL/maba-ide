@@ -12,7 +12,7 @@ import java.awt.datatransfer.StringSelection;
  */
 public class Copy implements ICommand {
     private ITextArea textArea;
-    private Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    private Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
     public Copy(RSyntaxTextArea textArea) {
         this.textArea = (ITextArea) textArea;
@@ -22,7 +22,7 @@ public class Copy implements ICommand {
     public void execute() {
         String copy = this.textArea.GetSelectedText();
         StringSelection selection = new StringSelection(copy);
-        this.clipboard.setContents(selection,selection);
+        this.clipBoard.setContents(selection, selection);
         System.out.println("Tercopy Ke Clipboard");
     }
 }

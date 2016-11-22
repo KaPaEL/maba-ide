@@ -141,10 +141,14 @@ public class MainWindow extends JFrame {
         editMenu.AddMenuItem(copyMenuItem);
 
         DefaultMenuItem pasteMenuItem= new DefaultMenuItem("Paste");
+        Paste paste = new Paste(defaultTextArea);
+        pasteMenuItem.SetCommand(paste);
         pasteMenuItem.SetIcon(new ImageIcon("assets/paste.png"));
         editMenu.AddMenuItem(pasteMenuItem);
 
         DefaultMenuItem selectAllMenuItem= new DefaultMenuItem("Select All");
+        SelectAll selectAll = new SelectAll(defaultTextArea);
+        selectAllMenuItem.SetCommand(selectAll);
         editMenu.AddMenuItem(selectAllMenuItem);
 
         //MENU Search

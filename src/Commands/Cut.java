@@ -12,7 +12,7 @@ import java.awt.datatransfer.StringSelection;
  */
 public class Cut implements ICommand {
     private ITextArea textArea;
-    private Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    private Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
     public Cut(RSyntaxTextArea textArea){
         this.textArea = (ITextArea) textArea;
     }
@@ -21,8 +21,8 @@ public class Cut implements ICommand {
     public void execute() {
         String copy = this.textArea.GetSelectedText();
         StringSelection selection = new StringSelection(copy);
-        this.clipboard.setContents(selection,selection);
-        this.textArea.ReplaceRange(this.textArea.GetSelectionStart(),this.textArea.GetSelectionEnd());
+        this.clipBoard.setContents(selection, selection);
+        this.textArea.ReplaceRange("", this.textArea.GetSelectionStart(), this.textArea.GetSelectionEnd());
         System.out.println("Tercut Ke Clipboard");
     }
 }

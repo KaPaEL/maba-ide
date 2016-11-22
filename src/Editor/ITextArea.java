@@ -12,5 +12,6 @@ public interface ITextArea {
     String GetSelectedText();
     int GetSelectionStart();
     int GetSelectionEnd();
-    void ReplaceRange(int start, int end);
+    void ReplaceRange(String replace, int start, int end);
+    void SelectAll();
 }
