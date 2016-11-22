@@ -228,12 +228,14 @@ public class MainWindow extends JFrame {
         Run run = new Run(defaultFileExplorer);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
+        runMenuItem.SetAcceleration(F10);
         runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
         Compile compile = new Compile(defaultFileExplorer);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
+        compileMenuItem.SetAcceleration(F9);
         compileMenuItem.SetCommand(compile);
         compileMenu.AddMenuItem(compileMenuItem);
 
@@ -281,13 +283,16 @@ public class MainWindow extends JFrame {
 
         this.iToolBar.AddSeparator();
         DefaultTool findTool = new DefaultTool("assets/find.png","Find text");
+        findTool.SetCommand(find);
         this.iToolBar.AddToolItem(findTool);
         DefaultTool replaceTool = new DefaultTool("assets/replace.png","Replace text");
         this.iToolBar.AddToolItem(replaceTool);
         this.iToolBar.AddSeparator();
         DefaultTool runTool = new DefaultTool("assets/run.png","Run");
+        runTool.SetCommand(run);
         this.iToolBar.AddToolItem(runTool);
         DefaultTool compileTool = new DefaultTool("assets/compile.png","Compile");
+        compileTool.SetCommand(compile);
         this.iToolBar.AddToolItem(compileTool);
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
