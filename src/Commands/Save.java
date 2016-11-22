@@ -24,22 +24,24 @@ public class Save  implements ICommand {
 
     @Override
     public void execute(){
-        try {
-            File file = new File(this.iFileExplorer.GetPath()+"\\"+ this.iFileExplorer.GetFileName());
+        if(this.iFileExplorer.GetPath()!="." ||  this.iFileExplorer.GetFileName()!="null"){
+            try {
+                File file = new File(this.iFileExplorer.GetPath()+"\\"+ this.iFileExplorer.GetFileName());
 
-            if (!file.exists()) {
-                file.createNewFile();
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(this.textArea.GetText());
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(this.textArea.GetText());
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+this.iFileExplorer.GetFileName()+".c"+" saved");
         }
-
-        System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+this.iFileExplorer.GetFileName()+".c"+" saved");
     }
 
 }

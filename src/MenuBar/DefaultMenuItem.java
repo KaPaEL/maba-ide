@@ -3,13 +3,15 @@ package MenuBar;
 import Commands.ICommand;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
  * Created by hanu on 10/30/16.
  */
-public class DefaultMenuItem extends JMenuItem implements IMenuItem, MouseListener{
+public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListener,ActionListener{
     String text = null;
     private ICommand command;
     
@@ -22,6 +24,7 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem, MouseListen
         this.setSize(37, 20);
         addMouseListener(this);
         this.setBorderPainted(false);
+        addActionListener(this);
     }
     
     
@@ -54,8 +57,8 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem, MouseListen
     }
     
     @Override
-    public void mouseReleased(MouseEvent e){
-        this.command.execute();
+    public void mouseReleased(MouseEvent e) {
+//        this.command.execute();
     }
     
     @Override
@@ -70,5 +73,15 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem, MouseListen
     
     public void SetIcon(ImageIcon icon){
         this.setIcon(icon);
+    }
+
+    @Override
+    public void SetAcceleration(KeyStroke keyStroke) {
+        this.setAccelerator(keyStroke);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.command.execute();
     }
 }
