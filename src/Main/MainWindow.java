@@ -252,24 +252,14 @@ public class MainWindow extends JFrame {
 
         //printout
         JTextPane terminalText = new JTextPane();
-        //terminalText.setPreferredSize(new Dimension(800,50));
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
-
-
-        //find panel
-        JTextField textField = new JTextField(20);
-        JButton textFind = new JButton("Find");
-        JPanel findPanel = new JPanel();
-        findPanel.add(textField);
-        findPanel.add(textFind);
-        findPanel.setVisible(true);
 
 
         JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
         contentPanel.add(mainSplit, BorderLayout.CENTER);
-        JLabel statusBar = new JLabel("Staus:");
+        JLabel statusBar = new JLabel("Status:");
 
         contentPanel.add(statusBar, BorderLayout.SOUTH);
         setContentPane(contentPanel);

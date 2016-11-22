@@ -29,7 +29,6 @@ public class Find implements ICommand {
     public void execute() {
         this.jPanel.setVisible(true);
         JButton findButton = ((JButton)this.jPanel.getComponent(1));
-
         findButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
