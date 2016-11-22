@@ -3,18 +3,18 @@ package Main;
 import Commands.*;
 import Commands.ShellCommand.Compile;
 import Editor.DefaultTextArea;
-import FileExplorer.*;
+import FileExplorer.DefaultFileExplorer;
+import FileExplorer.FileExplorer;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
-import com.sun.glass.events.KeyEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -71,6 +71,7 @@ public class MainWindow extends JFrame {
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
+
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         JScrollPane westPanel = new JScrollPane(new FileExplorer("."));
         pack();
@@ -128,14 +129,20 @@ public class MainWindow extends JFrame {
         CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
         closeFileMenuItem.SetCommand(closeFile);
         closeFileMenuItem.SetAcceleration(ctrlW);
+        closeFileMenuItem.SetIcon(new ImageIcon("assets/close-file.png"));
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
+        CloseAllFile closeAllFile = new CloseAllFile(defaultTextArea,defaultFileExplorer);
+        closeFileMenuItem.SetCommand(closeAllFile);
+        closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
         fileMenu.AddMenuItem(closeAllMenuFile);
+
 
         fileMenu.AddSeparator();
 
         DefaultMenuItem exitMenuFile= new DefaultMenuItem("Exit");
+        exitMenuFile.SetIcon(new ImageIcon("assets/close.png"));
         Exit exit = new Exit();
         exitMenuFile.SetCommand(exit);
         exitMenuFile.SetAcceleration(altF4);
@@ -180,6 +187,7 @@ public class MainWindow extends JFrame {
         SelectAll selectAll = new SelectAll(defaultTextArea);
         selectAllMenuItem.SetCommand(selectAll);
         selectAllMenuItem.SetAcceleration(ctrlA);
+        selectAllMenuItem.SetIcon(new ImageIcon("assets/select-all.png"));
         editMenu.AddMenuItem(selectAllMenuItem);
 
         //MENU Search
@@ -228,6 +236,12 @@ public class MainWindow extends JFrame {
         DefaultTool saveAsTool = new DefaultTool("assets/save-as.png","Save As file");
         saveAsTool.SetCommand(saveAs);
         this.iToolBar.AddToolItem(saveAsTool);
+        DefaultTool closeFileTool = new DefaultTool("assets/close-file.png","Close file");
+        closeFileTool.SetCommand(closeFile);
+        this.iToolBar.AddToolItem(closeFileTool);
+        DefaultTool closeAllFileTool = new DefaultTool("assets/close-all.png","Close All file");
+        closeAllFileTool.SetCommand(closeAllFile);
+        this.iToolBar.AddToolItem(closeAllFileTool);
 
         this.iToolBar.AddSeparator();
         DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
@@ -243,6 +257,9 @@ public class MainWindow extends JFrame {
         DefaultTool pasteTool = new DefaultTool("assets/paste.png","Paste text");
         pasteTool.SetCommand(paste);
         this.iToolBar.AddToolItem(pasteTool);
+        DefaultTool selectAllTool = new DefaultTool("assets/select-all.png","Select all text");
+        selectAllTool.SetCommand(selectAll);
+        this.iToolBar.AddToolItem(selectAllTool);
 
         this.iToolBar.AddSeparator();
         DefaultTool findTool = new DefaultTool("assets/find.png","Find text");
@@ -256,14 +273,36 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddToolItem(compileTool);
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
+
+
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
         splitPane.setDividerLocation(148);
-        contentPanel.add(splitPane, BorderLayout.CENTER);
+        //printout
+        JTextPane terminalText = new JTextPane();
+        terminalText.setPreferredSize(new Dimension(800,50));
+        terminalText.setEnabled(false);
+        JScrollPane terminalPanel = new JScrollPane(terminalText);
+
+        //find panel
+        JTextField textField = new JTextField(20);
+        JButton textFind = new JButton("Find");
+        JPanel findPanel = new JPanel();
+        findPanel.add(textField);
+        findPanel.add(textFind);
+        findPanel.setVisible(true);
+        JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
+        JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
+        contentPanel.add(mainSplit, BorderLayout.CENTER);
+        JLabel statusBar = new JLabel("Staus:");
+
+        contentPanel.add(statusBar, BorderLayout.SOUTH);
+
+
+        //contentPanel.add(find, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
-
         frame.setVisible(true);
 
     }
