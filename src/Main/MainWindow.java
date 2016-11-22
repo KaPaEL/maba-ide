@@ -9,6 +9,7 @@ import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
+import com.sun.glass.events.KeyEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -182,25 +183,47 @@ public class MainWindow extends JFrame {
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
-        DefaultTool newTool = new DefaultTool("assets/new.png","New file");
-        this.iToolBar.AddToolItem(newTool);
+        DefaultTool newFileTool = new DefaultTool("assets/new.png","New file");
+        newFileTool.SetCommand(newFile);
+        this.iToolBar.AddToolItem(newFileTool);
         DefaultTool openFileTool = new DefaultTool("assets/open-file.png","Open file");
+        openFileTool.SetCommand(openFile);
         this.iToolBar.AddToolItem(openFileTool);
         DefaultTool openFolderTool = new DefaultTool("assets/open.png","Open folder");
+        openFolderTool.SetCommand(openFolder);
         this.iToolBar.AddToolItem(openFolderTool);
-        Container fileContainer = frame.getContentPane();
-        fileContainer.add((Component) this.iToolBar, BorderLayout.WEST);
-        DefaultTool saveTool = new DefaultTool("assets/save.png","save file");
+        DefaultTool saveTool = new DefaultTool("assets/save.png","Save file");
+        saveTool.SetCommand(save);
         this.iToolBar.AddToolItem(saveTool);
-        DefaultTool copyTool = new DefaultTool("assets/copy.png","Copy text");
-        this.iToolBar.AddToolItem(copyTool);
+        DefaultTool saveAsTool = new DefaultTool("assets/save-as.png","Save As file");
+        saveAsTool.SetCommand(saveAs);
+        this.iToolBar.AddToolItem(saveAsTool);
+
+        this.iToolBar.AddSeparator();
         DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
         DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
+        DefaultTool cutTool = new DefaultTool("assets/cut.png","Cut text");
+        cutTool.SetCommand(cut);
+        this.iToolBar.AddToolItem(cutTool);
+        DefaultTool copyTool = new DefaultTool("assets/copy.png","Copy text");
+        copyTool.SetCommand(copy);
+        this.iToolBar.AddToolItem(copyTool);
+        DefaultTool pasteTool = new DefaultTool("assets/paste.png","Paste text");
+        pasteTool.SetCommand(paste);
+        this.iToolBar.AddToolItem(pasteTool);
+
+        this.iToolBar.AddSeparator();
+        DefaultTool findTool = new DefaultTool("assets/find.png","Find text");
+        this.iToolBar.AddToolItem(findTool);
+        DefaultTool replaceTool = new DefaultTool("assets/replace.png","Replace text");
+        this.iToolBar.AddToolItem(replaceTool);
+        this.iToolBar.AddSeparator();
         DefaultTool runTool = new DefaultTool("assets/run.png","Run");
         this.iToolBar.AddToolItem(runTool);
-
+        DefaultTool compileTool = new DefaultTool("assets/compile.png","Compile");
+        this.iToolBar.AddToolItem(compileTool);
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
 

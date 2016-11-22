@@ -1,14 +1,16 @@
 package ToolBar;
 
+import Commands.ICommand;
+
 /**
  * Created by ahmad on 11/1/2016.
  */
 public interface ITool {
     String text = null;
 
-    String getText();
-    void setText(String text);
+    String GetText();
+    void SetText(String text);
 
-    void AddTool(ITool menu);
-    void AddSeparator();
+    void SetCommand(ICommand command);
+    void SetMnemonic(char mnemonic);
 }

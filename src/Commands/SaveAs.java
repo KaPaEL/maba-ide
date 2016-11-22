@@ -30,6 +30,7 @@ public class SaveAs extends JFileChooser implements ICommand {
     @Override
     public void execute() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Save As");
         fileChooser.setApproveButtonText("Save");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".c", "c", "c");
         fileChooser.setFileFilter(filter);

@@ -42,6 +42,7 @@ public class OpenFile extends JFileChooser implements ICommand{
     @Override
     public void execute() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Open File");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".c", "c", "c");
         fileChooser.setFileFilter(filter);
         int returnValue = fileChooser.showOpenDialog(null);
