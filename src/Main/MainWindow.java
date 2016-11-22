@@ -50,6 +50,15 @@ public class MainWindow extends JFrame {
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
         //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
 
+        //find panel
+        JTextField textField = new JTextField(20);
+        JButton textFind = new JButton("Find");
+
+        JPanel findPanel = new JPanel();
+        findPanel.add(textField);
+        findPanel.add(textFind);
+        findPanel.setVisible(false);
+
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
 
@@ -157,6 +166,8 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(searchMenu);
 
         DefaultMenuItem findMenuItem = new DefaultMenuItem("Find");
+        Find find = new Find(defaultTextArea,findPanel);
+        findMenuItem.SetCommand(find);
         findMenuItem.SetIcon(new ImageIcon("assets/find.png"));
         searchMenu.AddMenuItem(findMenuItem);
 
@@ -211,16 +222,7 @@ public class MainWindow extends JFrame {
         splitPane.setDividerLocation(148);
         contentPanel.add(splitPane, BorderLayout.CENTER);
         contentPanel.add(southPanel, BorderLayout.SOUTH);
-        //find panel
-        JTextField textField = new JTextField(20);
-        JButton textFind = new JButton("Find");
-
-        JPanel find = new JPanel();
-        find.add(textField);
-        find.add(textFind);
-        //find.setVisible(false);
-
-        contentPanel.add(find, BorderLayout.SOUTH);
+        contentPanel.add(findPanel, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
 
