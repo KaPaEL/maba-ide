@@ -2,12 +2,15 @@ package Main;
 
 import Commands.*;
 import Commands.ShellCommand.Compile;
+import Commands.ShellCommand.Run;
+import Commands.ShellCommand.ShellCommand;
 import Editor.DefaultTextArea;
 import FileExplorer.*;
 import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
+import jdk.nashorn.tools.Shell;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -167,12 +170,14 @@ public class MainWindow extends JFrame {
         //Menu Compile
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
-
+    
+        Run run = new Run(defaultFileExplorer);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
+        runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile();
+        Compile compile = new Compile(defaultFileExplorer);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetCommand(compile);
