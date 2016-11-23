@@ -90,7 +90,7 @@ public class MainWindow extends JFrame {
         repalcePanel.add(btnFind);
         repalcePanel.add(textFieldReplace);
         repalcePanel.add(btnReplace);
-        repalcePanel.setVisible(true);
+        repalcePanel.setVisible(false);
         //===============================================
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
@@ -227,8 +227,10 @@ public class MainWindow extends JFrame {
         searchMenu.AddMenuItem(findMenuItem);
 
         DefaultMenuItem replaceMenuItem = new DefaultMenuItem("Replace");
+        Replace replace = new Replace(defaultTextArea,repalcePanel);
+        replaceMenuItem.SetCommand(replace);
         replaceMenuItem.SetIcon(new ImageIcon("assets/replace.png"));
-//        replaceMenuItem.SetAcceleration(ctrlR);
+        replaceMenuItem.SetAcceleration(ctrlR);
         searchMenu.AddMenuItem(replaceMenuItem);
 
 
