@@ -3,7 +3,6 @@ package Main;
 import Commands.*;
 import Commands.ShellCommand.Compile;
 import Commands.ShellCommand.Run;
-import Commands.ShellCommand.ShellCommand;
 import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
@@ -11,7 +10,6 @@ import MenuBar.*;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
-import jdk.nashorn.tools.Shell;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -50,7 +48,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow() throws IOException {
         try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -73,7 +71,7 @@ public class MainWindow extends JFrame {
         
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
         //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
-
+        //==============================================
         //find panel
         JTextField textField = new JTextField(20);
         JButton textFind = new JButton("Find");
@@ -251,6 +249,23 @@ public class MainWindow extends JFrame {
         compileMenuItem.SetAcceleration(F9);
         compileMenuItem.SetCommand(compile);
         compileMenu.AddMenuItem(compileMenuItem);
+
+        //Menu Snippet
+        DefaultMenu snippetMenu = new DefaultMenu("Snippet");
+        this.iMenuBar.AddMenu(snippetMenu);
+
+        DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
+        snippetMenu.AddMenuItem(bubbleSortMenuItem);
+
+        DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
+        snippetMenu.AddMenuItem(selectionSortMenuItem);
+
+        DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
+        snippetMenu.AddMenuItem(insertionSortMenuItem);
+
+        //Menu Themes
+        DefaultMenu themesMenu = new DefaultMenu("Themes");
+        this.iMenuBar.AddMenu(themesMenu);
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
