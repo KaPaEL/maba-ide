@@ -39,8 +39,10 @@ public class Replace implements ICommand {
                     try {
                         findText = findText.toLowerCase();
                         Highlighter highlighter = Replace.this.textArea.GetHighlighter();
+                        highlighter.removeAllHighlights();
                         Document document = Replace.this.textArea.GetDocument();
                         String allTextFile = document.getText(0,document.getLength());
+                        allTextFile = allTextFile.toLowerCase();
                         for (int i = -1; (i = allTextFile.indexOf(findText, i + 1)) != -1; ) {
                             highlighter.addHighlight(i,i+findText.length(),new DefaultHighlighter.DefaultHighlightPainter(Color.cyan));
                         }

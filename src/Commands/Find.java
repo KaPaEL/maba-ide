@@ -36,9 +36,10 @@ public class Find implements ICommand {
                     try {
                         findText = findText.toLowerCase();
                         Highlighter highlighter = Find.this.textArea.GetHighlighter();
-                    /*highlighter.removeAllHighlights();*/
+                        highlighter.removeAllHighlights();
                         Document document = Find.this.textArea.GetDocument();
                         String allTextFile = document.getText(0,document.getLength());
+                        allTextFile = allTextFile.toLowerCase();
                         for (int i = -1; (i = allTextFile.indexOf(findText, i + 1)) != -1; ) {
                             highlighter.addHighlight(i,i+findText.length(),new DefaultHighlighter.DefaultHighlightPainter(Color.cyan));
                         }
