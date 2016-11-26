@@ -6,6 +6,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Highlighter;
 import java.awt.*;
+import java.util.Stack;
 
 /**
  * Created by hanu on 11/16/16.
@@ -21,4 +22,7 @@ public interface ITextArea {
     void SelectAll();
     Document GetDocument();
     Highlighter GetHighlighter();
+    Stack GetStackUndoText();
+    Stack GetStackRedoText();
+
 }

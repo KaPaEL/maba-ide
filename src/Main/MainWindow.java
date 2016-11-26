@@ -164,13 +164,20 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(editMenu);
 
         DefaultMenuItem undoMenuItem= new DefaultMenuItem("Undo");
+        Undo undo = new Undo(defaultTextArea);
+        undoMenuItem.SetCommand(undo);
+        undoMenuItem.SetAcceleration(ctrlZ);
         undoMenuItem.SetIcon(new ImageIcon("assets/undo.png"));
-//        newMenuItem.SetAcceleration(ctrlZ);
         editMenu.AddMenuItem(undoMenuItem);
+
+
         DefaultMenuItem redoMenuItem= new DefaultMenuItem("Redo");
+        Redo redo = new Redo(defaultTextArea);
+        redoMenuItem.SetCommand(redo);
+        newMenuItem.SetAcceleration(ctrlY);
         redoMenuItem.SetIcon(new ImageIcon("assets/redo.png"));
-//        newMenuItem.SetAcceleration(ctrlY);
         editMenu.AddMenuItem(redoMenuItem);
+
         editMenu.AddSeparator();
 
         DefaultMenuItem cutMenuItem= new DefaultMenuItem("Cut");
@@ -259,8 +266,19 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddSeparator();
         DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
+        undoTool.SetCommand(undo);
+        /*if(defaultTextArea.GetStackText().empty())
+        {
+            System.out.println("masuk");
+            undoTool.setEnabled(false);
+        }*/
+
+        //CheckUndo checkUndo = new CheckUndo(undoTool,defaultTextArea);
+
+
         DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
+        redoTool.SetCommand(redo);
         DefaultTool cutTool = new DefaultTool("assets/cut.png","Cut text");
         cutTool.SetCommand(cut);
         this.iToolBar.AddToolItem(cutTool);
