@@ -48,7 +48,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow() throws IOException {
         try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -365,7 +365,7 @@ public class MainWindow extends JFrame {
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
         contentPanel.add(mainSplit, BorderLayout.CENTER);
 
-        JLabel statusBar = new JLabel("Status:");
+        final JLabel statusBar = new JLabel("Status:");
         statusBar.setText("Status: Line 1 Column 1");
 
 
