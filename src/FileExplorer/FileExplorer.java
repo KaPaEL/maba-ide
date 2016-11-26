@@ -23,9 +23,9 @@ public class FileExplorer extends JPanel {
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) e
 						.getPath().getLastPathComponent();
-				System.out.println("You selected " + node);
-				System.out.print(dir.getAbsolutePath());
-				System.out.print(node.getPath());
+//				System.out.println("You selected " + node);
+//				System.out.print(dir.getAbsolutePath());
+//				System.out.print(node.getPath());
 			}
 		});
 		

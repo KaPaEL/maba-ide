@@ -2,6 +2,7 @@ package Main;
 
 import Commands.*;
 import Commands.ShellCommand.Compile;
+import Commands.ShellCommand.Run;
 import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
@@ -47,7 +48,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow() throws IOException {
         try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -70,7 +71,7 @@ public class MainWindow extends JFrame {
         
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
         //UIManager.put("Button.setBorderPainted",BorderFactory.createEmptyBorder());
-
+        //==============================================
         //find panel
         JTextField textField = new JTextField(20);
         JButton textFind = new JButton("Find");
@@ -78,6 +79,19 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.setVisible(false);
+        //==============================================
+        //Find Replace
+        JTextField textFieldFind = new JTextField(20);
+        JButton btnFind = new JButton("Find");
+        JTextField textFieldReplace = new JTextField(20);
+        JButton btnReplace = new JButton("Replace");
+        JPanel repalcePanel = new JPanel();
+        repalcePanel.add(textFieldFind);
+        repalcePanel.add(btnFind);
+        repalcePanel.add(textFieldReplace);
+        repalcePanel.add(btnReplace);
+        repalcePanel.setVisible(false);
+        //===============================================
 
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane eastPanel = new JScrollPane(defaultTextArea);
@@ -220,24 +234,47 @@ public class MainWindow extends JFrame {
         searchMenu.AddMenuItem(findMenuItem);
 
         DefaultMenuItem replaceMenuItem = new DefaultMenuItem("Replace");
+        Replace replace = new Replace(defaultTextArea,repalcePanel);
+        replaceMenuItem.SetCommand(replace);
         replaceMenuItem.SetIcon(new ImageIcon("assets/replace.png"));
-//        replaceMenuItem.SetAcceleration(ctrlR);
+        replaceMenuItem.SetAcceleration(ctrlR);
         searchMenu.AddMenuItem(replaceMenuItem);
 
 
         //Menu Compile
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
-
+    
+        Run run = new Run(defaultFileExplorer);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
+        runMenuItem.SetAcceleration(F10);
+        runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile();
+        Compile compile = new Compile(defaultFileExplorer);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
+        compileMenuItem.SetAcceleration(F9);
         compileMenuItem.SetCommand(compile);
         compileMenu.AddMenuItem(compileMenuItem);
+
+        //Menu Snippet
+        DefaultMenu snippetMenu = new DefaultMenu("Snippet");
+        this.iMenuBar.AddMenu(snippetMenu);
+
+        DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
+        snippetMenu.AddMenuItem(bubbleSortMenuItem);
+
+        DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
+        snippetMenu.AddMenuItem(selectionSortMenuItem);
+
+        DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
+        snippetMenu.AddMenuItem(insertionSortMenuItem);
+
+        //Menu Themes
+        DefaultMenu themesMenu = new DefaultMenu("Themes");
+        this.iMenuBar.AddMenu(themesMenu);
 
         //Region Toobar
         this.iToolBar = new DefaultToolBar();
@@ -294,13 +331,16 @@ public class MainWindow extends JFrame {
 
         this.iToolBar.AddSeparator();
         DefaultTool findTool = new DefaultTool("assets/find.png","Find text");
+        findTool.SetCommand(find);
         this.iToolBar.AddToolItem(findTool);
         DefaultTool replaceTool = new DefaultTool("assets/replace.png","Replace text");
         this.iToolBar.AddToolItem(replaceTool);
         this.iToolBar.AddSeparator();
         DefaultTool runTool = new DefaultTool("assets/run.png","Run");
+        runTool.SetCommand(run);
         this.iToolBar.AddToolItem(runTool);
         DefaultTool compileTool = new DefaultTool("assets/compile.png","Compile");
+        compileTool.SetCommand(compile);
         this.iToolBar.AddToolItem(compileTool);
         Container container = frame.getContentPane();
         container.add((Component) this.iToolBar, BorderLayout.NORTH);
@@ -308,17 +348,18 @@ public class MainWindow extends JFrame {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,eastPanel);
+        JSplitPane splitTextRepalce = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,repalcePanel,eastPanel);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, westPanel,splitTextRepalce);
         splitPane.setDividerLocation(148);
 
         contentPanel.add(splitPane, BorderLayout.CENTER);
-        contentPanel.add(findPanel, BorderLayout.SOUTH);
 
         //printout
         JTextPane terminalText = new JTextPane();
-        terminalText.setPreferredSize(new Dimension(800,50));
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
+
+
 
         JSplitPane southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,terminalPanel,findPanel);
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,southSplit);
@@ -326,6 +367,7 @@ public class MainWindow extends JFrame {
 
         JLabel statusBar = new JLabel("Status:");
         statusBar.setText("Status: Line 1 Column 1");
+
 
         contentPanel.add(statusBar, BorderLayout.SOUTH);
         defaultTextArea.addCaretListener(new CaretListener() {

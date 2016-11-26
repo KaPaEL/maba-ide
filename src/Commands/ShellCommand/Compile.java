@@ -1,17 +1,23 @@
 package Commands.ShellCommand;
 
-import Commands.ICommand;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Objects;
+import FileExplorer.IFileExplorer;
 
 /**
  * Created by mfrazi on 15/11/2016.
  */
 public class Compile extends ShellCommand{
-    // TODO: 15/11/2016 Cara mengetahui tab yang aktif dan ambil pathnya
-    public Compile(){
-        
+    public Compile(IFileExplorer iFileExplorer){
+        super(iFileExplorer);
+    }
+    
+    @Override
+    public void UpdateCommand(){
+        super.UpdateCommand();
+        String path = this.GetPath();
+        String fileName = this.GetFileName();
+        String outputExe = path+"\\"+fileName.split("\\.c")[0];
+        String command = "gcc \""+path+"\\"+fileName+"\" -o \""+outputExe+"\"";
+        this.SetOutputExe(outputExe);
+        this.SetCommand(command);
     }
 }
