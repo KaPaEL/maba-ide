@@ -305,7 +305,7 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddSeparator();
         DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
-        //undoTool.setEnabled(false);
+        undoTool.setEnabled(false);
         undoTool.SetCommand(undo);
         /*if(defaultTextArea.GetStackText().empty())
         {
@@ -318,7 +318,7 @@ public class MainWindow extends JFrame {
 
         DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
-        //redoTool.setEnabled(false);
+        redoTool.setEnabled(false);
         redoTool.SetCommand(redo);
         DefaultTool cutTool = new DefaultTool("assets/cut.png","Cut text");
         cutTool.SetCommand(cut);
@@ -380,10 +380,10 @@ public class MainWindow extends JFrame {
                 int linenum = 1;
                 int columnnum = 1;
                 DefaultTextArea editArea = (DefaultTextArea)e.getSource();
-                /*if(editArea.GetStackUndoText().empty() || editArea.GetStackUndoText().size()==1) undoTool.setEnabled(false);
+                if(editArea.GetStackUndoText().size()<=1 ) undoTool.setEnabled(false);
                 else undoTool.setEnabled(true);
-                if(editArea.GetStackRedoText().empty()) redoTool.setEnabled(false);*//*
-                else redoTool.setEnabled(false);*/
+                if(editArea.GetStackRedoText().size()==0 ) redoTool.setEnabled(false);
+                else redoTool.setEnabled(true);
                 try {
                     int caretpos = editArea.getCaretPosition();
                     linenum = editArea.getLineOfOffset(caretpos);

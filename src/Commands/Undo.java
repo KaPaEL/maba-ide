@@ -19,12 +19,13 @@ public class Undo implements ICommand {
         Stack stackUndo = textArea.GetStackUndoText();
         Stack stackRedo = textArea.GetStackRedoText();
         //System.out.println("Undo :"+stackUndo.peek());
-        if (stackUndo.size() > 1)
+        if (stackUndo.size()>1)
         {
             stackRedo.push(stackUndo.peek());
             stackUndo.pop();
+            textArea.SetText(stackUndo.peek().toString());
         }
 
-        textArea.SetText(stackUndo.peek().toString());
+
     }
 }

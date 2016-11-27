@@ -21,9 +21,6 @@ public class Redo implements ICommand {
         if(!stackRedo.empty())
         {
             textArea.SetText(stackRedo.peek().toString());
-        }
-        if (stackRedo.size() > 1)
-        {
             stackUndo.push(stackRedo.peek());
             stackRedo.pop();
         }

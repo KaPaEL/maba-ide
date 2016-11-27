@@ -1,5 +1,6 @@
 package Editor;
 
+import MenuBar.DefaultMenuItem;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
@@ -21,6 +22,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
     public Stack commandRedoStack = new Stack();
 
     static int counter = 0;
+    int flag = 0;
     static Timer timer;
     public DefaultTextArea() {
         this.setSize(20,60);
@@ -33,21 +35,17 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
         this.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent keyEvent) {
-                //System.out.println("masuk ptype");
+
             }
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                //commandRedoStack = null;
-                if(!commandRedoStack.empty() && !commandUndoStack.peek().equals(GetText()))
+                if(commandUndoStack.size()==1 && flag == 0)
                 {
-                    //System.out.println("peek"+GetStackRedoText().peek().toString().trim()+" - "+GetText().trim());
-                    for (int i = GetStackRedoText().size();i>0;i--)
-                    {
-                        commandRedoStack.pop();
-                    }
-                    //System.out.println("akhir"+GetStackRedoText().size());
+                    commandUndoStack.push(GetText());
+                    flag = 1;
                 }
+
 
                 if ((keyEvent.getKeyCode() == KeyEvent.VK_V) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
                     if(!commandUndoStack.peek().equals(GetText())  && commandRedoStack.isEmpty() )
@@ -69,6 +67,13 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
+                if(!commandUndoStack.peek().equals(GetText()))
+                {
+                    for (int i = GetStackRedoText().size();i>0;i--)
+                    {
+                        commandRedoStack.pop();
+                    }
+                }
                 counter=0;
                 TimerTask timerTask = new TimerTask() {
                     @Override
