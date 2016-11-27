@@ -39,20 +39,20 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
                 //commandRedoStack = null;
-                if(!commandRedoStack.empty())
+                if(!commandRedoStack.empty() && !commandUndoStack.peek().equals(GetText()))
                 {
-                    System.out.println("awal"+GetStackRedoText().size());
+                    //System.out.println("peek"+GetStackRedoText().peek().toString().trim()+" - "+GetText().trim());
                     for (int i = GetStackRedoText().size();i>0;i--)
                     {
                         commandRedoStack.pop();
                     }
-                    System.out.println("akhir"+GetStackRedoText().size());
+                    //System.out.println("akhir"+GetStackRedoText().size());
                 }
 
                 if ((keyEvent.getKeyCode() == KeyEvent.VK_V) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
                     if(!commandUndoStack.peek().equals(GetText())  && commandRedoStack.isEmpty() )
                     {
-                        System.out.println("masuk paste");
+                        //System.out.println("masuk paste");
                         commandUndoStack.push(GetText());
                     }
                 }
@@ -60,7 +60,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
                 else if ((keyEvent.getKeyCode() == KeyEvent.VK_X) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
                     if(!commandUndoStack.peek().equals(GetText())  && commandRedoStack.isEmpty() )
                     {
-                        System.out.println("masuk cut");
+                        //System.out.println("masuk cut");
                         commandUndoStack.push(GetText());
                     }
                 }
