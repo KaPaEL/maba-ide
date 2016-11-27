@@ -15,7 +15,7 @@ public class Run extends ShellCommand{
         super.UpdateCommand();
         String path = this.GetPath();
         String fileName = this.GetFileName();
-        String outputExe = "\""+path+"\\"+fileName.split("\\.c")[0]+"\"";
+        String outputExe = "cmd /c start cmd /c (\"C:\\Program Files (x86)\\Dev-Cpp\\ConsolePauser.exe\" \""+path+"\\"+fileName.split("\\.c")[0]+"\")";
         this.SetOutputExe(outputExe);
         this.SetCommand(outputExe);
     }
