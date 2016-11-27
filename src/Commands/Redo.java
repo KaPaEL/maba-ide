@@ -18,7 +18,10 @@ public class Redo implements ICommand {
         Stack stackUndo = textArea.GetStackUndoText();
         Stack stackRedo = textArea.GetStackRedoText();
         //System.out.println("Redo :"+stackRedo.peek());
-        textArea.SetText(stackRedo.peek().toString());
+        if(!stackRedo.empty())
+        {
+            textArea.SetText(stackRedo.peek().toString());
+        }
         if (stackRedo.size() > 1)
         {
             stackUndo.push(stackRedo.peek());

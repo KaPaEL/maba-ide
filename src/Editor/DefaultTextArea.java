@@ -39,6 +39,16 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
                 //commandRedoStack = null;
+                if(!commandRedoStack.empty())
+                {
+                    System.out.println("awal"+GetStackRedoText().size());
+                    for (int i = GetStackRedoText().size();i>0;i--)
+                    {
+                        commandRedoStack.pop();
+                    }
+                    System.out.println("akhir"+GetStackRedoText().size());
+                }
+
                 if ((keyEvent.getKeyCode() == KeyEvent.VK_V) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
                     if(!commandUndoStack.peek().equals(GetText())  && commandRedoStack.isEmpty() )
                     {
@@ -72,7 +82,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
                     public void run() {
                         while (true) {
                             try {
-                                if(counter==2)
+                                if(counter==4)
                                 {
                                     if(!commandUndoStack.peek().equals(GetText()) && commandRedoStack.isEmpty())
                                     {
