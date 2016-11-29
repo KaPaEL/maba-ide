@@ -337,8 +337,11 @@ public class MainWindow extends JFrame {
         DefaultTool findTool = new DefaultTool("assets/find.png","Find text");
         findTool.SetCommand(find);
         this.iToolBar.AddToolItem(findTool);
+
         DefaultTool replaceTool = new DefaultTool("assets/replace.png","Replace text");
+        replaceTool.SetCommand(replace);
         this.iToolBar.AddToolItem(replaceTool);
+
         this.iToolBar.AddSeparator();
         DefaultTool runTool = new DefaultTool("assets/run.png","Run");
         runTool.SetCommand(run);
