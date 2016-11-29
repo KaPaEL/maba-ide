@@ -124,10 +124,9 @@ public class MainWindow extends JFrame {
         splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,splitTextFind,rightPanel);
         splitTextFind.getTopComponent().setVisible(false);
         splitTextFind.getBottomComponent().setVisible(false);
+        //splitTextReplace.setVisible(false);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, leftPanel,splitTextReplace);
         mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,terminalPanel);
-        //splitPane.setDividerLocation(148);
-        //southSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,terminalPanel);
 
         //================================================
 

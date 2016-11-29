@@ -28,8 +28,9 @@ public class Find implements ICommand {
 
     @Override
     public void execute() {
-
-        this.jSplit.getBottomComponent().setVisible(true);
+        this.jSplit.getBottomComponent().setVisible(false);
+        this.jSplit.setDividerLocation(0.0);
+        this.jSplit.getTopComponent().setVisible(true);
         this.jSplit.setDividerLocation(0.1);
 
         JButton findButton = ((JButton)this.jPanel.getComponent(1));
