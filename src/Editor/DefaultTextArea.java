@@ -87,24 +87,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
                     flag = 1;
                 }
 
-
-                if ((keyEvent.getKeyCode() == KeyEvent.VK_V) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
-                    if(!commandUndoStack.peek().equals(GetText())  && commandRedoStack.isEmpty() )
-                    {
-                        //System.out.println("masuk paste");
-                        commandUndoStack.push(GetText());
-                    }
-                }
-
-                else if ((keyEvent.getKeyCode() == KeyEvent.VK_X) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
-                    if(!commandUndoStack.peek().equals(GetText())  && commandRedoStack.isEmpty() )
-                    {
-                        //System.out.println("masuk cut");
-                        commandUndoStack.push(GetText());
-                    }
-                }
-
-                else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                     if(!commandUndoStack.peek().equals(GetText().trim())  && commandRedoStack.isEmpty() )
                     {
                         commandUndoStack.push(GetText());
