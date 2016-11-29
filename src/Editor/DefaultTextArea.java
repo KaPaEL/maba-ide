@@ -20,11 +20,28 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
 
     public Stack commandUndoStack = new Stack();
     public Stack commandRedoStack = new Stack();
+    private DefaultTextArea defaultTextArea;
 
     static int counter = 0;
     int flag = 0;
     int flagThread = 0;
     static Timer timer;
+
+    public DefaultTextArea getInstance() {
+        if (this.defaultTextArea != null) {
+            return this.defaultTextArea;
+        } else {
+            defaultTextArea = new DefaultTextArea();
+            return this.defaultTextArea;
+        }
+    }
+
+    private DefaultTextArea() {
+        this.defaultTextArea.setSize(20,60);
+        this.defaultTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        this.defaultTextArea.setCodeFoldingEnabled(true);
+        this.defaultTextArea.setAutoscrolls(true);
+        //commandRedoStack = null;
     public DefaultTextArea() {
         this.setSize(20,60);
         this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
@@ -32,6 +49,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
         this.setAutoscrolls(true);
         commandUndoStack.push(GetText());
 
+        this.defaultTextArea.addKeyListener(new KeyListener() {
 
         this.addKeyListener(new KeyListener() {
             @Override
@@ -117,37 +135,37 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
 
     @Override
     public void SetText(String text) {
-        this.setText(text);
+        this.defaultTextArea.setText(text);
     }
 
     @Override
-    public String GetText() { return this.getText(); }
+    public String GetText() { return this.defaultTextArea.getText(); }
 
     @Override
-    public String GetSelectedText() { return this.getSelectedText(); }
+    public String GetSelectedText() { return this.defaultTextArea.getSelectedText(); }
 
     @Override
-    public int GetSelectionStart() { return this.getSelectionStart(); }
+    public int GetSelectionStart() { return this.defaultTextArea.getSelectionStart(); }
 
     @Override
-    public int GetSelectionEnd() { return this.getSelectionEnd(); }
+    public int GetSelectionEnd() { return this.defaultTextArea.getSelectionEnd(); }
 
     @Override
-    public void ReplaceRange( String replace, int start, int end) { this.replaceRange(replace, start, end); }
+    public void ReplaceRange( String replace, int start, int end) { this.defaultTextArea.replaceRange(replace, start, end); }
 
     @Override
-    public void SelectAll() { this.selectAll(); }
+    public void SelectAll() { this.defaultTextArea.selectAll(); }
 
     @Override
-    public Document GetDocument() { return this.getDocument(); }
+    public Document GetDocument() { return this.defaultTextArea.getDocument(); }
 
     @Override
-    public Highlighter GetHighlighter() { return this.getHighlighter(); }
+    public Highlighter GetHighlighter() { return this.defaultTextArea.getHighlighter(); }
 
     @Override
-    public Stack GetStackUndoText() { return commandUndoStack; }
+    public Stack GetStackUndoText() { return this.defaultTextArea.commandUndoStack; }
 
     @Override
-    public Stack GetStackRedoText() { return commandRedoStack; }
+    public Stack GetStackRedoText() { return this.defaultTextArea.commandRedoStack; }
 
 }
