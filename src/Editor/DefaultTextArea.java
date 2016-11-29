@@ -1,6 +1,8 @@
 package Editor;
 
-import MenuBar.DefaultMenuItem;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
+import TabBar.ITabObserver;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
@@ -8,7 +10,6 @@ import javax.swing.text.Document;
 import javax.swing.text.Highlighter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,32 +17,21 @@ import java.util.TimerTask;
 /**
  * Created by hanu on 11/16/16.
  */
-public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
+public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabObserver {
 
-    public Stack commandUndoStack = new Stack();
-    public Stack commandRedoStack = new Stack();
+    private DefaultTabSubject subject;
+    public DefaultTabEditor defaultTabEditor;
 
-    static int counter = 0;
-    int flag = 0;
-    int flagThread = 0;
     static Timer timer;
 
-
     public DefaultTextArea() {
+        this.subject = DefaultTabSubject.getInstance();
         this.setSize(20,60);
         this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         this.setCodeFoldingEnabled(true);
         this.setAutoscrolls(true);
         //commandRedoStack = null;
-    public DefaultTextArea() {
-        this.setSize(20,60);
-        this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        this.setCodeFoldingEnabled(true);
-        this.setAutoscrolls(true);
-        commandUndoStack.push(GetText());
-
-        this.addKeyListener(new KeyListener() {
-        this.defaultTextArea.addKeyListener(new KeyListener() {
+        //defaultTabEditor.pushCommandUndoStack(GetText());
 
         this.addKeyListener(new KeyListener() {
             @Override
@@ -51,78 +41,82 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if(flagThread==0)
+                if(defaultTabEditor.getCommandUndoStackSize() == 1 && defaultTabEditor.getflag() == 0)
                 {
-                    System.out.println("flag masuk");
-                    flagThread = 1;
-                    counter=0;
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            counter++;
-                        }
-                    };
-                    Thread t = new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            while (true) {
-                                try {
-                                    if(counter==2)
-                                    {
-                                        System.out.println("masuk thread");
-                                        if(!commandUndoStack.peek().equals(GetText()) && commandRedoStack.isEmpty())
-                                        {
-                                            commandUndoStack.push(GetText());
-                                        }
-                                        counter = 0;
-                                    }
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException ex) {
-                                    ex.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-                    t.interrupt();
-                    timer = new Timer("MyTimer");
-                    timer.scheduleAtFixedRate(timerTask, 0, 1000);
-                    t.setDaemon(true);
-                    t.start();
-                    System.out.println(t.getState());
-                }
-                if(commandUndoStack.size()==1 && flag == 0)
-                {
-                    commandUndoStack.push(GetText());
-                    flag = 1;
+                    defaultTabEditor.pushCommandUndoStack(GetText());
+                    defaultTabEditor.setFlag(1);
                 }
 
-                if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
-                    if(!commandUndoStack.peek().equals(GetText().trim())  && commandRedoStack.isEmpty() )
+
+                if ((keyEvent.getKeyCode() == KeyEvent.VK_V) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
+                    if(!defaultTabEditor.peekCommandUndoStack().equals(GetText())  && defaultTabEditor.isCommandRedoStackEmpty() )
                     {
-                        commandUndoStack.push(GetText());
+                        //System.out.println("masuk paste");
+                        defaultTabEditor.pushCommandUndoStack(GetText());
                     }
                 }
-                else if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(!commandUndoStack.peek().equals(GetText().trim().replace("\n", "").replace("\r", ""))  && commandRedoStack.isEmpty() )
+
+                else if ((keyEvent.getKeyCode() == KeyEvent.VK_X) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
+                    if(!defaultTabEditor.peekCommandUndoStack().equals(GetText())  && defaultTabEditor.isCommandRedoStackEmpty() )
                     {
-                        commandUndoStack.push(GetText());
+                        //System.out.println("masuk cut");
+                        defaultTabEditor.pushCommandUndoStack(GetText());
                     }
                 }
+
             }
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                if(!commandUndoStack.peek().equals(GetText()))
+                if(defaultTabEditor.peekCommandUndoStack().equals(GetText()))
                 {
-                    for (int i = GetStackRedoText().size();i>0;i--)
+                    for (int i = defaultTabEditor.getCommandRedoStackSize();i>0;i--)
                     {
-                        commandRedoStack.pop();
+                        defaultTabEditor.popCommandRedoStack();
                     }
                 }
+                defaultTabEditor.setCounter(0);
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        defaultTabEditor.setCounter(defaultTabEditor.getCounter() + 1);
+                    }
+                };
+                Thread t = new Thread(new Runnable() {
 
+                    @Override
+                    public void run() {
+                        while (true) {
+                            try {
+                                if(defaultTabEditor.getCounter() == 4)
+                                {
+                                    if(!defaultTabEditor.peekCommandUndoStack().equals(GetText()) && defaultTabEditor.isCommandRedoStackEmpty())
+                                    {
+                                        defaultTabEditor.pushCommandUndoStack(GetText());
+                                        timer.cancel();
+                                        break;
+                                    }
+                                }
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+                });
+                timer = new Timer("MyTimer");
+                timer.scheduleAtFixedRate(timerTask, 0, 1000);
+                t.start();
             }
         });
+    }
+
+    public void setDefaultTabEditor(DefaultTabEditor _defaultTabEditor) {
+        this.defaultTabEditor = _defaultTabEditor;
+    }
+
+    public void pushUndoCommand(String command) {
+        this.defaultTabEditor.pushCommandUndoStack(command);
     }
 
     @Override
@@ -154,10 +148,10 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea {
     @Override
     public Highlighter GetHighlighter() { return this.getHighlighter(); }
 
-    @Override
-    public Stack GetStackUndoText() { return this.commandUndoStack; }
 
-    @Override
-    public Stack GetStackRedoText() { return this.commandRedoStack; }
-
+    public void update(DefaultTabEditor tabEditor) {
+        this.defaultTabEditor.setTextContent(GetText());
+        this.defaultTabEditor = tabEditor;
+        this.SetText(this.defaultTabEditor.getTextContent());
+    }
 }

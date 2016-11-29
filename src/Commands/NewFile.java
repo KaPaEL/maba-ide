@@ -2,6 +2,9 @@ package Commands;
 
 import Editor.ITextArea;
 import FileExplorer.IFileExplorer;
+import TabBar.DefaultTabBar;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
@@ -49,5 +52,8 @@ public class NewFile implements ICommand{
         }
         iFileExplorer.SetFileName(fileName+".c");
         System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+fileName+".c"+" created");
+        DefaultTabEditor tabEditor = new DefaultTabEditor(fileName + ".c");
+        DefaultTabSubject.getInstance().attachObserver(tabEditor);
+        DefaultTabBar.getInstance().addTab(tabEditor);
     }
 }

@@ -22,7 +22,5 @@ public interface ITextArea {
     void SelectAll();
     Document GetDocument();
     Highlighter GetHighlighter();
-    Stack GetStackUndoText();
-    Stack GetStackRedoText();
 
 }

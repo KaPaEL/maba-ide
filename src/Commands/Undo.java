@@ -2,6 +2,8 @@ package Commands;
 
 import Editor.DefaultTextArea;
 import Editor.ITextArea;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import java.util.Stack;
 
@@ -16,14 +18,13 @@ public class Undo implements ICommand {
     }
     @Override
     public void execute() {
-        Stack stackUndo = textArea.GetStackUndoText();
-        Stack stackRedo = textArea.GetStackRedoText();
         //System.out.println("Undo :"+stackUndo.peek());
-        if (stackUndo.size()>1)
+        DefaultTabEditor activedEditor = DefaultTabSubject.getInstance().getActiveTab();
+        if (activedEditor.getCommandUndoStackSize() > 1)
         {
-            stackRedo.push(stackUndo.peek());
-            stackUndo.pop();
-            textArea.SetText(stackUndo.peek().toString());
+            String lastUndoCommand = activedEditor.peekCommandUndoStack();
+            activedEditor.pushCommandRedoStack(lastUndoCommand);
+            textArea.SetText(activedEditor.peekCommandUndoStack().toString());
         }
 
 
