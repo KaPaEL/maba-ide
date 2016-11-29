@@ -9,6 +9,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * Created by Hanif Sudira on 11/22/2016.
@@ -22,10 +23,16 @@ public class Paste implements ICommand {
     }
     @Override
     public void execute() {
+        Stack stackUndo = textArea.GetStackUndoText();
+        Stack stackRedo = textArea.GetStackRedoText();
         Transferable clipPaste = clipBoard.getContents(this.textArea);
         try{
             String paste = (String)clipPaste.getTransferData(DataFlavor.stringFlavor);
             this.textArea.ReplaceRange(paste, this.textArea.GetSelectionStart(), this.textArea.GetSelectionEnd());
+            if(!stackUndo.peek().equals(textArea.GetText())  && stackRedo.isEmpty() )
+            {
+                stackUndo.push(textArea.GetText());
+            }
         } catch (UnsupportedFlavorException e) {
             e.printStackTrace();
         } catch (IOException e) {
