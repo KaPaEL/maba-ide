@@ -18,15 +18,20 @@ import java.awt.event.ActionListener;
 public class Find implements ICommand {
     private ITextArea textArea;
     private JPanel jPanel;
+    private  JSplitPane jSplit;
 
-    public Find(RSyntaxTextArea textArea, JPanel jPanel){
+    public Find(RSyntaxTextArea textArea, JPanel jPanel,JSplitPane jSplit){
         this.textArea = (ITextArea)textArea;
         this.jPanel = jPanel;
+        this.jSplit = jSplit;
     }
 
     @Override
     public void execute() {
-        this.jPanel.setVisible(true);
+
+        this.jSplit.getBottomComponent().setVisible(true);
+        this.jSplit.setDividerLocation(0.1);
+
         JButton findButton = ((JButton)this.jPanel.getComponent(1));
         findButton.addActionListener(new ActionListener() {
             @Override

@@ -18,17 +18,21 @@ import java.awt.event.ActionListener;
 public class Replace implements ICommand {
     private ITextArea textArea;
     private JPanel jPanel;
+    private JSplitPane jSplit;
 
-    public Replace(RSyntaxTextArea textArea, JPanel jPanel){
+    public Replace(RSyntaxTextArea textArea, JPanel jPanel,JSplitPane jSplit2){
         this.textArea = (ITextArea)textArea;
         this.jPanel = jPanel;
+        this.jSplit = jSplit2;
     }
 
     @Override
     public void execute() {
         System.out.println("\n");
         System.out.println("Masuk Bos");
-        this.jPanel.setVisible(true);
+        //this.jPanel.setVisible(true);
+        this.jSplit.getBottomComponent().setVisible(true);
+        this.jSplit.setDividerLocation(0.1);
 
         JButton findButton = ((JButton)this.jPanel.getComponent(1));
         findButton.addActionListener(new ActionListener() {
