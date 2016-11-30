@@ -49,7 +49,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
 
                 if ((keyEvent.getKeyCode() == KeyEvent.VK_V) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
-                    if(!defaultTabEditor.peekCommandUndoStack().equals(GetText())  && defaultTabEditor.isCommandRedoStackEmpty() )
+                    if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText())  && defaultTabEditor.isCommandRedoStackEmpty() )
                     {
                         //System.out.println("masuk paste");
                         defaultTabEditor.pushCommandUndoStack(GetText());
@@ -57,7 +57,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                 }
 
                 else if ((keyEvent.getKeyCode() == KeyEvent.VK_X) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
-                    if(!defaultTabEditor.peekCommandUndoStack().equals(GetText())  && defaultTabEditor.isCommandRedoStackEmpty() )
+                    if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText())  && defaultTabEditor.isCommandRedoStackEmpty() )
                     {
                         //System.out.println("masuk cut");
                         defaultTabEditor.pushCommandUndoStack(GetText());
@@ -68,7 +68,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                if(defaultTabEditor.peekCommandUndoStack().equals(GetText()))
+                if(!defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText()))
                 {
                     for (int i = defaultTabEditor.getCommandRedoStackSize();i>0;i--)
                     {
@@ -90,7 +90,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                             try {
                                 if(defaultTabEditor.getCounter() == 4)
                                 {
-                                    if(!defaultTabEditor.peekCommandUndoStack().equals(GetText()) && defaultTabEditor.isCommandRedoStackEmpty())
+                                    if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText()) && defaultTabEditor.isCommandRedoStackEmpty())
                                     {
                                         defaultTabEditor.pushCommandUndoStack(GetText());
                                         timer.cancel();

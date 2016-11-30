@@ -23,7 +23,7 @@ public class NewFile implements ICommand{
     private ITextArea textArea;
 
     public NewFile(RSyntaxTextArea textArea, IFileExplorer iFileExplorer, JFrame mainwindow) {
-        this.textArea = (ITextArea) textArea;
+//        this.textArea = (ITextArea) textArea;
         this.iFileExplorer = iFileExplorer;
         this.mainwindow = mainwindow;
     }
@@ -36,7 +36,7 @@ public class NewFile implements ICommand{
                 JOptionPane.QUESTION_MESSAGE);
         try {
             String content = "";
-            this.textArea.SetText("");
+//            this.textArea.SetText("");
             File file = new File(this.iFileExplorer.GetPath()+"\\"+fileName+".c");
 
             if (!file.exists()) {
@@ -54,6 +54,8 @@ public class NewFile implements ICommand{
         System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+fileName+".c"+" created");
         DefaultTabEditor tabEditor = new DefaultTabEditor(fileName + ".c");
         DefaultTabSubject.getInstance().attachObserver(tabEditor);
+        DefaultTabSubject.getInstance().setActiveTab(tabEditor);
         DefaultTabBar.getInstance().addTab(tabEditor);
+        System.out.println("[DEBUG] " + DefaultTabSubject.getInstance().getActiveTab().getTabId().toString());
     }
 }

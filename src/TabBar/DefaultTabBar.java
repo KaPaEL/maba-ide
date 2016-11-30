@@ -15,7 +15,7 @@ public class DefaultTabBar implements ITabBar{
     private JTabbedPane tabbedPane;
 
     private DefaultTabBar() {
-        this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        this.tabbedPane = new JTabbedPane();
         ChangeListener changeListener = new ChangeListener() {
             public void stateChanged(ChangeEvent changeEvent) {
                 JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
@@ -24,6 +24,10 @@ public class DefaultTabBar implements ITabBar{
             }
         };
         tabbedPane.addChangeListener(changeListener);
+    }
+
+    public JTabbedPane getTabbedPane() {
+        return this.tabbedPane;
     }
 
     public static DefaultTabBar getInstance() {
