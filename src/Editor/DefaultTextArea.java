@@ -41,7 +41,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if(defaultTabEditor.getCommandUndoStackSize() == 1 && defaultTabEditor.getflag() == 0)
+                if(defaultTabEditor != null && defaultTabEditor.getCommandUndoStackSize() == 1 && defaultTabEditor.getflag() == 0)
                 {
                     defaultTabEditor.pushCommandUndoStack(GetText());
                     defaultTabEditor.setFlag(1);
@@ -68,7 +68,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                if(!defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText()))
+                if(defaultTabEditor != null && !defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText()))
                 {
                     for (int i = defaultTabEditor.getCommandRedoStackSize();i>0;i--)
                     {

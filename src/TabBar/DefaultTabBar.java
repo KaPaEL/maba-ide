@@ -35,11 +35,11 @@ public class DefaultTabBar implements ITabBar{
     }
 
     public void addTab(DefaultTabEditor tabEditor) {
-        tabbedPane.addTab(tabEditor.getTabId().toString(), makePanel(tabEditor.getTabName()));
+        tabbedPane.addTab(tabEditor.getTabName().toString(), makePanel(""));
     }
 
     public void removeTab(DefaultTabEditor tabEditor) {
-        tabbedPane.remove(tabbedPane.indexOfTab(tabEditor.getTabId().toString()));
+        tabbedPane.remove(tabbedPane.indexOfTab(tabEditor.getTabName().toString()));
     }
 
     public void selectTab(int idx) {
@@ -50,6 +50,7 @@ public class DefaultTabBar implements ITabBar{
         JPanel p = new JPanel();
         p.add(new Label(text));
         p.setLayout(new GridLayout(1, 1));
+        p.setVisible(false);
         return p;
     }
 

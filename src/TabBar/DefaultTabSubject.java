@@ -57,10 +57,10 @@ public class DefaultTabSubject implements ITabSubject {
         }
     }
 
-    public void selectTab(String tabId) {
+    public void selectTab(String tabName) {
         for (int idx = observers.size() - 1; idx > 0; idx--) {
             DefaultTabEditor temp = (DefaultTabEditor) this.observers.get(idx);
-            if (temp.getTabId().toString().equals(tabId)) {
+            if (temp.getTabName().toString().equals(tabName)) {
                 this.setActiveTab(temp);
                 this.update();
                 return;

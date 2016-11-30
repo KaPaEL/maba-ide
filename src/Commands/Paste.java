@@ -1,6 +1,8 @@
 package Commands;
 
 import Editor.ITextArea;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import java.awt.*;
@@ -23,15 +25,14 @@ public class Paste implements ICommand {
     }
     @Override
     public void execute() {
-        Stack stackUndo = textArea.GetStackUndoText();
-        Stack stackRedo = textArea.GetStackRedoText();
+        DefaultTabEditor activeEditor = DefaultTabSubject.getInstance().getActiveTab();
         Transferable clipPaste = clipBoard.getContents(this.textArea);
         try{
             String paste = (String)clipPaste.getTransferData(DataFlavor.stringFlavor);
             this.textArea.ReplaceRange(paste, this.textArea.GetSelectionStart(), this.textArea.GetSelectionEnd());
-            if(!stackUndo.peek().equals(textArea.GetText())  && stackRedo.isEmpty() )
+            if(!activeEditor.isCommandUndoStackEmpty() && activeEditor.peekCommandUndoStack().equals(textArea.GetText())  && activeEditor.isCommandRedoStackEmpty() )
             {
-                stackUndo.push(textArea.GetText());
+                activeEditor.pushCommandUndoStack(textArea.GetText());
             }
         } catch (UnsupportedFlavorException e) {
             e.printStackTrace();
