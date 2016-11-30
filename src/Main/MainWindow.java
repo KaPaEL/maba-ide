@@ -7,6 +7,9 @@ import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
 import MenuBar.*;
+import TabBar.DefaultTabBar;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
@@ -105,9 +108,13 @@ public class MainWindow extends JFrame {
         //===============================================
         //TabtextArea
         DefaultTextArea defaultTextArea = new DefaultTextArea();
-        tabPane = new JTabbedPane();
-        tabPane.add("nama tab",new JScrollPane(defaultTextArea));//add tab
-        tabPane.setTabComponentAt(0,new CloseableTabComponent(tabPane));// close tab
+        DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
+        DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
+        defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
+        DefaultTabSubject.getInstance().getActiveTab().pushCommandUndoStack("");
+
+        DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
+
         //====================================================================
         //FolderExplorer
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
@@ -121,11 +128,9 @@ public class MainWindow extends JFrame {
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
 
-
-
-
-        splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel,repalcePanel);
-        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,splitTextFind,tabPane);
+        splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
+        JSplitPane tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true, splitTextFind, DefaultTabBar.getInstance().getTabbedPane());
+        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, tabArea, defaultTextArea);
         splitTextFind.getTopComponent().setVisible(false);
         splitTextFind.getBottomComponent().setVisible(false);
         //splitTextReplace.setVisible(false);
@@ -408,9 +413,9 @@ public class MainWindow extends JFrame {
                 int linenum = 1;
                 int columnnum = 1;
                 DefaultTextArea editArea = (DefaultTextArea)e.getSource();
-                if(editArea.GetStackUndoText().size()<=1 ) undoTool.setEnabled(false);
+                if(DefaultTabSubject.getInstance().getActiveTab() == null || DefaultTabSubject.getInstance().getActiveTab().getCommandUndoStackSize() <= 1) undoTool.setEnabled(false);
                 else undoTool.setEnabled(true);
-                if(editArea.GetStackRedoText().size()==0 ) redoTool.setEnabled(false);
+                if(DefaultTabSubject.getInstance().getActiveTab() == null || DefaultTabSubject.getInstance().getActiveTab().getCommandRedoStackSize() == 0 ) redoTool.setEnabled(false);
                 else redoTool.setEnabled(true);
                 try {
                     int caretpos = editArea.getCaretPosition();

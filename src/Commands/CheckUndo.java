@@ -2,6 +2,8 @@ package Commands;
 
 import Editor.DefaultTextArea;
 import Editor.ITextArea;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import ToolBar.DefaultTool;
 
 /**
@@ -17,7 +19,8 @@ public class CheckUndo implements ICommand {
     }
     @Override
     public void execute() {
-        if(this.textArea.GetStackUndoText().empty()){
+        DefaultTabEditor activeTab = DefaultTabSubject.getInstance().getActiveTab();
+        if(activeTab.isCommandUndoStackEmpty()){
             this.undoTool.setEnabled(false);
         }
         else {
