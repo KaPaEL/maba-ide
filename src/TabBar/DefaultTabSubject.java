@@ -35,7 +35,13 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public void attachObserver(ITabObserver observer) {
-        this.observers.add(observer);
+        if (this.observers.size() > 0) {
+            DefaultTabEditor temp = (DefaultTabEditor) observer;
+            temp.pushCommandUndoStack("");
+            this.observers.add(temp);
+        } else {
+            this.observers.add(observer);
+        }
         if (this.observers.size() > 1 && this.activeTab == null) {
             this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
         }
@@ -69,6 +75,8 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public void update() {
+        System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
+        System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
         for (ITabObserver obj : this.observers) {
             obj.update(this.activeTab);
         }

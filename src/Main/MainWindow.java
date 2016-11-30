@@ -111,7 +111,7 @@ public class MainWindow extends JFrame {
         DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
         DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
         defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
-
+        DefaultTabSubject.getInstance().getActiveTab().pushCommandUndoStack("");
 
         DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
 

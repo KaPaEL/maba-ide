@@ -55,6 +55,7 @@ public class NewFile implements ICommand{
         DefaultTabEditor tabEditor = new DefaultTabEditor(fileName + ".c");
         DefaultTabSubject.getInstance().attachObserver(tabEditor);
         DefaultTabSubject.getInstance().setActiveTab(tabEditor);
+        DefaultTabSubject.getInstance().update();
         DefaultTabBar.getInstance().addTab(tabEditor);
         System.out.println("[DEBUG] " + DefaultTabSubject.getInstance().getActiveTab().getTabId().toString());
     }

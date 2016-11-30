@@ -68,7 +68,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                if(defaultTabEditor != null && !defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText()))
+                if(!defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText()))
                 {
                     for (int i = defaultTabEditor.getCommandRedoStackSize();i>0;i--)
                     {
@@ -90,8 +90,10 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                             try {
                                 if(defaultTabEditor.getCounter() == 4)
                                 {
+                                    // System.out.println("[DEBUG] counter is 4");
                                     if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText()) && defaultTabEditor.isCommandRedoStackEmpty())
                                     {
+                                        System.out.println("[DEBUG] pushed to undo stack");
                                         defaultTabEditor.pushCommandUndoStack(GetText());
                                         timer.cancel();
                                         break;
@@ -115,9 +117,6 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
         this.defaultTabEditor = _defaultTabEditor;
     }
 
-    public void pushUndoCommand(String command) {
-        this.defaultTabEditor.pushCommandUndoStack(command);
-    }
 
     @Override
     public void SetText(String text) {
