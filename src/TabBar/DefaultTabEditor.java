@@ -17,6 +17,7 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
     private DefaultTabSubject subject;
     private int counter;
     private int flag;
+    private int flagThread;
     
     public DefaultTabEditor(String _tabName) {
         this.subject = DefaultTabSubject.getInstance();
@@ -26,6 +27,7 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
         this.textContent = "";
         this.counter = 0;
         this.flag = 0;
+        this.flagThread = 0;
         this.tabName = _tabName;
     }
 
@@ -43,6 +45,14 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
 
     public void setFlag(int _flag) {
         this.flag = _flag;
+    }
+
+    public int getflagThread() {
+        return this.flagThread;
+    }
+
+    public void setFlagThread(int _flagThread) {
+        this.flagThread = _flagThread;
     }
 
     public String getTextContent() {

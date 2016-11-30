@@ -18,7 +18,7 @@ public class Redo implements ICommand {
     @Override
     public void execute() {
         DefaultTabEditor activeTab = DefaultTabSubject.getInstance().getActiveTab();
-        //System.out.println("Redo :"+stackRedo.peek());
+        System.out.println("Undo :"+ DefaultTabSubject.getInstance().getActiveTab().peekCommandRedoStack());
         if(!activeTab.isCommandRedoStackEmpty())
         {
             textArea.SetText(activeTab.peekCommandRedoStack().toString());
