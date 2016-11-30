@@ -17,6 +17,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class MainWindow extends JFrame {
     private JScrollPane leftPanel;
     private JScrollPane rightPanel;
     private JSplitPane mainSplit;
+    private JTabbedPane tabPane;
     private static KeyStroke ctrlN = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlaltS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK+ActionEvent.ALT_MASK);
@@ -101,10 +103,12 @@ public class MainWindow extends JFrame {
         repalcePanel.add(btnReplace);
         //repalcePanel.setVisible(false);
         //===============================================
-        //textArea
+        //TabtextArea
         DefaultTextArea defaultTextArea = new DefaultTextArea();
-        rightPanel = new JScrollPane(defaultTextArea);
-
+        tabPane = new JTabbedPane();
+        tabPane.add("nama tab",new JScrollPane(defaultTextArea));//add tab
+        tabPane.setTabComponentAt(0,new CloseableTabComponent(tabPane));// close tab
+        //====================================================================
         //FolderExplorer
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         leftPanel = new JScrollPane(new FileExplorer("."));
@@ -121,7 +125,7 @@ public class MainWindow extends JFrame {
 
 
         splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel,repalcePanel);
-        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,splitTextFind,rightPanel);
+        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,splitTextFind,tabPane);
         splitTextFind.getTopComponent().setVisible(false);
         splitTextFind.getBottomComponent().setVisible(false);
         //splitTextReplace.setVisible(false);
@@ -132,7 +136,7 @@ public class MainWindow extends JFrame {
 
 
 
-        //setContentPane(frame);
+
 
 
         this.iMenuBar = new DefaultMenuBar();
@@ -428,7 +432,46 @@ public class MainWindow extends JFrame {
         frame.setVisible(true);
 
     }
+    private static class CloseableTabComponent extends JPanel {
 
+        private static int tabNo = 0;
+        private JLabel titleLabel = null;
+        private JButton closeButton = null;
+        private JTabbedPane tabPane = null;
+
+        public CloseableTabComponent(JTabbedPane aTabbedPane) {
+            super(new BorderLayout());
+            tabPane = aTabbedPane;
+
+            setOpaque(false);
+            setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0));
+
+            titleLabel = new JLabel("Tab " + (++tabNo) + " ");
+            titleLabel.setOpaque(false);
+
+            closeButton = new JButton("X");
+            closeButton.setFont(new Font("Dialog", Font.BOLD, 14));
+            closeButton.setForeground(Color.red);
+            closeButton.setBorderPainted(false);
+
+            closeButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    for (int i = 0; i < tabPane.getTabCount(); i++) {
+                        if (MainWindow.CloseableTabComponent.this.equals(tabPane.getTabComponentAt(i))) {
+                            tabPane.removeTabAt(i);
+                            break;
+                        }
+                    }
+                    if ((tabPane.getTabCount() > 1) && (tabPane.getSelectedIndex() == tabPane.getTabCount() - 1)) {
+                        tabPane.setSelectedIndex(tabPane.getTabCount() - 2);
+                    }
+                }
+            });
+
+            add(titleLabel, BorderLayout.CENTER);
+            add(closeButton, BorderLayout.EAST);
+        }
+    }
 
     public static void main(String args[]) throws IOException {
         MainWindow mainWindow = new MainWindow();
