@@ -33,6 +33,7 @@ public class Paste implements ICommand {
             if(!activeEditor.isCommandUndoStackEmpty() && activeEditor.peekCommandUndoStack().equals(textArea.GetText())  && activeEditor.isCommandRedoStackEmpty() )
             {
                 activeEditor.pushCommandUndoStack(textArea.GetText());
+                DefaultTabSubject.getInstance().getActiveTab().setCounter(0);
             }
         } catch (UnsupportedFlavorException e) {
             e.printStackTrace();

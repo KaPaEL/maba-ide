@@ -31,6 +31,7 @@ public class Cut implements ICommand {
         {
             //System.out.println("masuk cut");
             activeEditor.pushCommandUndoStack(textArea.GetText());
+            DefaultTabSubject.getInstance().getActiveTab().setCounter(0);
         }
         System.out.println("Tercut Ke Clipboard");
     }

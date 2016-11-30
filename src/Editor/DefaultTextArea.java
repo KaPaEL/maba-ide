@@ -91,6 +91,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                 if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE ) {
                     if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText().trim())  && defaultTabEditor.isCommandRedoStackEmpty() )
                     {
+                        defaultTabEditor.setCounter(0);
                         System.out.println("[DEBUG] pushed to undo stack space");
                         defaultTabEditor.pushCommandUndoStack(GetText());
                     }
@@ -99,6 +100,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                 else if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText().trim().replace("\n", "").replace("\r", ""))  && defaultTabEditor.isCommandRedoStackEmpty() )
                     {
+                        defaultTabEditor.setCounter(0);
                         System.out.println("[DEBUG] pushed to undo stack enter");
                         defaultTabEditor.pushCommandUndoStack(GetText());
                     }
