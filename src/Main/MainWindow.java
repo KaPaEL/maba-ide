@@ -317,12 +317,18 @@ public class MainWindow extends JFrame {
 
         DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);
+        //Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
+        //bubbleSortMenuItem.SetCommand(snippetBubleSort);
 
         DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
         snippetMenu.AddMenuItem(selectionSortMenuItem);
+        Snippet snippetSelectionSort = new Snippet(defaultTextArea,"selection-sort");
+        selectAllMenuItem.SetCommand(snippetSelectionSort);
 
         DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
         snippetMenu.AddMenuItem(insertionSortMenuItem);
+        Snippet snippetInsertionSort = new Snippet(defaultTextArea, "insertion-sort");
+        insertionSortMenuItem.SetCommand(snippetInsertionSort);
 
         //Menu Themes
         DefaultMenu themesMenu = new DefaultMenu("Themes");
