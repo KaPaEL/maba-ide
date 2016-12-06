@@ -12,7 +12,8 @@ import java.io.InputStreamReader;
 
 public class ShellCommand implements ICommand{
     private IFileExplorer iFileExplorer;
-    private String command = "";
+    public String command = "";
+    public String resultExe = "";
     private String outputExe = "";
     
     public ShellCommand(IFileExplorer iFileExplorer){
@@ -22,25 +23,30 @@ public class ShellCommand implements ICommand{
     @Override
     public void execute(){
         this.UpdateCommand();
-//        System.out.println(this.iFileExplorer.GetPath()+"\\"+this.iFileExplorer.GetFileName());
-        System.out.print(this.command);
-        String output = "";
-        String command = this.command;
-        Process p;
-        try{
-            p = Runtime.getRuntime().exec(command);
-            p.waitFor();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line = "";
-            
-            while((line = reader.readLine())!=null){
-                output += line+"\n";
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                System.out.print(command);
+                String output = "";
+//                String command = this.getClass().;
+                Process p;
+                try{
+                    p = Runtime.getRuntime().exec(command);
+                    p.waitFor();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    String line = "";
+                    
+                    while((line = reader.readLine())!=null){
+                        output += line+"\n";
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                System.out.println("\n"+output);
+                resultExe = output;
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        System.out.println("\n"+output);
+        });
+        t.start();
     }
     
     public void SetCommand(String command){
