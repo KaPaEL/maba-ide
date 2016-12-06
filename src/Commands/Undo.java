@@ -18,10 +18,16 @@ public class Undo implements ICommand {
     }
     @Override
     public void execute() {
-        System.out.println("Undo :"+ DefaultTabSubject.getInstance().getActiveTab().peekCommandUndoStack());
+        //System.out.println("Undo :"+ DefaultTabSubject.getInstance().getActiveTab().peekCommandUndoStack());
         DefaultTabEditor activedEditor = DefaultTabSubject.getInstance().getActiveTab();
+        activedEditor.setTextContent(DefaultTabSubject.getInstance().getTextArea().GetText());
         if (activedEditor.getCommandUndoStackSize() > 1)
         {
+            /*if(!activedEditor.peekCommandRedoStack().equals(activedEditor.getTextContent()))
+            {
+                activedEditor.pushCommandRedoStack(activedEditor.getTextContent());
+            }*/
+            //System.out.println("Latest :"+ );
             String lastUndoCommand = activedEditor.peekCommandUndoStack();
             activedEditor.pushCommandRedoStack(lastUndoCommand);
             activedEditor.popCommandUndoStack();
