@@ -3,6 +3,9 @@ package Commands.ShellCommand;
 import Commands.ICommand;
 import FileExplorer.IFileExplorer;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -12,38 +15,52 @@ import java.io.InputStreamReader;
 
 public class ShellCommand implements ICommand{
     private IFileExplorer iFileExplorer;
+    public JTextPane terminalText;
     public String command = "";
-    public String resultExe = "";
+//    public String resultExe = "";
     private String outputExe = "";
     
-    public ShellCommand(IFileExplorer iFileExplorer){
+    public ShellCommand(IFileExplorer iFileExplorer, JTextPane terminalText){
         this.iFileExplorer = iFileExplorer;
+        this.terminalText = terminalText;
     }
     
     @Override
     public void execute(){
+        this.terminalText.setText("Compileeee....\n");
         this.UpdateCommand();
         Thread t = new Thread(new Runnable(){
             @Override
             public void run(){
                 System.out.print(command);
                 String output = "";
-//                String command = this.getClass().;
                 Process p;
                 try{
                     p = Runtime.getRuntime().exec(command);
                     p.waitFor();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
                     String line = "";
-                    
                     while((line = reader.readLine())!=null){
+                        System.out.println("masuk");
                         output += line+"\n";
                     }
                 }catch(Exception e){
                     e.printStackTrace();
                 }
                 System.out.println("\n"+output);
-                resultExe = output;
+//                resultExe = output;
+                try {
+                    Document doc = terminalText.getDocument();
+                    if(output.length()==0){
+                        doc.insertString(doc.getLength(), "Done", null);
+                    }
+                    else{
+                        doc.insertString(doc.getLength(), output, null);
+                    }
+                } catch(BadLocationException exc) {
+                    exc.printStackTrace();
+                }
+//                terminalText.setText(output);
             }
         });
         t.start();
