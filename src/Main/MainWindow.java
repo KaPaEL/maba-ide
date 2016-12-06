@@ -19,9 +19,7 @@ import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -92,7 +90,12 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.add(labelClose);
-
+        labelClose.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                findPanel.setVisible(false);
+            }
+        });
         //==============================================
         //Find Replace
         JTextField textFieldFind = new JTextField(20);
@@ -104,6 +107,14 @@ public class MainWindow extends JFrame {
         repalcePanel.add(btnFind);
         repalcePanel.add(textFieldReplace);
         repalcePanel.add(btnReplace);
+        JLabel labelCloseReplace = new JLabel("X");
+        repalcePanel.add(labelCloseReplace);
+        labelCloseReplace.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                repalcePanel.setVisible(false);
+            }
+        });
         //repalcePanel.setVisible(false);
         //===============================================
         //TabtextArea
@@ -125,6 +136,7 @@ public class MainWindow extends JFrame {
 
         //printout
         JTextPane terminalText = new JTextPane();
+        terminalText.setText("haiiiiiiii");
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
@@ -287,14 +299,14 @@ public class MainWindow extends JFrame {
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
 
-        Run run = new Run(defaultFileExplorer);
+        Run run = new Run(defaultFileExplorer, terminalText);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
         runMenuItem.SetAcceleration(F10);
         runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile(defaultFileExplorer);
+        Compile compile = new Compile(defaultFileExplorer, terminalText);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetAcceleration(F9);
@@ -307,12 +319,18 @@ public class MainWindow extends JFrame {
 
         DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);
+        //Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
+        //bubbleSortMenuItem.SetCommand(snippetBubleSort);
 
         DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
         snippetMenu.AddMenuItem(selectionSortMenuItem);
+        Snippet snippetSelectionSort = new Snippet(defaultTextArea,"selection-sort");
+        selectAllMenuItem.SetCommand(snippetSelectionSort);
 
         DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
         snippetMenu.AddMenuItem(insertionSortMenuItem);
+        Snippet snippetInsertionSort = new Snippet(defaultTextArea, "insertion-sort");
+        insertionSortMenuItem.SetCommand(snippetInsertionSort);
 
         //Menu Themes
         DefaultMenu themesMenu = new DefaultMenu("Themes");
@@ -343,7 +361,7 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddToolItem(closeAllFileTool);
 
         this.iToolBar.AddSeparator();
-        DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
+        final DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
         undoTool.setEnabled(false);
         undoTool.SetCommand(undo);
@@ -356,7 +374,7 @@ public class MainWindow extends JFrame {
         //CheckUndo checkUndo = new CheckUndo(undoTool,defaultTextArea);
 
 
-        DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
+        final DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
         redoTool.setEnabled(false);
         redoTool.SetCommand(redo);

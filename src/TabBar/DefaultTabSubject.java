@@ -1,5 +1,7 @@
 package TabBar;
 
+import Editor.DefaultTextArea;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -20,6 +22,11 @@ public class DefaultTabSubject implements ITabSubject {
     private DefaultTabSubject() {
         this.observers = new ArrayList<ITabObserver>();
         this.activeTab = null;
+    }
+
+    public DefaultTextArea getTextArea() {
+        if (this.observers.size() >= 1) return (DefaultTextArea) this.observers.get(0);
+        else return null;
     }
 
     public UUID getActiveTabId() {
