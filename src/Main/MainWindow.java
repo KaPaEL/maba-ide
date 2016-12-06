@@ -148,6 +148,7 @@ public class MainWindow extends JFrame {
            ===========================================================================================================
         */
         JTextPane terminalText = new JTextPane();
+        terminalText.setText("haiiiiiiii");
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
@@ -309,14 +310,14 @@ public class MainWindow extends JFrame {
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
 
-        Run run = new Run(defaultFileExplorer);
+        Run run = new Run(defaultFileExplorer, terminalText);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
         runMenuItem.SetAcceleration(F10);
         runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile(defaultFileExplorer);
+        Compile compile = new Compile(defaultFileExplorer, terminalText);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetAcceleration(F9);
@@ -329,12 +330,18 @@ public class MainWindow extends JFrame {
 
         DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);
+        //Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
+        //bubbleSortMenuItem.SetCommand(snippetBubleSort);
 
         DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
         snippetMenu.AddMenuItem(selectionSortMenuItem);
+        Snippet snippetSelectionSort = new Snippet(defaultTextArea,"selection-sort");
+        selectAllMenuItem.SetCommand(snippetSelectionSort);
 
         DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
         snippetMenu.AddMenuItem(insertionSortMenuItem);
+        Snippet snippetInsertionSort = new Snippet(defaultTextArea, "insertion-sort");
+        insertionSortMenuItem.SetCommand(snippetInsertionSort);
 
         /* Menu Themes */
         DefaultMenu themesMenu = new DefaultMenu("Themes");

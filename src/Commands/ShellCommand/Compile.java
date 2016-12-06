@@ -2,12 +2,14 @@ package Commands.ShellCommand;
 
 import FileExplorer.IFileExplorer;
 
+import javax.swing.*;
+
 /**
  * Created by mfrazi on 15/11/2016.
  */
 public class Compile extends ShellCommand{
-    public Compile(IFileExplorer iFileExplorer){
-        super(iFileExplorer);
+    public Compile(IFileExplorer iFileExplorer, JTextPane terminalText){
+        super(iFileExplorer, terminalText);
     }
     
     @Override
