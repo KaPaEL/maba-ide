@@ -19,9 +19,7 @@ import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -92,7 +90,12 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.add(labelClose);
-
+        labelClose.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                findPanel.setVisible(false);
+            }
+        });
         //==============================================
         //Find Replace
         JTextField textFieldFind = new JTextField(20);
@@ -104,6 +107,14 @@ public class MainWindow extends JFrame {
         repalcePanel.add(btnFind);
         repalcePanel.add(textFieldReplace);
         repalcePanel.add(btnReplace);
+        JLabel labelCloseReplace = new JLabel("X");
+        repalcePanel.add(labelCloseReplace);
+        labelCloseReplace.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                repalcePanel.setVisible(false);
+            }
+        });
         //repalcePanel.setVisible(false);
         //===============================================
         //TabtextArea
