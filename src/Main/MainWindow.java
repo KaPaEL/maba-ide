@@ -117,8 +117,9 @@ public class MainWindow extends JFrame {
 
         //====================================================================
         //FolderExplorer
+        leftPanel = new JScrollPane();
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
-        leftPanel = new JScrollPane(new FileExplorer("."));
+        leftPanel.getViewport().add(defaultFileExplorer);
         pack();
         setLocationRelativeTo(null);
 
