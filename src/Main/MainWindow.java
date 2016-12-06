@@ -7,6 +7,9 @@ import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
 import MenuBar.*;
+import TabBar.DefaultTabBar;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import ToolBar.DefaultTool;
 import ToolBar.DefaultToolBar;
 import ToolBar.IToolBar;
@@ -16,9 +19,7 @@ import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -89,7 +90,12 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.add(labelClose);
-
+        labelClose.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                findPanel.setVisible(false);
+            }
+        });
         //==============================================
         //Find Replace
         JTextField textFieldFind = new JTextField(20);
@@ -101,13 +107,25 @@ public class MainWindow extends JFrame {
         repalcePanel.add(btnFind);
         repalcePanel.add(textFieldReplace);
         repalcePanel.add(btnReplace);
+        JLabel labelCloseReplace = new JLabel("X");
+        repalcePanel.add(labelCloseReplace);
+        labelCloseReplace.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                repalcePanel.setVisible(false);
+            }
+        });
         //repalcePanel.setVisible(false);
         //===============================================
         //TabtextArea
         DefaultTextArea defaultTextArea = new DefaultTextArea();
-        tabPane = new JTabbedPane();
-        tabPane.add("nama tab",new JScrollPane(defaultTextArea));//add tab
-        tabPane.setTabComponentAt(0,new CloseableTabComponent(tabPane));// close tab
+        DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
+        DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
+        defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
+        DefaultTabSubject.getInstance().getActiveTab().pushCommandUndoStack("");
+
+        DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
+
         //====================================================================
         //FolderExplorer
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
@@ -121,11 +139,9 @@ public class MainWindow extends JFrame {
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
 
-
-
-
-        splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel,repalcePanel);
-        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,splitTextFind,tabPane);
+        splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
+        JSplitPane tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true, splitTextFind, DefaultTabBar.getInstance().getTabbedPane());
+        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, tabArea, defaultTextArea);
         splitTextFind.getTopComponent().setVisible(false);
         splitTextFind.getBottomComponent().setVisible(false);
         //splitTextReplace.setVisible(false);
@@ -337,7 +353,7 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddToolItem(closeAllFileTool);
 
         this.iToolBar.AddSeparator();
-        DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
+        final DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
         undoTool.setEnabled(false);
         undoTool.SetCommand(undo);
@@ -350,7 +366,7 @@ public class MainWindow extends JFrame {
         //CheckUndo checkUndo = new CheckUndo(undoTool,defaultTextArea);
 
 
-        DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
+        final DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
         redoTool.setEnabled(false);
         redoTool.SetCommand(redo);
@@ -408,9 +424,9 @@ public class MainWindow extends JFrame {
                 int linenum = 1;
                 int columnnum = 1;
                 DefaultTextArea editArea = (DefaultTextArea)e.getSource();
-                if(editArea.GetStackUndoText().size()<=1 ) undoTool.setEnabled(false);
+                if(DefaultTabSubject.getInstance().getActiveTab() == null || DefaultTabSubject.getInstance().getActiveTab().getCommandUndoStackSize() <= 1) undoTool.setEnabled(false);
                 else undoTool.setEnabled(true);
-                if(editArea.GetStackRedoText().size()==0 ) redoTool.setEnabled(false);
+                if(DefaultTabSubject.getInstance().getActiveTab() == null || DefaultTabSubject.getInstance().getActiveTab().getCommandRedoStackSize() == 0 ) redoTool.setEnabled(false);
                 else redoTool.setEnabled(true);
                 try {
                     int caretpos = editArea.getCaretPosition();

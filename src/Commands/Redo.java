@@ -1,6 +1,8 @@
 package Commands;
 
 import Editor.ITextArea;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import java.util.Stack;
@@ -15,14 +17,13 @@ public class Redo implements ICommand {
     }
     @Override
     public void execute() {
-        Stack stackUndo = textArea.GetStackUndoText();
-        Stack stackRedo = textArea.GetStackRedoText();
-        //System.out.println("Redo :"+stackRedo.peek());
-        if(!stackRedo.empty())
+        DefaultTabEditor activeTab = DefaultTabSubject.getInstance().getActiveTab();
+        System.out.println("Undo :"+ DefaultTabSubject.getInstance().getActiveTab().peekCommandRedoStack());
+        if(!activeTab.isCommandRedoStackEmpty())
         {
-            textArea.SetText(stackRedo.peek().toString());
-            stackUndo.push(stackRedo.peek());
-            stackRedo.pop();
+            textArea.SetText(activeTab.peekCommandRedoStack().toString());
+            activeTab.pushCommandUndoStack(activeTab.peekCommandRedoStack());
+            activeTab.popCommandRedoStack();
         }
 
     }

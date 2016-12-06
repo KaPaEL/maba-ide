@@ -2,6 +2,8 @@ package Commands;
 
 import Editor.DefaultTextArea;
 import Editor.ITextArea;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import java.util.Stack;
 
@@ -16,14 +18,20 @@ public class Undo implements ICommand {
     }
     @Override
     public void execute() {
-        Stack stackUndo = textArea.GetStackUndoText();
-        Stack stackRedo = textArea.GetStackRedoText();
-        //System.out.println("Undo :"+stackUndo.peek());
-        if (stackUndo.size()>1)
+        //System.out.println("Undo :"+ DefaultTabSubject.getInstance().getActiveTab().peekCommandUndoStack());
+        DefaultTabEditor activedEditor = DefaultTabSubject.getInstance().getActiveTab();
+        activedEditor.setTextContent(DefaultTabSubject.getInstance().getTextArea().GetText());
+        if (activedEditor.getCommandUndoStackSize() > 1)
         {
-            stackRedo.push(stackUndo.peek());
-            stackUndo.pop();
-            textArea.SetText(stackUndo.peek().toString());
+            /*if(!activedEditor.peekCommandRedoStack().equals(activedEditor.getTextContent()))
+            {
+                activedEditor.pushCommandRedoStack(activedEditor.getTextContent());
+            }*/
+            //System.out.println("Latest :"+ );
+            String lastUndoCommand = activedEditor.peekCommandUndoStack();
+            activedEditor.pushCommandRedoStack(lastUndoCommand);
+            activedEditor.popCommandUndoStack();
+            textArea.SetText(activedEditor.peekCommandUndoStack().toString());
         }
 
 
