@@ -342,7 +342,7 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddToolItem(closeAllFileTool);
 
         this.iToolBar.AddSeparator();
-        DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
+        final DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
         undoTool.setEnabled(false);
         undoTool.SetCommand(undo);
@@ -355,7 +355,7 @@ public class MainWindow extends JFrame {
         //CheckUndo checkUndo = new CheckUndo(undoTool,defaultTextArea);
 
 
-        DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
+        final DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
         redoTool.setEnabled(false);
         redoTool.SetCommand(redo);
