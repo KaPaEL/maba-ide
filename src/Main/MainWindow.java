@@ -124,6 +124,7 @@ public class MainWindow extends JFrame {
 
         //printout
         JTextPane terminalText = new JTextPane();
+        terminalText.setText("haiiiiiiii");
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
@@ -286,14 +287,14 @@ public class MainWindow extends JFrame {
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
 
-        Run run = new Run(defaultFileExplorer);
+        Run run = new Run(defaultFileExplorer, terminalText);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
         runMenuItem.SetAcceleration(F10);
         runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile(defaultFileExplorer);
+        Compile compile = new Compile(defaultFileExplorer, terminalText);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetAcceleration(F9);
