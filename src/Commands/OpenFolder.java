@@ -19,7 +19,7 @@ public class OpenFolder extends JFileChooser implements ICommand {
 
     @Override
     public void execute() {
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser(".");
         fileChooser.setDialogTitle("Open Folder");
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = fileChooser.showOpenDialog(null);

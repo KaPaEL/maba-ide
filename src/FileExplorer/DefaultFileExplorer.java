@@ -25,6 +25,7 @@ public class DefaultFileExplorer extends FileExplorer implements IFileExplorer {
 
     @Override
     public void SetPath(String folderPath) {
+        this.reloadTree(folderPath);
         this.folderPath=folderPath;
     }
 

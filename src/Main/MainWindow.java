@@ -158,13 +158,21 @@ public class MainWindow extends JFrame {
 
         DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
 
+
+
+
+        /*DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
+        leftPanel = new JScrollPane(new FileExplorer("."));
+
+        */
+
         /* ===========================================================================================================
              FOLDER EXPLORER
            ===========================================================================================================
          */
-
+        leftPanel = new JScrollPane();
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
-        leftPanel = new JScrollPane(new FileExplorer("."));
+        leftPanel.getViewport().add(defaultFileExplorer);
         leftPanel.setMinimumSize(new Dimension(200,100));
         pack();
         setLocationRelativeTo(null);
