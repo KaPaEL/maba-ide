@@ -7,6 +7,7 @@ import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
 import MenuBar.*;
+import Splash.SplashPanel;
 import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
 import TabBar.DefaultTabSubject;
@@ -38,6 +39,10 @@ public class MainWindow extends JFrame {
     private JScrollPane rightPanel;
     private JSplitPane mainSplit;
     private JTabbedPane tabPane;
+    private JSplitPane tabArea;
+    private JWindow splashScreen;
+    private SplashPanel splashPanel;
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private static KeyStroke ctrlN = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlaltS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK+ActionEvent.ALT_MASK);
@@ -77,8 +82,22 @@ public class MainWindow extends JFrame {
         JFrame frame = new JFrame("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
-
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
+        /* ===========================================================================================================
+            SPLASH SCREEN
+           ===========================================================================================================
+         */
+        splashPanel = new SplashPanel();
+        splashScreen = new JWindow();
+        splashScreen.getContentPane().add(splashPanel);
+        splashScreen.pack();
+        Dimension size = splashScreen.getSize();
+        splashScreen.setLocation(screenSize.width / 2 - size.width / 2, screenSize.height / 2 - size.height / 2);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                splashScreen.setVisible(true);
+            }
+        });
         /* ===========================================================================================================
             FORM FIND
            ===========================================================================================================
@@ -158,7 +177,7 @@ public class MainWindow extends JFrame {
            ==========================================================================================================
         */
         splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
-        JSplitPane tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true, splitTextFind, DefaultTabBar.getInstance().getTabbedPane());
+        tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true, splitTextFind, DefaultTabBar.getInstance().getTabbedPane());
         splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, tabArea, defaultTextArea);
         splitTextFind.getTopComponent().setVisible(false);
         splitTextFind.getBottomComponent().setVisible(false);
@@ -330,8 +349,8 @@ public class MainWindow extends JFrame {
 
         DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);
-        //Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
-        //bubbleSortMenuItem.SetCommand(snippetBubleSort);
+        Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
+        bubbleSortMenuItem.SetCommand(snippetBubleSort);
 
         DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
         snippetMenu.AddMenuItem(selectionSortMenuItem);
@@ -451,6 +470,7 @@ public class MainWindow extends JFrame {
 
         setContentPane(contentPanel);
         frame.add(contentPanel);
+        splashScreen.setVisible(false);
         frame.setVisible(true);
 
     }
