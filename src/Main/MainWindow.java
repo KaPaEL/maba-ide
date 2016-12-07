@@ -33,7 +33,7 @@ public class MainWindow extends JFrame {
     private IToolBar iToolBar;
     private IMenuItem iMenuItem;
     private JSplitPane splitTextReplace;
-    private JSplitPane splitTextFind;
+    private JSplitPane splitFindReplace;
     private JSplitPane splitPane;
     private JScrollPane leftPanel;
     private JScrollPane rightPanel;
@@ -42,6 +42,7 @@ public class MainWindow extends JFrame {
     private JSplitPane tabArea;
     private JWindow splashScreen;
     private SplashPanel splashPanel;
+    private JPanel textPanel;
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private static KeyStroke ctrlN = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK);
@@ -114,6 +115,8 @@ public class MainWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 findPanel.setVisible(false);
+                splitFindReplace.setVisible(false);
+                frame.revalidate();
             }
         });
         /* ===========================================================================================================
@@ -135,6 +138,8 @@ public class MainWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 repalcePanel.setVisible(false);
+                splitFindReplace.setVisible(false);
+                frame.revalidate();
             }
         });
 
@@ -144,6 +149,8 @@ public class MainWindow extends JFrame {
             ==========================================================================================================
          */
         DefaultTextArea defaultTextArea = new DefaultTextArea();
+        JScrollPane scroolTextArea = new JScrollPane(defaultTextArea);
+        scroolTextArea.setMinimumSize(new Dimension(300,200));
         DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
         DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
         defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
@@ -158,6 +165,7 @@ public class MainWindow extends JFrame {
 
         DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         leftPanel = new JScrollPane(new FileExplorer("."));
+        leftPanel.setMinimumSize(new Dimension(200,100));
         pack();
         setLocationRelativeTo(null);
 
@@ -167,7 +175,6 @@ public class MainWindow extends JFrame {
            ===========================================================================================================
         */
         JTextPane terminalText = new JTextPane();
-        terminalText.setText("haiiiiiiii");
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
@@ -176,11 +183,12 @@ public class MainWindow extends JFrame {
              SPLITING AREA
            ==========================================================================================================
         */
-        splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
-        tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true, splitTextFind, DefaultTabBar.getInstance().getTabbedPane());
-        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, tabArea, defaultTextArea);
-        splitTextFind.getTopComponent().setVisible(false);
-        splitTextFind.getBottomComponent().setVisible(false);
+        splitFindReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
+        tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,DefaultTabBar.getInstance().getTabbedPane(),scroolTextArea);
+        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, splitFindReplace,tabArea );
+        splitFindReplace.getTopComponent().setVisible(false);
+        splitFindReplace.getBottomComponent().setVisible(false);
+        //splitFindReplace.setVisible(false);
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, leftPanel,splitTextReplace);
         mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,terminalPanel);
@@ -311,14 +319,14 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(searchMenu);
 
         DefaultMenuItem findMenuItem = new DefaultMenuItem("Find");
-        Find find = new Find(defaultTextArea,findPanel,splitTextFind);
+        Find find = new Find(defaultTextArea,findPanel,splitFindReplace);
         findMenuItem.SetCommand(find);
         findMenuItem.SetAcceleration(ctrlF);
         findMenuItem.SetIcon(new ImageIcon("assets/find.png"));
         searchMenu.AddMenuItem(findMenuItem);
 
         DefaultMenuItem replaceMenuItem = new DefaultMenuItem("Replace");
-        Replace replace = new Replace(defaultTextArea,repalcePanel,splitTextFind);
+        Replace replace = new Replace(defaultTextArea,repalcePanel,splitFindReplace);
         replaceMenuItem.SetCommand(replace);
         replaceMenuItem.SetIcon(new ImageIcon("assets/replace.png"));
         replaceMenuItem.SetAcceleration(ctrlR);
@@ -472,6 +480,7 @@ public class MainWindow extends JFrame {
         frame.add(contentPanel);
         splashScreen.setVisible(false);
         frame.setVisible(true);
+        splitFindReplace.setVisible(false);
 
     }
     private static class CloseableTabComponent extends JPanel {

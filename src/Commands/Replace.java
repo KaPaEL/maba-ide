@@ -30,11 +30,13 @@ public class Replace implements ICommand {
     public void execute() {
         System.out.println("\n");
         System.out.println("Masuk Bos");
-        //this.jPanel.setVisible(true);
+        this.jPanel.setVisible(true);
+        this.jSplit.revalidate();
         this.jSplit.getTopComponent().setVisible(false);
         this.jSplit.setDividerLocation(0.0);
+
         this.jSplit.getBottomComponent().setVisible(true);
-        this.jSplit.setDividerLocation(0.1);
+        this.jSplit.setDividerLocation(200);
 
         JButton findButton = ((JButton)this.jPanel.getComponent(1));
         findButton.addActionListener(new ActionListener() {
