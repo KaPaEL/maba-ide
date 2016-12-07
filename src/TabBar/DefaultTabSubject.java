@@ -1,5 +1,6 @@
 package TabBar;
 
+
 import Editor.DefaultTextArea;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class DefaultTabSubject implements ITabSubject {
         else return null;
     }
 
+
     public UUID getActiveTabId() {
         return this.activeTab.getTabId();
     }
@@ -42,6 +44,7 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public void attachObserver(ITabObserver observer) {
+
         if (this.observers.size() > 0) {
             DefaultTabEditor temp = (DefaultTabEditor) observer;
             temp.pushCommandUndoStack("");
@@ -49,6 +52,7 @@ public class DefaultTabSubject implements ITabSubject {
         } else {
             this.observers.add(observer);
         }
+
         if (this.observers.size() > 1 && this.activeTab == null) {
             this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
         }
@@ -70,10 +74,12 @@ public class DefaultTabSubject implements ITabSubject {
         }
     }
 
+
     public void selectTab(String tabName) {
         for (int idx = observers.size() - 1; idx > 0; idx--) {
             DefaultTabEditor temp = (DefaultTabEditor) this.observers.get(idx);
             if (temp.getTabName().toString().equals(tabName)) {
+
                 this.setActiveTab(temp);
                 this.update();
                 return;
@@ -82,6 +88,7 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public void update() {
+
         System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
         System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
         for (ITabObserver obj : this.observers) {

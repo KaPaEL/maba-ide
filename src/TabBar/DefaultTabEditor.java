@@ -1,7 +1,5 @@
 package TabBar;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.Stack;
 import java.util.UUID;
 
@@ -17,6 +15,7 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
     private DefaultTabSubject subject;
     private int counter;
     private int flag;
+
     private int flagThread;
     
     public DefaultTabEditor(String _tabName) {
@@ -46,6 +45,7 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
     public void setFlag(int _flag) {
         this.flag = _flag;
     }
+
 
     public int getflagThread() {
         return this.flagThread;
