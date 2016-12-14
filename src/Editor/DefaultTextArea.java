@@ -158,8 +158,9 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
 
     public void update(DefaultTabEditor tabEditor) {
+        System.out.println("[DEBUG Text Area] update with text: " + tabEditor.getTextContent());
         this.defaultTabEditor.setTextContent(GetText());
         this.defaultTabEditor = tabEditor;
-        this.SetText(this.defaultTabEditor.getTextContent());
+        this.SetText(tabEditor.getTextContent());
     }
 }

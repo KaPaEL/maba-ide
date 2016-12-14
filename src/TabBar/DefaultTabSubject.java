@@ -15,6 +15,7 @@ public class DefaultTabSubject implements ITabSubject {
     private DefaultTabEditor activeTab;
     private List<ITabObserver> observers = null;
     private static DefaultTabSubject selfSubject = new DefaultTabSubject();
+    private final int textAreaIdx = 0, mainFrameIdx = 1;
 
     public static DefaultTabSubject getInstance() {
         return selfSubject;
@@ -26,7 +27,7 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public DefaultTextArea getTextArea() {
-        if (this.observers.size() >= 1) return (DefaultTextArea) this.observers.get(0);
+        if (this.observers.size() >= 2) return (DefaultTextArea) this.observers.get(1);
         else return null;
     }
 
@@ -45,17 +46,21 @@ public class DefaultTabSubject implements ITabSubject {
 
     public void attachObserver(ITabObserver observer) {
 
-        if (this.observers.size() > 0) {
+        if (this.observers.size() > 1) {
             DefaultTabEditor temp = (DefaultTabEditor) observer;
             temp.pushCommandUndoStack("");
             this.observers.add(temp);
         } else {
             this.observers.add(observer);
         }
-
-        if (this.observers.size() > 1 && this.activeTab == null) {
+        System.out.println("observer added\nNumber of observer = " + this.observers.size());
+        if (this.observers.size() > 2 && this.activeTab == null) {
             this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
         }
+    }
+
+    public void setActiveTabToLast() {
+        this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
     }
 
     public void removeObserver(ITabObserver tabEditor) {
@@ -67,7 +72,7 @@ public class DefaultTabSubject implements ITabSubject {
         }
 
         // Assume the front object in the list is always the text area
-        if (this.observers.size() <= 1) {
+        if (this.observers.size() <= 2) {
             this.setActiveTab(null);
         } else {
             this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
@@ -76,10 +81,9 @@ public class DefaultTabSubject implements ITabSubject {
 
 
     public void selectTab(String tabName) {
-        for (int idx = observers.size() - 1; idx > 0; idx--) {
+        for (int idx = observers.size() - 1; idx > 1; idx--) {
             DefaultTabEditor temp = (DefaultTabEditor) this.observers.get(idx);
             if (temp.getTabName().toString().equals(tabName)) {
-
                 this.setActiveTab(temp);
                 this.update();
                 return;
@@ -89,8 +93,9 @@ public class DefaultTabSubject implements ITabSubject {
 
     public void update() {
 
-        System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
-        System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
+//        System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
+//        System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
+        System.out.println("[DEBUG UPDATE] " + this.activeTab.getTextContent());
         for (ITabObserver obj : this.observers) {
             obj.update(this.activeTab);
         }
