@@ -53,10 +53,14 @@ public class DefaultTabSubject implements ITabSubject {
         } else {
             this.observers.add(observer);
         }
-
+        System.out.println("observer added\nNumber of observer = " + this.observers.size());
         if (this.observers.size() > 2 && this.activeTab == null) {
             this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
         }
+    }
+
+    public void setActiveTabToLast() {
+        this.setActiveTab((DefaultTabEditor) this.observers.get(this.observers.size() - 1));
     }
 
     public void removeObserver(ITabObserver tabEditor) {
@@ -89,8 +93,9 @@ public class DefaultTabSubject implements ITabSubject {
 
     public void update() {
 
-        System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
-        System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
+//        System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
+//        System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
+        System.out.println("[DEBUG UPDATE] " + this.activeTab.getTextContent());
         for (ITabObserver obj : this.observers) {
             obj.update(this.activeTab);
         }

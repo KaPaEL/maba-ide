@@ -2,6 +2,8 @@ package Commands;
 
 import Editor.ITextArea;
 import FileExplorer.IFileExplorer;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
@@ -20,21 +22,19 @@ import java.nio.file.Paths;
  * Created by mfrazi on 15/11/2016.
  */
 // TODO: 15/11/2016 http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FileChooserDemoProject/src/components/FileChooserDemo.java
-public class OpenFile extends JFileChooser implements ICommand{
-    private String text=null;
-    private String folderPath=".";
-    private String fileName="";
+public class OpenFile extends JFileChooser implements ICommand {
+    private String text = null;
+    private String folderPath = ".";
+    private String fileName = "";
     private ITextArea textArea;
     private IFileExplorer iFileExplorer;
 
-    public OpenFile(RSyntaxTextArea textArea,IFileExplorer iFileExplorer) {
+    public OpenFile(RSyntaxTextArea textArea, IFileExplorer iFileExplorer) {
         this.textArea = (ITextArea) textArea;
         this.iFileExplorer = (IFileExplorer) iFileExplorer;
     }
 
-    static String readFile(String path, Charset encoding)
-            throws IOException
-    {
+    static String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
     }
@@ -52,20 +52,24 @@ public class OpenFile extends JFileChooser implements ICommand{
             System.out.println(coba);
             try {
                 text = readFile(selectedFile.getAbsolutePath(), StandardCharsets.UTF_8);
-                this.textArea.SetText(text);
+//                this.textArea.SetText(text);
                 folderPath = fileChooser.getCurrentDirectory().getAbsolutePath();
                 this.iFileExplorer.SetPath(folderPath);
                 fileName = fileChooser.getSelectedFile().getName();
                 this.iFileExplorer.SetFileName(fileName);
+                DefaultTabEditor editor = new DefaultTabEditor(fileName);
+                editor.setTextContent(text);
+                editor.setFilePath(folderPath + '/');
+                DefaultTabSubject.getInstance().attachObserver(editor);
+                DefaultTabSubject.getInstance().setActiveTab(editor);
+                DefaultTabSubject.getInstance().update();
+//                System.out.println("Active tab = " + DefaultTabSubject.getInstance().getActiveTab().getTextContent());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("Open File in Folder "+folderPath);
-        System.out.println("Open File in File Name "+fileName);
+        System.out.println("Open File in Folder " + folderPath);
+        System.out.println("Open File in File Name " + fileName);
 
     }
-
 }
-

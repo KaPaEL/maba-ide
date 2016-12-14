@@ -36,14 +36,12 @@ public class SaveAs extends JFileChooser implements ICommand {
         fileChooser.setFileFilter(filter);
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
-
             try {
-            File file = fileChooser.getSelectedFile();
+                File file = fileChooser.getSelectedFile();
 
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
                 bw.write(this.textArea.GetText());
@@ -56,6 +54,6 @@ public class SaveAs extends JFileChooser implements ICommand {
                 e.printStackTrace();
             }
         }
-        System.out.println("File "+folderPath+"\\"+fileName+".c"+" saved");
+        System.out.println("File " + folderPath + "\\" + fileName + ".c" + " saved");
     }
 }
