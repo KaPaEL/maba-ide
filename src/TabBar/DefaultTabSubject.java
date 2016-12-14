@@ -46,7 +46,7 @@ public class DefaultTabSubject implements ITabSubject {
 
     public void attachObserver(ITabObserver observer) {
 
-        if (this.observers.size() > 1) {
+        if (this.observers.size() >= 2) {
             DefaultTabEditor temp = (DefaultTabEditor) observer;
             temp.pushCommandUndoStack("");
             this.observers.add(temp);

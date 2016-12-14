@@ -2,6 +2,7 @@ package Commands;
 
 import Editor.ITextArea;
 import FileExplorer.IFileExplorer;
+import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
 import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -60,6 +61,7 @@ public class OpenFile extends JFileChooser implements ICommand {
                 DefaultTabEditor editor = new DefaultTabEditor(fileName);
                 editor.setTextContent(text);
                 editor.setFilePath(folderPath + '/');
+                DefaultTabBar.getInstance().addTab(editor);
                 DefaultTabSubject.getInstance().attachObserver(editor);
                 DefaultTabSubject.getInstance().setActiveTab(editor);
                 DefaultTabSubject.getInstance().update();
