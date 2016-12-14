@@ -1,5 +1,7 @@
 package Commands;
 
+import FileExplorer.FileExplorer;
+import FileExplorer.IFileExplorer;
 import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
 import TabBar.DefaultTabSubject;
@@ -27,9 +29,11 @@ public class OpenFile extends JFileChooser implements ICommand {
     private String newFileName;
     private DefaultTabSubject subject;
     private DefaultTabEditor defaultTabEditor;
+    private IFileExplorer fileExplorer;
 
-    public OpenFile() {
+    public OpenFile(FileExplorer fileExplorer) {
         this.subject = DefaultTabSubject.getInstance();
+        this.fileExplorer = (IFileExplorer) fileExplorer;
     }
 
     static String readFile(String path, Charset encoding) throws IOException {
@@ -61,7 +65,8 @@ public class OpenFile extends JFileChooser implements ICommand {
                 newFileName = fileChooser.getSelectedFile().getName();
                 DefaultTabEditor editor = new DefaultTabEditor(newFileName);
                 editor.setTextContent(content);
-                editor.setFilePath(newPath + '/');
+                editor.setFilePath(newPath + '\\');
+                this.fileExplorer.update(newPath + '\\');
                 this.subject.attachObserver(editor);
                 this.subject.setActiveTab(editor);
                 this.subject.update();
@@ -72,7 +77,7 @@ public class OpenFile extends JFileChooser implements ICommand {
             }
         }
         System.out.println("Open File in Folder " + newPath);
-        System.out.println("Open File in File Name " + fileName);
+        System.out.println("Open File in File Name " + newFileName);
 
     }
 }

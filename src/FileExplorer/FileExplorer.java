@@ -38,6 +38,7 @@ public class FileExplorer extends JScrollPane{
 		}
 		Vector ol = new Vector();
 		String[] tmp = dir.list();
+//		System.out.println(tmp.toString());
 		for (int i = 0; i < tmp.length; i++){
 			ol.addElement(tmp[i]);
 		}
@@ -72,6 +73,7 @@ public class FileExplorer extends JScrollPane{
 		tree = new JTree(addNodes(null, dir));
 		this.getViewport().add(tree);
 
+
 		// Add a listener
 		tree.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -103,13 +105,14 @@ public class FileExplorer extends JScrollPane{
 
 				DefaultTabEditor tabEditor = new DefaultTabEditor(node.toString());
 				tabEditor.setTextContent(text);
+				tabEditor.setFilePath(dir.getAbsolutePath().replace(".",""));
 				DefaultTabSubject.getInstance().attachObserver(tabEditor);
 				DefaultTabSubject.getInstance().setActiveTab(tabEditor);
 				DefaultTabSubject.getInstance().update();
 				DefaultTabBar.getInstance().addTab(tabEditor);
 			}
-			System.out.println("You selected " + node);
-			System.out.print(dir.getAbsolutePath().replace(".","")+node.toString());
+//			System.out.println("You selected " + node);
+//			System.out.print(dir.getAbsolutePath().replace(".","")+"\\"+node.toString());
 		}
 	}
 

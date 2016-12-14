@@ -222,7 +222,7 @@ public class MainWindow extends JFrame {
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
-        OpenFile openFile = new OpenFile();
+        OpenFile openFile = new OpenFile(defaultFileExplorer);
         openFileMenuItem.SetCommand(openFile);
         openFileMenuItem.SetAcceleration(ctrlO);
         openFileMenuItem.SetIcon(new ImageIcon("assets/open-file.png"));
@@ -253,14 +253,14 @@ public class MainWindow extends JFrame {
         fileMenu.AddSeparator();
 
         DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
-        CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
+        CloseFile closeFile = new CloseFile();
         closeFileMenuItem.SetCommand(closeFile);
         closeFileMenuItem.SetAcceleration(ctrlW);
         closeFileMenuItem.SetIcon(new ImageIcon("assets/close-file.png"));
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
-        CloseAllFile closeAllFile = new CloseAllFile(defaultTextArea,defaultFileExplorer);
+        CloseAllFile closeAllFile = new CloseAllFile();
         closeFileMenuItem.SetCommand(closeAllFile);
         closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
         fileMenu.AddMenuItem(closeAllMenuFile);
@@ -347,14 +347,14 @@ public class MainWindow extends JFrame {
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
 
-        Run run = new Run(defaultFileExplorer, terminalText);
+        Run run = new Run(terminalText);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
         runMenuItem.SetAcceleration(F10);
         runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile(defaultFileExplorer, terminalText);
+        Compile compile = new Compile(terminalText);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetAcceleration(F9);

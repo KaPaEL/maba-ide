@@ -2,6 +2,8 @@ package Commands.ShellCommand;
 
 import Commands.ICommand;
 import FileExplorer.IFileExplorer;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -14,19 +16,22 @@ import java.io.InputStreamReader;
  */
 
 public class ShellCommand implements ICommand{
-    private IFileExplorer iFileExplorer;
+    private DefaultTabSubject subject;
+    private DefaultTabEditor defaultTabEditor;
     public JTextPane terminalText;
     public String command = "";
 //    public String resultExe = "";
     private String outputExe = "";
     
-    public ShellCommand(IFileExplorer iFileExplorer, JTextPane terminalText){
-        this.iFileExplorer = iFileExplorer;
+    public ShellCommand(JTextPane terminalText){
+        this.subject = DefaultTabSubject.getInstance();
+        this.defaultTabEditor = this.subject.getActiveTab();
         this.terminalText = terminalText;
     }
     
     @Override
     public void execute(){
+        this.defaultTabEditor = this.subject.getActiveTab();
         this.terminalText.setText("Compileeee....\n");
         this.UpdateCommand();
         Thread t = new Thread(new Runnable(){
@@ -79,11 +84,11 @@ public class ShellCommand implements ICommand{
     }
     
     public String GetPath(){
-        return this.iFileExplorer.GetPath();
+        return this.defaultTabEditor.getFilePath();
     }
     
     public String GetFileName(){
-        return this.iFileExplorer.GetFileName();
+        return this.defaultTabEditor.getTabName();
     }
     
     public void UpdateCommand(){

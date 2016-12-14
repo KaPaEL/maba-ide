@@ -40,8 +40,10 @@ public class OpenFolder extends JFileChooser implements ICommand {
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             folder = fileChooser.getSelectedFile().getAbsolutePath();
-//            this.fileExplorer.SetPath(folder);
-            defaultTabEditor.setFilePath(folder);
+            defaultTabEditor.setFilePath(folder+"\\");
+            this.subject.setActiveTab(defaultTabEditor);
+            this.subject.update();
+            this.fileExplorer.update(folder);
             System.out.println("Folder "+folder);
         }
         System.out.println("Open Folder "+folder);
