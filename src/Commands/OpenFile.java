@@ -1,16 +1,12 @@
 package Commands;
 
-import Editor.ITextArea;
-import FileExplorer.IFileExplorer;
 import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
 import TabBar.DefaultTabSubject;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,15 +20,16 @@ import java.nio.file.Paths;
  */
 // TODO: 15/11/2016 http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FileChooserDemoProject/src/components/FileChooserDemo.java
 public class OpenFile extends JFileChooser implements ICommand {
-    private String text = null;
-    private String folderPath = ".";
-    private String fileName = "";
-    private ITextArea textArea;
-    private IFileExplorer iFileExplorer;
+    private String content;
+    private String path;
+    private String fileName;
+    private String newPath;
+    private String newFileName;
+    private DefaultTabSubject subject;
+    private DefaultTabEditor defaultTabEditor;
 
-    public OpenFile(RSyntaxTextArea textArea, IFileExplorer iFileExplorer) {
-        this.textArea = (ITextArea) textArea;
-        this.iFileExplorer = (IFileExplorer) iFileExplorer;
+    public OpenFile() {
+        this.subject = DefaultTabSubject.getInstance();
     }
 
     static String readFile(String path, Charset encoding) throws IOException {
@@ -42,7 +39,14 @@ public class OpenFile extends JFileChooser implements ICommand {
 
     @Override
     public void execute() {
+        defaultTabEditor = this.subject.getActiveTab();
+        defaultTabEditor.setTextContent(this.subject.getTextArea().getText());
+        path = defaultTabEditor.getFilePath();
+
         JFileChooser fileChooser = new JFileChooser(".");
+        if(path!="")
+            fileChooser = new JFileChooser(path);
+
         fileChooser.setDialogTitle("Open File");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".c", "c", "c");
         fileChooser.setFileFilter(filter);
@@ -52,25 +56,22 @@ public class OpenFile extends JFileChooser implements ICommand {
             String coba = selectedFile.getAbsolutePath();
             System.out.println(coba);
             try {
-                text = readFile(selectedFile.getAbsolutePath(), StandardCharsets.UTF_8);
-//                this.textArea.SetText(text);
-                folderPath = fileChooser.getCurrentDirectory().getAbsolutePath();
-                this.iFileExplorer.SetPath(folderPath);
-                fileName = fileChooser.getSelectedFile().getName();
-                this.iFileExplorer.SetFileName(fileName);
-                DefaultTabEditor editor = new DefaultTabEditor(fileName);
-                editor.setTextContent(text);
-                editor.setFilePath(folderPath + '/');
+                content = readFile(selectedFile.getAbsolutePath(), StandardCharsets.UTF_8);
+                newPath = fileChooser.getCurrentDirectory().getAbsolutePath();
+                newFileName = fileChooser.getSelectedFile().getName();
+                DefaultTabEditor editor = new DefaultTabEditor(newFileName);
+                editor.setTextContent(content);
+                editor.setFilePath(newPath + '/');
+                this.subject.attachObserver(editor);
+                this.subject.setActiveTab(editor);
+                this.subject.update();
                 DefaultTabBar.getInstance().addTab(editor);
-                DefaultTabSubject.getInstance().attachObserver(editor);
-                DefaultTabSubject.getInstance().setActiveTab(editor);
-                DefaultTabSubject.getInstance().update();
 //                System.out.println("Active tab = " + DefaultTabSubject.getInstance().getActiveTab().getTextContent());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Open File in Folder " + folderPath);
+        System.out.println("Open File in Folder " + newPath);
         System.out.println("Open File in File Name " + fileName);
 
     }

@@ -215,14 +215,14 @@ public class MainWindow extends JFrame {
         this.iMenuBar.AddMenu(fileMenu);
 
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
-        NewFile newFile = new NewFile(defaultTextArea,defaultFileExplorer,this);
+        NewFile newFile = new NewFile();
         newMenuItem.SetCommand(newFile);
         newMenuItem.SetAcceleration(ctrlN);
         newMenuItem.SetIcon(new ImageIcon("assets/new.png"));
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
-        OpenFile openFile = new OpenFile(defaultTextArea,defaultFileExplorer);
+        OpenFile openFile = new OpenFile();
         openFileMenuItem.SetCommand(openFile);
         openFileMenuItem.SetAcceleration(ctrlO);
         openFileMenuItem.SetIcon(new ImageIcon("assets/open-file.png"));
@@ -237,14 +237,14 @@ public class MainWindow extends JFrame {
         fileMenu.AddSeparator();
 
         DefaultMenuItem saveMenuItem= new DefaultMenuItem("Save");
-        Save save = new Save(defaultTextArea,defaultFileExplorer);
+        Save save = new Save();
         saveMenuItem.SetCommand(save);
         saveMenuItem.SetAcceleration(ctrlS);
         saveMenuItem.SetIcon(new ImageIcon("assets/save.png"));
         fileMenu.AddMenuItem(saveMenuItem);
 
         DefaultMenuItem saveAsMenuItem= new DefaultMenuItem("Save As");
-        SaveAs saveAs = new SaveAs(defaultTextArea,defaultFileExplorer);
+        SaveAs saveAs = new SaveAs();
         saveAsMenuItem.SetCommand(saveAs);
         saveAsMenuItem.SetAcceleration(ctrlaltS);
         saveAsMenuItem.SetIcon(new ImageIcon("assets/save-as.png"));
