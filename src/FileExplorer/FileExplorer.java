@@ -32,14 +32,16 @@ public class FileExplorer extends JScrollPane{
 //		System.out.print(dir);
 		String curPath = dir.getPath();
 //		System.out.print(curPath);
-		DefaultMutableTreeNode curDir = new DefaultMutableTreeNode(curPath);
+		DefaultMutableTreeNode curDir = new DefaultMutableTreeNode(curPath.substring(curPath.lastIndexOf(File.separator) + 1));
 		if (curTop != null) { // should only be null at root
+//			System.out.println(curDir);
 			curTop.add(curDir);
 		}
 		Vector ol = new Vector();
 		String[] tmp = dir.list();
 //		System.out.println(tmp.toString());
 		for (int i = 0; i < tmp.length; i++){
+//		System.out.println(tmp[i]);
 			ol.addElement(tmp[i]);
 		}
 		Collections.sort(ol, String.CASE_INSENSITIVE_ORDER);
@@ -48,14 +50,14 @@ public class FileExplorer extends JScrollPane{
 		// Make two passes, one for Dirs and one for Files. This is #1.
 		for (int i = 0; i < ol.size(); i++) {
 			String thisObject = (String) ol.elementAt(i);
-//			System.out.println(thisObject);
 			String newPath;
 			if (curPath.equals("."))
 				newPath = thisObject;
 			else
 				newPath = curPath + File.separator + thisObject;
-			if ((f = new File(newPath)).isDirectory())
+			if ((f = new File(newPath)).isDirectory()){
 				addNodes(curDir, f);
+			}
 			else {
 				files.addElement(thisObject);
 			}
@@ -87,6 +89,7 @@ public class FileExplorer extends JScrollPane{
 	static String readFile(String path, Charset encoding)
 			throws IOException
 	{
+		System.out.println(path);
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return new String(encoded, encoding);
 	}
@@ -95,24 +98,34 @@ public class FileExplorer extends JScrollPane{
 		TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
 		if (tp != null){
 			DefaultMutableTreeNode node = (DefaultMutableTreeNode) tp.getLastPathComponent();
+//			String path =tp.getParentPath().getLastPathComponent().toString();
+			String path ="";
+			Object[] paths = tp.getPath();
+			for (int i=1; i<paths.length-1; i++) {
+				path += paths[i];
+				if (i+1 <paths.length-1 ) {
+					path += File.separator;
+				}
+			}
+			path = dir.getAbsolutePath()+File.separator+path;
 			if(node.isLeaf()){
+//				System.out.println(path+node.toString());
 				String text = "";
 				try {
-					text = readFile(dir.getAbsolutePath().replace(".","")+"\\"+node.toString(), StandardCharsets.UTF_8);
+					text = readFile(path+File.separator+node.toString(), StandardCharsets.UTF_8);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				DefaultTabEditor tabEditor = new DefaultTabEditor(node.toString());
 				tabEditor.setTextContent(text);
-				tabEditor.setFilePath(dir.getAbsolutePath().replace(".",""));
+				tabEditor.setFilePath(path);
 				DefaultTabSubject.getInstance().attachObserver(tabEditor);
 				DefaultTabSubject.getInstance().setActiveTab(tabEditor);
 				DefaultTabSubject.getInstance().update();
 				DefaultTabBar.getInstance().addTab(tabEditor);
 			}
-//			System.out.println("You selected " + node);
-//			System.out.print(dir.getAbsolutePath().replace(".","")+"\\"+node.toString());
+			System.out.println("Open "+path+File.separator+node.toString());
 		}
 	}
 

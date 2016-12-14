@@ -28,6 +28,6 @@ public class DefaultFileExplorer extends FileExplorer implements IFileExplorer {
         if(path=="")
             path=".";
         System.out.println(path);
-//        this.reloadTree(path);
+        this.reloadTree(path);
     }
 }
