@@ -7,6 +7,7 @@ import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
 import MenuBar.*;
+import Observer.FrameObserver;
 import Splash.SplashPanel;
 import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
@@ -80,7 +81,7 @@ public class MainWindow extends JFrame {
     }
 
     private void InitUI() throws IOException {
-        JFrame frame = new JFrame("MABA IDE");
+        FrameObserver frame = new FrameObserver("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
@@ -151,6 +152,7 @@ public class MainWindow extends JFrame {
         DefaultTextArea defaultTextArea = new DefaultTextArea();
         JScrollPane scroolTextArea = new JScrollPane(defaultTextArea);
         scroolTextArea.setMinimumSize(new Dimension(300,200));
+        DefaultTabSubject.getInstance().attachObserver(frame);
         DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
         DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
         defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());

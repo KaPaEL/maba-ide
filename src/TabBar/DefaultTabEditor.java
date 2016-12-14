@@ -15,6 +15,7 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
     private DefaultTabSubject subject;
     private int counter;
     private int flag;
+    private String filePath;
 
     private int flagThread;
     
@@ -28,6 +29,15 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
         this.flag = 0;
         this.flagThread = 0;
         this.tabName = _tabName;
+        this.filePath = "";
+    }
+
+    public String getFilePath() {
+        return this.filePath;
+    }
+
+    public void setFilePath(String _filePath) {
+        this.filePath = _filePath;
     }
 
     public int getCounter() {
