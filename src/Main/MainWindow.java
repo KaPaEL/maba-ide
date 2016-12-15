@@ -24,6 +24,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -173,7 +176,18 @@ public class MainWindow extends JFrame {
            ===========================================================================================================
          */
         leftPanel = new JScrollPane();
-        DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
+
+        URL url = MainWindow.class.getProtectionDomain().getCodeSource().getLocation(); //Gets the path
+        String jarPath = null;
+        try {
+            jarPath = URLDecoder.decode(url.getFile(), "UTF-8"); //Should fix it to be read correctly by the system
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String parentPath = new File(jarPath).getParentFile().getPath(); //Path of the jar
+
+        DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(parentPath);
         leftPanel.getViewport().add(defaultFileExplorer);
         leftPanel.setMinimumSize(new Dimension(200,100));
         pack();
