@@ -45,14 +45,16 @@ public class DefaultTabBar implements ITabBar{
         System.out.println("[DEBUG] tabpane size: " + tabbedPane.getTabCount());
         System.out.println("[DEBUG] index of deleted tab: " + tabbedPane.indexOfTab(tabEditor.getTabName().toString()));
         int idx = tabbedPane.indexOfTab(tabEditor.getTabName().toString());
-        tabbedPane.remove(idx);
+        if (idx>-1) {
+            tabbedPane.remove(idx);
+        }
         System.out.println("[DEBUG] remaining tabpane size: " + tabbedPane.getTabCount());
 
     }
 
     public void selectTab(int idx) {
         if (idx < tabbedPane.getTabCount()) {
-            tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
+            tabbedPane.setSelectedIndex(idx);
             DefaultTabSubject.getInstance().selectTab(tabbedPane.getTitleAt(idx));
         }
     }
