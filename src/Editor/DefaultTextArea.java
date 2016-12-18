@@ -26,7 +26,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
     public DefaultTextArea() {
         this.subject = DefaultTabSubject.getInstance();
-        this.setSize(20,60);
+        this.setSize(20, 60);
         this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         this.setCodeFoldingEnabled(true);
         this.setAutoscrolls(true);
@@ -40,8 +40,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if(defaultTabEditor.getflagThread()==0)
-                {
+                if (defaultTabEditor.getflagThread() == 0) {
                     defaultTabEditor.setFlagThread(1);
                     defaultTabEditor.setCounter(0);
                     TimerTask timerTask = new TimerTask() {
@@ -56,11 +55,9 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                         public void run() {
                             while (true) {
                                 try {
-                                    if(defaultTabEditor.getCounter() == 2)
-                                    {
+                                    if (defaultTabEditor.getCounter() == 2) {
                                         // System.out.println("[DEBUG] counter is 4");
-                                        if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText()) && defaultTabEditor.isCommandRedoStackEmpty())
-                                        {
+                                        if (!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText()) && defaultTabEditor.isCommandRedoStackEmpty()) {
                                             System.out.println("[DEBUG] pushed to undo stack");
                                             defaultTabEditor.pushCommandUndoStack(GetText());
                                         }
@@ -81,25 +78,20 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
                     System.out.println(t.getState());
                 }
 
-                if(defaultTabEditor != null && defaultTabEditor.getCommandUndoStackSize() == 1 && defaultTabEditor.getflag() == 0)
-                {
+                if (defaultTabEditor != null && defaultTabEditor.getCommandUndoStackSize() == 1 && defaultTabEditor.getflag() == 0) {
                     defaultTabEditor.pushCommandUndoStack(GetText());
                     defaultTabEditor.setFlag(1);
                 }
 
 
-                if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE ) {
-                    if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText().trim())  && defaultTabEditor.isCommandRedoStackEmpty() )
-                    {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
+                    if (!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText().trim()) && defaultTabEditor.isCommandRedoStackEmpty()) {
                         defaultTabEditor.setCounter(0);
                         System.out.println("[DEBUG] pushed to undo stack space");
                         defaultTabEditor.pushCommandUndoStack(GetText());
                     }
-                }
-
-                else if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText().trim().replace("\n", "").replace("\r", ""))  && defaultTabEditor.isCommandRedoStackEmpty() )
-                    {
+                } else if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!defaultTabEditor.isCommandUndoStackEmpty() && !defaultTabEditor.peekCommandUndoStack().equals(GetText().trim().replace("\n", "").replace("\r", "")) && defaultTabEditor.isCommandRedoStackEmpty()) {
                         defaultTabEditor.setCounter(0);
                         System.out.println("[DEBUG] pushed to undo stack enter");
                         defaultTabEditor.pushCommandUndoStack(GetText());
@@ -110,10 +102,8 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                if(!defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText()))
-                {
-                    for (int i = defaultTabEditor.getCommandRedoStackSize();i>0;i--)
-                    {
+                if (!defaultTabEditor.isCommandUndoStackEmpty() && defaultTabEditor.peekCommandUndoStack().equals(GetText())) {
+                    for (int i = defaultTabEditor.getCommandRedoStackSize(); i > 0; i--) {
                         defaultTabEditor.popCommandRedoStack();
                     }
                 }
@@ -133,34 +123,61 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
     }
 
     @Override
-    public String GetText() { return this.getText(); }
+    public String GetText() {
+        return this.getText();
+    }
 
     @Override
-    public String GetSelectedText() { return this.getSelectedText(); }
+    public String GetSelectedText() {
+        return this.getSelectedText();
+    }
 
     @Override
-    public int GetSelectionStart() { return this.getSelectionStart(); }
+    public int GetSelectionStart() {
+        return this.getSelectionStart();
+    }
 
     @Override
-    public int GetSelectionEnd() { return this.getSelectionEnd(); }
+    public int GetSelectionEnd() {
+        return this.getSelectionEnd();
+    }
 
     @Override
-    public void ReplaceRange( String replace, int start, int end) { this.replaceRange(replace, start, end); }
+    public void ReplaceRange(String replace, int start, int end) {
+        this.replaceRange(replace, start, end);
+    }
 
     @Override
-    public void SelectAll() { this.selectAll(); }
+    public void SelectAll() {
+        this.selectAll();
+    }
 
     @Override
-    public Document GetDocument() { return this.getDocument(); }
+    public Document GetDocument() {
+        return this.getDocument();
+    }
 
     @Override
-    public Highlighter GetHighlighter() { return this.getHighlighter(); }
+    public Highlighter GetHighlighter() {
+        return this.getHighlighter();
+    }
 
 
     public void update(DefaultTabEditor tabEditor) {
-        System.out.println("[DEBUG Text Area] update with text: " + tabEditor.getTextContent());
-        this.defaultTabEditor.setTextContent(GetText());
-        this.defaultTabEditor = tabEditor;
-        this.SetText(tabEditor.getTextContent());
+        if (tabEditor != null) {
+            System.out.println("[DEBUG Text Area] update with text: " + tabEditor.getTextContent());
+            if (this.defaultTabEditor != null) {
+                this.defaultTabEditor.setTextContent(GetText());
+            }
+            this.defaultTabEditor = tabEditor;
+            this.SetText(tabEditor.getTextContent());
+        }
+
+        if (this.subject.getObserverSize() > 2) {
+            this.setVisible(true);
+        } else {
+            this.setVisible(false);
+        }
+
     }
 }
