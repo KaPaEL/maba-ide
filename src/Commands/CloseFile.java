@@ -21,5 +21,6 @@ public class CloseFile implements ICommand {
         DefaultTabBar.getInstance().removeTab(closeWannabe);
         closeWannabe.close();
         System.out.println("[DEBUG] File closed");
+        System.out.println("[DEBUG] Number of remaining observer: " + DefaultTabSubject.getInstance().getObserverSize());
     }
 }

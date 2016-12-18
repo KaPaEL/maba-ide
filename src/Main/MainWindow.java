@@ -153,17 +153,11 @@ public class MainWindow extends JFrame {
             ==========================================================================================================
          */
         DefaultTextArea defaultTextArea = new DefaultTextArea();
+        defaultTextArea.setVisible(false);
         JScrollPane scroolTextArea = new JScrollPane(defaultTextArea);
         scroolTextArea.setMinimumSize(new Dimension(300,200));
         DefaultTabSubject.getInstance().attachObserver(frame);
         DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
-        DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
-        defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
-        DefaultTabSubject.getInstance().getActiveTab().pushCommandUndoStack("");
-
-        DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
-
-
 
 
         /*DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");

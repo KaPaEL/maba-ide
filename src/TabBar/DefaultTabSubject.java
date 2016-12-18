@@ -27,7 +27,7 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public DefaultTextArea getTextArea() {
-        if (this.observers.size() >= 2) return (DefaultTextArea) this.observers.get(1);
+        if (this.observers.size() >= 1) return (DefaultTextArea) this.observers.get(0);
         else return null;
     }
 
@@ -79,6 +79,9 @@ public class DefaultTabSubject implements ITabSubject {
         }
     }
 
+    public int getObserverSize() {
+        return this.observers.size();
+    }
 
     public void selectTab(String tabName) {
         for (int idx = observers.size() - 1; idx > 1; idx--) {
