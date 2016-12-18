@@ -37,8 +37,8 @@ public class DefaultTabBar implements ITabBar{
     }
 
     public void addTab(DefaultTabEditor tabEditor) {
-
         tabbedPane.addTab(tabEditor.getTabName().toString(), makePanel(""));
+        this.selectTab(tabbedPane.getTabCount() - 1);
     }
 
     public void removeTab(DefaultTabEditor tabEditor) {
@@ -52,6 +52,7 @@ public class DefaultTabBar implements ITabBar{
 
     public void selectTab(int idx) {
         if (idx < tabbedPane.getTabCount()) {
+            tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
             DefaultTabSubject.getInstance().selectTab(tabbedPane.getTitleAt(idx));
         }
     }
