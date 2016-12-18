@@ -98,7 +98,7 @@ public class DefaultTabSubject implements ITabSubject {
 
 //        System.out.println("[DEBUG] Undo Stack Size = " + this.activeTab.getCommandUndoStackSize());
 //        System.out.println("[DEBUG] Redo Stack Size = " + this.activeTab.getCommandRedoStackSize());
-        System.out.println("[DEBUG UPDATE] " + this.activeTab.getTextContent());
+//        System.out.println("[DEBUG UPDATE] " + this.activeTab.getTextContent());
         for (ITabObserver obj : this.observers) {
             obj.update(this.activeTab);
         }
