@@ -388,6 +388,13 @@ public class MainWindow extends JFrame {
         Snippet snippetInsertionSort = new Snippet(defaultTextArea, "insertion-sort");
         insertionSortMenuItem.SetCommand(snippetInsertionSort);
 
+        snippetMenu.addSeparator();
+        DefaultMenuItem addPluginMenuItem = new DefaultMenuItem("Add Snippet");
+        snippetMenu.AddMenuItem(addPluginMenuItem);
+        AddPlugin addPlugin = new AddPlugin(frame);
+        addPluginMenuItem.SetCommand(addPlugin);
+
+
         /* Menu Themes */
         DefaultMenu themesMenu = new DefaultMenu("Themes");
         this.iMenuBar.AddMenu(themesMenu);
