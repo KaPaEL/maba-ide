@@ -153,17 +153,11 @@ public class MainWindow extends JFrame {
             ==========================================================================================================
          */
         DefaultTextArea defaultTextArea = new DefaultTextArea();
+        defaultTextArea.setVisible(false);
         JScrollPane scroolTextArea = new JScrollPane(defaultTextArea);
         scroolTextArea.setMinimumSize(new Dimension(300,200));
         DefaultTabSubject.getInstance().attachObserver(frame);
         DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
-        DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
-        defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
-        DefaultTabSubject.getInstance().getActiveTab().pushCommandUndoStack("");
-
-        DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
-
-
 
 
         /*DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
@@ -273,11 +267,11 @@ public class MainWindow extends JFrame {
         closeFileMenuItem.SetIcon(new ImageIcon("assets/close-file.png"));
         fileMenu.AddMenuItem(closeFileMenuItem);
 
-        DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
-        CloseAllFile closeAllFile = new CloseAllFile();
-        closeFileMenuItem.SetCommand(closeAllFile);
-        closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
-        fileMenu.AddMenuItem(closeAllMenuFile);
+//        DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
+//        CloseAllFile closeAllFile = new CloseAllFile();
+//        closeFileMenuItem.SetCommand(closeAllFile);
+//        closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
+//        fileMenu.AddMenuItem(closeAllMenuFile);
 
 
         fileMenu.AddSeparator();
@@ -422,9 +416,9 @@ public class MainWindow extends JFrame {
         DefaultTool closeFileTool = new DefaultTool("assets/close-file.png","Close file");
         closeFileTool.SetCommand(closeFile);
         this.iToolBar.AddToolItem(closeFileTool);
-        DefaultTool closeAllFileTool = new DefaultTool("assets/close-all.png","Close All file");
-        closeAllFileTool.SetCommand(closeAllFile);
-        this.iToolBar.AddToolItem(closeAllFileTool);
+//        DefaultTool closeAllFileTool = new DefaultTool("assets/close-all.png","Close All file");
+//        closeAllFileTool.SetCommand(closeAllFile);
+//        this.iToolBar.AddToolItem(closeAllFileTool);
 
         this.iToolBar.AddSeparator();
         final DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");

@@ -2,6 +2,9 @@ package Commands;
 
 import Editor.ITextArea;
 import FileExplorer.IFileExplorer;
+import TabBar.DefaultTabBar;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 /**
@@ -14,6 +17,10 @@ public class CloseFile implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println("File Closed");
+        DefaultTabEditor closeWannabe = DefaultTabSubject.getInstance().getActiveTab();
+        DefaultTabBar.getInstance().removeTab(closeWannabe);
+        closeWannabe.close();
+        System.out.println("[DEBUG] File closed");
+        System.out.println("[DEBUG] Number of remaining observer: " + DefaultTabSubject.getInstance().getObserverSize());
     }
 }

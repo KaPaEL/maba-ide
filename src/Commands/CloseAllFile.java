@@ -14,6 +14,6 @@ public class CloseAllFile implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println("File Closed");
+        System.out.println("All File Closed");
     }
 }
