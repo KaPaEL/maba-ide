@@ -138,5 +138,6 @@ public class DefaultTabEditor implements ITabEditor, ITabObserver {
         this.subject.removeObserver(this);
         this.subject.update();
     }
-    
+
+
 }
