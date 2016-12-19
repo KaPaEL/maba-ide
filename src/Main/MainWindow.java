@@ -7,6 +7,8 @@ import Editor.DefaultTextArea;
 import FileExplorer.DefaultFileExplorer;
 import FileExplorer.FileExplorer;
 import MenuBar.*;
+import Observer.FrameObserver;
+import Splash.SplashPanel;
 import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
 import TabBar.DefaultTabSubject;
@@ -19,11 +21,16 @@ import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -34,12 +41,17 @@ public class MainWindow extends JFrame {
     private IToolBar iToolBar;
     private IMenuItem iMenuItem;
     private JSplitPane splitTextReplace;
-    private JSplitPane splitTextFind;
+    private JSplitPane splitFindReplace;
     private JSplitPane splitPane;
     private JScrollPane leftPanel;
     private JScrollPane rightPanel;
     private JSplitPane mainSplit;
     private JTabbedPane tabPane;
+    private JSplitPane tabArea;
+    private JWindow splashScreen;
+    private SplashPanel splashPanel;
+    private JPanel textPanel;
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private static KeyStroke ctrlN = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK);
     private static KeyStroke ctrlaltS = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK+ActionEvent.ALT_MASK);
@@ -76,14 +88,29 @@ public class MainWindow extends JFrame {
     }
 
     private void InitUI() throws IOException {
-        JFrame frame = new JFrame("MABA IDE");
+        FrameObserver frame = new FrameObserver("MABA IDE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
-
         frame.setIconImage(ImageIO.read(new File("assets/logo.png")));
-
-        //==============================================
-        //find panel
+        /* ===========================================================================================================
+            SPLASH SCREEN
+           ===========================================================================================================
+         */
+        splashPanel = new SplashPanel();
+        splashScreen = new JWindow();
+        splashScreen.getContentPane().add(splashPanel);
+        splashScreen.pack();
+        Dimension size = splashScreen.getSize();
+        splashScreen.setLocation(screenSize.width / 2 - size.width / 2, screenSize.height / 2 - size.height / 2);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                splashScreen.setVisible(true);
+            }
+        });
+        /* ===========================================================================================================
+            FORM FIND
+           ===========================================================================================================
+         */
         JTextField textField = new JTextField(20);
         JButton textFind = new JButton("Find");
         JLabel labelClose= new JLabel("X");
@@ -92,9 +119,18 @@ public class MainWindow extends JFrame {
         findPanel.add(textField);
         findPanel.add(textFind);
         findPanel.add(labelClose);
-
-        //==============================================
-        //Find Replace
+        labelClose.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                findPanel.setVisible(false);
+                splitFindReplace.setVisible(false);
+                frame.revalidate();
+            }
+        });
+        /* ===========================================================================================================
+             FORM REPLACE
+           ===========================================================================================================
+         */
         JTextField textFieldFind = new JTextField(20);
         JButton btnFind = new JButton("Find");
         JTextField textFieldReplace = new JTextField(20);
@@ -104,62 +140,101 @@ public class MainWindow extends JFrame {
         repalcePanel.add(btnFind);
         repalcePanel.add(textFieldReplace);
         repalcePanel.add(btnReplace);
-        //repalcePanel.setVisible(false);
-        //===============================================
-        //TabtextArea
+        JLabel labelCloseReplace = new JLabel("X");
+        repalcePanel.add(labelCloseReplace);
+        labelCloseReplace.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                repalcePanel.setVisible(false);
+                splitFindReplace.setVisible(false);
+                frame.revalidate();
+            }
+        });
+
+        /*
+            ==========================================================================================================
+                TEXT AREA
+            ==========================================================================================================
+         */
         DefaultTextArea defaultTextArea = new DefaultTextArea();
+        defaultTextArea.setVisible(false);
+        JScrollPane scroolTextArea = new JScrollPane(defaultTextArea);
+        scroolTextArea.setMinimumSize(new Dimension(300,200));
+        DefaultTabSubject.getInstance().attachObserver(frame);
         DefaultTabSubject.getInstance().attachObserver(defaultTextArea);
-        DefaultTabSubject.getInstance().attachObserver(new DefaultTabEditor("untitled.c"));
-        defaultTextArea.setDefaultTabEditor(DefaultTabSubject.getInstance().getActiveTab());
-        DefaultTabSubject.getInstance().getActiveTab().pushCommandUndoStack("");
 
-        DefaultTabBar.getInstance().addTab(DefaultTabSubject.getInstance().getActiveTab());
 
-        //====================================================================
-        //FolderExplorer
-        DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
+        /*DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(".");
         leftPanel = new JScrollPane(new FileExplorer("."));
+
+        */
+
+        /* ===========================================================================================================
+             FOLDER EXPLORER
+           ===========================================================================================================
+         */
+        leftPanel = new JScrollPane();
+
+        URL url = MainWindow.class.getProtectionDomain().getCodeSource().getLocation(); //Gets the path
+        String jarPath = null;
+        try {
+            jarPath = URLDecoder.decode(url.getFile(), "UTF-8"); //Should fix it to be read correctly by the system
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String parentPath = new File(jarPath).getParentFile().getPath(); //Path of the jar
+
+        DefaultFileExplorer defaultFileExplorer = new DefaultFileExplorer(parentPath);
+        leftPanel.getViewport().add(defaultFileExplorer);
+        leftPanel.setMinimumSize(new Dimension(200,100));
         pack();
         setLocationRelativeTo(null);
 
-        //printout
+        /*
+           ===========================================================================================================
+            PRINT OUT/CONSOLE
+           ===========================================================================================================
+        */
         JTextPane terminalText = new JTextPane();
         terminalText.setEnabled(false);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
+        /*
+           ==========================================================================================================
+             SPLITING AREA
+           ==========================================================================================================
+        */
+        splitFindReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
+        tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,DefaultTabBar.getInstance().getTabbedPane(),scroolTextArea);
+        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, splitFindReplace,tabArea );
+        splitFindReplace.getTopComponent().setVisible(false);
+        splitFindReplace.getBottomComponent().setVisible(false);
+        //splitFindReplace.setVisible(false);
 
-        splitTextFind = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,findPanel, repalcePanel);
-        JSplitPane tabArea = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true, splitTextFind, DefaultTabBar.getInstance().getTabbedPane());
-        splitTextReplace = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, tabArea, defaultTextArea);
-        splitTextFind.getTopComponent().setVisible(false);
-        splitTextFind.getBottomComponent().setVisible(false);
-        //splitTextReplace.setVisible(false);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, leftPanel,splitTextReplace);
         mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,true,splitPane,terminalPanel);
 
-        //================================================
-
-
-
-
-
-
+        /* ==========================================================================================================
+              MENUBAR
+           ==========================================================================================================
+        */
         this.iMenuBar = new DefaultMenuBar();
         frame.setJMenuBar((JMenuBar) this.iMenuBar);
 
-        //MENU FILE
+        /* Menu File */
         DefaultMenu fileMenu= new DefaultMenu("File");
         this.iMenuBar.AddMenu(fileMenu);
 
         DefaultMenuItem newMenuItem= new DefaultMenuItem("New File");
-        NewFile newFile = new NewFile(defaultTextArea,defaultFileExplorer,this);
+        NewFile newFile = new NewFile();
         newMenuItem.SetCommand(newFile);
         newMenuItem.SetAcceleration(ctrlN);
         newMenuItem.SetIcon(new ImageIcon("assets/new.png"));
         fileMenu.AddMenuItem(newMenuItem);
 
         DefaultMenuItem openFileMenuItem= new DefaultMenuItem("Open File");
-        OpenFile openFile = new OpenFile(defaultTextArea,defaultFileExplorer);
+        OpenFile openFile = new OpenFile(defaultFileExplorer);
         openFileMenuItem.SetCommand(openFile);
         openFileMenuItem.SetAcceleration(ctrlO);
         openFileMenuItem.SetIcon(new ImageIcon("assets/open-file.png"));
@@ -174,14 +249,14 @@ public class MainWindow extends JFrame {
         fileMenu.AddSeparator();
 
         DefaultMenuItem saveMenuItem= new DefaultMenuItem("Save");
-        Save save = new Save(defaultTextArea,defaultFileExplorer);
+        Save save = new Save();
         saveMenuItem.SetCommand(save);
         saveMenuItem.SetAcceleration(ctrlS);
         saveMenuItem.SetIcon(new ImageIcon("assets/save.png"));
         fileMenu.AddMenuItem(saveMenuItem);
 
         DefaultMenuItem saveAsMenuItem= new DefaultMenuItem("Save As");
-        SaveAs saveAs = new SaveAs(defaultTextArea,defaultFileExplorer);
+        SaveAs saveAs = new SaveAs();
         saveAsMenuItem.SetCommand(saveAs);
         saveAsMenuItem.SetAcceleration(ctrlaltS);
         saveAsMenuItem.SetIcon(new ImageIcon("assets/save-as.png"));
@@ -190,15 +265,15 @@ public class MainWindow extends JFrame {
         fileMenu.AddSeparator();
 
         DefaultMenuItem closeFileMenuItem= new DefaultMenuItem("Close File");
-        CloseFile closeFile = new CloseFile(defaultTextArea,defaultFileExplorer);
+        CloseFile closeFile = new CloseFile();
         closeFileMenuItem.SetCommand(closeFile);
         closeFileMenuItem.SetAcceleration(ctrlW);
         closeFileMenuItem.SetIcon(new ImageIcon("assets/close-file.png"));
         fileMenu.AddMenuItem(closeFileMenuItem);
 
         DefaultMenuItem closeAllMenuFile= new DefaultMenuItem("Close All Files");
-        CloseAllFile closeAllFile = new CloseAllFile(defaultTextArea,defaultFileExplorer);
-        closeFileMenuItem.SetCommand(closeAllFile);
+        CloseAllFile closeAllFile = new CloseAllFile();
+        closeAllMenuFile.SetCommand(closeAllFile);
         closeAllMenuFile.SetIcon(new ImageIcon("assets/close-all.png"));
         fileMenu.AddMenuItem(closeAllMenuFile);
 
@@ -212,13 +287,12 @@ public class MainWindow extends JFrame {
         exitMenuFile.SetAcceleration(altF4);
         fileMenu.AddMenuItem(exitMenuFile);
 
-        //MENU EDIT
+        /* Menu Edit */
         DefaultMenu editMenu= new DefaultMenu("Edit");
         this.iMenuBar.AddMenu(editMenu);
 
         DefaultMenuItem undoMenuItem= new DefaultMenuItem("Undo");
         Undo undo = new Undo(defaultTextArea);
-        //undoMenuItem.setEnabled(false);
         undoMenuItem.SetCommand(undo);
         undoMenuItem.SetAcceleration(ctrlZ);
         undoMenuItem.SetIcon(new ImageIcon("assets/undo.png"));
@@ -227,7 +301,6 @@ public class MainWindow extends JFrame {
 
         DefaultMenuItem redoMenuItem= new DefaultMenuItem("Redo");
         Redo redo = new Redo(defaultTextArea);
-        //redoMenuItem.setEnabled(false);
         redoMenuItem.SetCommand(redo);
         newMenuItem.SetAcceleration(ctrlY);
         redoMenuItem.SetIcon(new ImageIcon("assets/redo.png"));
@@ -263,61 +336,94 @@ public class MainWindow extends JFrame {
         selectAllMenuItem.SetIcon(new ImageIcon("assets/select-all.png"));
         editMenu.AddMenuItem(selectAllMenuItem);
 
-        //MENU Search
+        /* Menu Search */
         DefaultMenu searchMenu= new DefaultMenu("Search");
         this.iMenuBar.AddMenu(searchMenu);
 
         DefaultMenuItem findMenuItem = new DefaultMenuItem("Find");
-        Find find = new Find(defaultTextArea,findPanel,splitTextFind);
+        Find find = new Find(defaultTextArea,findPanel,splitFindReplace);
         findMenuItem.SetCommand(find);
         findMenuItem.SetAcceleration(ctrlF);
         findMenuItem.SetIcon(new ImageIcon("assets/find.png"));
         searchMenu.AddMenuItem(findMenuItem);
 
         DefaultMenuItem replaceMenuItem = new DefaultMenuItem("Replace");
-        Replace replace = new Replace(defaultTextArea,repalcePanel,splitTextFind);
+        Replace replace = new Replace(defaultTextArea,repalcePanel,splitFindReplace);
         replaceMenuItem.SetCommand(replace);
         replaceMenuItem.SetIcon(new ImageIcon("assets/replace.png"));
         replaceMenuItem.SetAcceleration(ctrlR);
         searchMenu.AddMenuItem(replaceMenuItem);
 
 
-        //Menu Compile
+        /* Menu Compile */
         DefaultMenu compileMenu= new DefaultMenu("Compile");
         this.iMenuBar.AddMenu(compileMenu);
 
-        Run run = new Run(defaultFileExplorer);
+        Run run = new Run(terminalText);
         DefaultMenuItem runMenuItem= new DefaultMenuItem("Run");
         runMenuItem.SetIcon(new ImageIcon("assets/run.png"));
         runMenuItem.SetAcceleration(F10);
         runMenuItem.SetCommand(run);
         compileMenu.AddMenuItem(runMenuItem);
 
-        Compile compile = new Compile(defaultFileExplorer);
+        Compile compile = new Compile(terminalText);
         DefaultMenuItem compileMenuItem= new DefaultMenuItem("Compile");
         compileMenuItem.SetIcon(new ImageIcon("assets/compile.png"));
         compileMenuItem.SetAcceleration(F9);
         compileMenuItem.SetCommand(compile);
         compileMenu.AddMenuItem(compileMenuItem);
 
-        //Menu Snippet
+        /* Menu Snippet */
         DefaultMenu snippetMenu = new DefaultMenu("Snippet");
         this.iMenuBar.AddMenu(snippetMenu);
 
-        DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
+        DefaultMenuItem addPluginMenuItem = new DefaultMenuItem("Add Snippet");
+        snippetMenu.AddMenuItem(addPluginMenuItem);
+        AddPlugin addPlugin = new AddPlugin(frame);
+        addPluginMenuItem.SetCommand(addPlugin);
+
+        snippetMenu.addSeparator();
+
+        try(Stream<Path> paths = Files.walk(Paths.get("assets/snippet/"))) {
+            paths.forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+                    //System.out.println(filePath);
+                    String fileName = filePath.toString();
+                    fileName.replace("\\","\\\\");
+                    String[] name = fileName.split("\\\\");
+                    String file = name[2].toString().split("\\.")[0];
+                    DefaultMenuItem defaultMenuItem = new DefaultMenuItem(file);
+                    snippetMenu.AddMenuItem(defaultMenuItem);
+                    Snippet snippet = new Snippet(defaultTextArea,file);
+                    defaultMenuItem.SetCommand(snippet);
+                }
+            });
+        }
+
+        /*DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);
+        Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
+        bubbleSortMenuItem.SetCommand(snippetBubleSort);
 
         DefaultMenuItem selectionSortMenuItem = new DefaultMenuItem("Selection Sort");
         snippetMenu.AddMenuItem(selectionSortMenuItem);
+        Snippet snippetSelectionSort = new Snippet(defaultTextArea,"selection-sort");
+        selectionSortMenuItem.SetCommand(snippetSelectionSort);
 
         DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
         snippetMenu.AddMenuItem(insertionSortMenuItem);
+        Snippet snippetInsertionSort = new Snippet(defaultTextArea, "insertion-sort");
+        insertionSortMenuItem.SetCommand(snippetInsertionSort);*/
 
-        //Menu Themes
+        /* Menu Themes */
         DefaultMenu themesMenu = new DefaultMenu("Themes");
         this.iMenuBar.AddMenu(themesMenu);
 
-        //Region Toobar
+        /*
+           ===========================================================================================================
+               TOOLBAR
+           ===========================================================================================================
+         */
         this.iToolBar = new DefaultToolBar();
         DefaultTool newFileTool = new DefaultTool("assets/new.png","New file");
         newFileTool.SetCommand(newFile);
@@ -342,20 +448,12 @@ public class MainWindow extends JFrame {
         this.iToolBar.AddToolItem(closeAllFileTool);
 
         this.iToolBar.AddSeparator();
-        DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
+        final DefaultTool undoTool = new DefaultTool("assets/undo.png","Undo");
         this.iToolBar.AddToolItem(undoTool);
         undoTool.setEnabled(false);
         undoTool.SetCommand(undo);
-        /*if(defaultTextArea.GetStackText().empty())
-        {
-            System.out.println("masuk");
-            undoTool.setEnabled(false);
-        }*/
 
-        //CheckUndo checkUndo = new CheckUndo(undoTool,defaultTextArea);
-
-
-        DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
+        final DefaultTool redoTool = new DefaultTool("assets/redo.png","Redo");
         this.iToolBar.AddToolItem(redoTool);
         redoTool.setEnabled(false);
         redoTool.SetCommand(redo);
@@ -394,12 +492,6 @@ public class MainWindow extends JFrame {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
-
-
-       // contentPanel.add(splitPane, BorderLayout.CENTER);
-
-
-
         contentPanel.add(mainSplit, BorderLayout.CENTER);
 
         final JLabel statusBar = new JLabel("Status:");
@@ -429,12 +521,11 @@ public class MainWindow extends JFrame {
             }
         });
 
-        //System.out.println(pos);
-
-        //contentPanel.add(find, BorderLayout.SOUTH);
         setContentPane(contentPanel);
         frame.add(contentPanel);
+        splashScreen.setVisible(false);
         frame.setVisible(true);
+        splitFindReplace.setVisible(false);
 
     }
     private static class CloseableTabComponent extends JPanel {

@@ -19,8 +19,10 @@ public class DefaultTabBar implements ITabBar{
         ChangeListener changeListener = new ChangeListener() {
             public void stateChanged(ChangeEvent changeEvent) {
                 JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
-                int index = sourceTabbedPane.getSelectedIndex();
-                selectTab(index);
+                if (sourceTabbedPane.getTabCount()>0) {
+                    int index = sourceTabbedPane.getSelectedIndex();
+                    selectTab(index);
+                }
             }
         };
         tabbedPane.addChangeListener(changeListener);
@@ -36,20 +38,32 @@ public class DefaultTabBar implements ITabBar{
 
     public void addTab(DefaultTabEditor tabEditor) {
         tabbedPane.addTab(tabEditor.getTabName().toString(), makePanel(""));
+        this.selectTab(tabbedPane.getTabCount() - 1);
     }
 
     public void removeTab(DefaultTabEditor tabEditor) {
-        tabbedPane.remove(tabbedPane.indexOfTab(tabEditor.getTabName().toString()));
+        System.out.println("[DEBUG] tabpane size: " + tabbedPane.getTabCount());
+        System.out.println("[DEBUG] index of deleted tab: " + tabbedPane.indexOfTab(tabEditor.getTabName().toString()));
+        int idx = tabbedPane.indexOfTab(tabEditor.getTabName().toString());
+        if (idx>-1) {
+            tabbedPane.remove(idx);
+        }
+        System.out.println("[DEBUG] remaining tabpane size: " + tabbedPane.getTabCount());
+
     }
 
     public void selectTab(int idx) {
-        DefaultTabSubject.getInstance().selectTab(tabbedPane.getTitleAt(idx));
+        if (idx < tabbedPane.getTabCount()) {
+            tabbedPane.setSelectedIndex(idx);
+            DefaultTabSubject.getInstance().selectTab(tabbedPane.getTitleAt(idx));
+        }
     }
 
     private JPanel makePanel(String text) {
         JPanel p = new JPanel();
         p.add(new Label(text));
         p.setLayout(new GridLayout(1, 1));
+
         p.setVisible(false);
         return p;
     }

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 
 /**
  * Created by hanu on 10/30/16.
@@ -82,6 +83,10 @@ public class DefaultMenuItem extends JMenuItem implements IMenuItem,MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.command.execute();
+        try {
+            this.command.execute();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,8 @@
 package FileExplorer;
 
 import Commands.ICommand;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 
 import javax.swing.*;
 import java.io.File;
@@ -10,9 +12,7 @@ import java.io.File;
  */
 public class DefaultFileExplorer extends FileExplorer implements IFileExplorer {
 
-    private String folderPath = ".";
-    private String fileName = "";
-
+    private String path = ".";
     /**
      * Construct a FileTree
      *
@@ -20,28 +20,14 @@ public class DefaultFileExplorer extends FileExplorer implements IFileExplorer {
      */
     public DefaultFileExplorer(String folderPath) {
         super(folderPath);
-        this.folderPath=folderPath;
+        this.path=folderPath;
     }
 
     @Override
-    public void SetPath(String folderPath) {
-        this.folderPath=folderPath;
+    public void update(String path) {
+        if(path=="")
+            path=".";
+        System.out.println(path);
+        this.reloadTree(path);
     }
-
-    @Override
-    public String GetPath() {
-        return this.folderPath;
-    }
-
-    @Override
-    public void SetFileName(String fileName) {
-        this.fileName=fileName;
-    }
-
-    @Override
-    public String GetFileName() {
-        return this.fileName;
-    }
-
-
 }

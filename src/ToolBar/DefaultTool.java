@@ -5,6 +5,7 @@ import Commands.ICommand;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 
 /**
  * Created by ahmad on 11/1/2016.
@@ -50,7 +51,11 @@ public class DefaultTool extends JButton implements ITool,MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.command.execute();
+        try {
+            this.command.execute();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override

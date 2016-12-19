@@ -1,10 +1,8 @@
 package Commands;
 
-import Editor.ITextArea;
-import FileExplorer.IFileExplorer;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import TabBar.DefaultTabEditor;
+import TabBar.DefaultTabSubject;
 
-import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,20 +11,28 @@ import java.io.IOException;
 /**
  * Created by HANU on 21/11/2016.
  */
-public class Save  implements ICommand {
-    private IFileExplorer iFileExplorer;
-    private ITextArea textArea;
+public class Save  implements ICommand{
+    private String content;
+    private String path;
+    private String fileName;
+    private DefaultTabSubject subject;
+    private DefaultTabEditor defaultTabEditor;
 
-    public Save(RSyntaxTextArea textArea,  IFileExplorer iFileExplorer) {
-        this.textArea = (ITextArea) textArea;
-        this.iFileExplorer = iFileExplorer;
+    public Save(){
+        this.subject = DefaultTabSubject.getInstance();
     }
 
     @Override
     public void execute(){
-        if(this.iFileExplorer.GetPath()!="." ||  this.iFileExplorer.GetFileName()!="null"){
+        defaultTabEditor = this.subject.getActiveTab();
+        defaultTabEditor.setTextContent(this.subject.getTextArea().getText());
+        content = defaultTabEditor.getTextContent();
+        path = defaultTabEditor.getFilePath();
+        fileName = defaultTabEditor.getTabName();
+        System.out.println("File "+path+fileName+" saving...");
+
             try {
-                File file = new File(this.iFileExplorer.GetPath()+"\\"+ this.iFileExplorer.GetFileName());
+                File file = new File(path+fileName);
 
                 if (!file.exists()) {
                     file.createNewFile();
@@ -34,14 +40,13 @@ public class Save  implements ICommand {
 
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(this.textArea.GetText());
+                bw.write(content);
                 bw.close();
+                this.subject.update();
+                System.out.println("File "+path+fileName+" saved");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+this.iFileExplorer.GetFileName()+".c"+" saved");
-        }
     }
 
 }

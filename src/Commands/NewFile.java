@@ -1,11 +1,8 @@
 package Commands;
 
-import Editor.ITextArea;
-import FileExplorer.IFileExplorer;
 import TabBar.DefaultTabBar;
 import TabBar.DefaultTabEditor;
 import TabBar.DefaultTabSubject;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
 import java.io.BufferedWriter;
@@ -17,15 +14,13 @@ import java.io.IOException;
  * Created by mfrazi on 15/11/2016.
  */
 public class NewFile implements ICommand{
-    private IFileExplorer iFileExplorer;
-    private String folderPath;
-    private JFrame mainwindow;
-    private ITextArea textArea;
+    private String content;
+    private DefaultTabSubject subject;
+    private DefaultTabEditor defaultTabEditor;
 
-    public NewFile(RSyntaxTextArea textArea, IFileExplorer iFileExplorer, JFrame mainwindow) {
-//        this.textArea = (ITextArea) textArea;
-        this.iFileExplorer = iFileExplorer;
-        this.mainwindow = mainwindow;
+    public NewFile() {
+        this.subject = DefaultTabSubject.getInstance();
+        content="";
     }
 
     @Override
@@ -34,10 +29,9 @@ public class NewFile implements ICommand{
                 "Masukkan Nama File ?",
                 "Dialog",
                 JOptionPane.QUESTION_MESSAGE);
+        DefaultTabEditor tabEditor = new DefaultTabEditor(fileName + ".c");
         try {
-            String content = "";
-//            this.textArea.SetText("");
-            File file = new File(this.iFileExplorer.GetPath()+"\\"+fileName+".c");
+            File file = new File(tabEditor.getFilePath()+tabEditor.getTabName());
 
             if (!file.exists()) {
                 file.createNewFile();
@@ -50,13 +44,14 @@ public class NewFile implements ICommand{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        iFileExplorer.SetFileName(fileName+".c");
-        System.out.println("File "+this.iFileExplorer.GetPath()+"\\"+fileName+".c"+" created");
-        DefaultTabEditor tabEditor = new DefaultTabEditor(fileName + ".c");
-        DefaultTabSubject.getInstance().attachObserver(tabEditor);
-        DefaultTabSubject.getInstance().setActiveTab(tabEditor);
-        DefaultTabSubject.getInstance().update();
         DefaultTabBar.getInstance().addTab(tabEditor);
+        this.subject.attachObserver(tabEditor);
+        this.subject.setActiveTab(tabEditor);
+        this.subject.update();
+
+        System.out.println("[DEBUG TAB NAME] " + tabEditor.getTabName());
+        System.out.println("[DEBUG TAB FILE] " + tabEditor.getFilePath());
+
         System.out.println("[DEBUG] " + DefaultTabSubject.getInstance().getActiveTab().getTabId().toString());
     }
 }
