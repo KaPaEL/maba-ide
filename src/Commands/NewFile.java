@@ -14,13 +14,11 @@ import java.io.IOException;
  * Created by mfrazi on 15/11/2016.
  */
 public class NewFile implements ICommand{
-    private String content;
     private DefaultTabSubject subject;
     private DefaultTabEditor defaultTabEditor;
 
     public NewFile() {
         this.subject = DefaultTabSubject.getInstance();
-        content="";
     }
 
     @Override
@@ -30,20 +28,7 @@ public class NewFile implements ICommand{
                 "Dialog",
                 JOptionPane.QUESTION_MESSAGE);
         DefaultTabEditor tabEditor = new DefaultTabEditor(fileName + ".c");
-        try {
-            File file = new File(tabEditor.getFilePath()+tabEditor.getTabName());
 
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(content);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         DefaultTabBar.getInstance().addTab(tabEditor);
         this.subject.attachObserver(tabEditor);
         this.subject.setActiveTab(tabEditor);

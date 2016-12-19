@@ -23,12 +23,9 @@ import java.nio.file.Paths;
 // TODO: 15/11/2016 http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FileChooserDemoProject/src/components/FileChooserDemo.java
 public class OpenFile extends JFileChooser implements ICommand {
     private String content;
-    private String path;
-    private String fileName;
     private String newPath;
     private String newFileName;
     private DefaultTabSubject subject;
-    private DefaultTabEditor defaultTabEditor;
     private IFileExplorer fileExplorer;
 
     public OpenFile(FileExplorer fileExplorer) {
@@ -43,14 +40,7 @@ public class OpenFile extends JFileChooser implements ICommand {
 
     @Override
     public void execute() {
-        defaultTabEditor = this.subject.getActiveTab();
-        defaultTabEditor.setTextContent(this.subject.getTextArea().getText());
-        path = defaultTabEditor.getFilePath();
-
         JFileChooser fileChooser = new JFileChooser(".");
-        if(path!="")
-            fileChooser = new JFileChooser(path);
-
         fileChooser.setDialogTitle("Open File");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".c", "c", "c");
         fileChooser.setFileFilter(filter);

@@ -1,5 +1,6 @@
 package Commands.ShellCommand;
 
+import Commands.Save;
 import FileExplorer.IFileExplorer;
 
 import javax.swing.*;
@@ -15,6 +16,8 @@ public class Compile extends ShellCommand{
     @Override
     public void UpdateCommand(){
         super.UpdateCommand();
+        Save save = new Save();
+        save.execute();
         String path = this.GetPath();
         if(path=="")
             path=".";
