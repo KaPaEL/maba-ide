@@ -27,6 +27,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 /**
  * Created by Hanif Sudira on 10/30/2016.
@@ -373,7 +377,30 @@ public class MainWindow extends JFrame {
         DefaultMenu snippetMenu = new DefaultMenu("Snippet");
         this.iMenuBar.AddMenu(snippetMenu);
 
-        DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
+        DefaultMenuItem addPluginMenuItem = new DefaultMenuItem("Add Snippet");
+        snippetMenu.AddMenuItem(addPluginMenuItem);
+        AddPlugin addPlugin = new AddPlugin(frame);
+        addPluginMenuItem.SetCommand(addPlugin);
+
+        snippetMenu.addSeparator();
+
+        try(Stream<Path> paths = Files.walk(Paths.get("assets/snippet/"))) {
+            paths.forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+                    //System.out.println(filePath);
+                    String fileName = filePath.toString();
+                    fileName.replace("\\","\\\\");
+                    String[] name = fileName.split("\\\\");
+                    String file = name[2].toString().split("\\.")[0];
+                    DefaultMenuItem defaultMenuItem = new DefaultMenuItem(file);
+                    snippetMenu.AddMenuItem(defaultMenuItem);
+                    Snippet snippet = new Snippet(defaultTextArea,file);
+                    defaultMenuItem.SetCommand(snippet);
+                }
+            });
+        }
+
+        /*DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);
         Snippet snippetBubleSort = new Snippet(defaultTextArea,"buble-sort");
         bubbleSortMenuItem.SetCommand(snippetBubleSort);
@@ -386,14 +413,7 @@ public class MainWindow extends JFrame {
         DefaultMenuItem insertionSortMenuItem = new DefaultMenuItem("Insertion Sort");
         snippetMenu.AddMenuItem(insertionSortMenuItem);
         Snippet snippetInsertionSort = new Snippet(defaultTextArea, "insertion-sort");
-        insertionSortMenuItem.SetCommand(snippetInsertionSort);
-
-        snippetMenu.addSeparator();
-        DefaultMenuItem addPluginMenuItem = new DefaultMenuItem("Add Snippet");
-        snippetMenu.AddMenuItem(addPluginMenuItem);
-        AddPlugin addPlugin = new AddPlugin(frame);
-        addPluginMenuItem.SetCommand(addPlugin);
-
+        insertionSortMenuItem.SetCommand(snippetInsertionSort);*/
 
         /* Menu Themes */
         DefaultMenu themesMenu = new DefaultMenu("Themes");
