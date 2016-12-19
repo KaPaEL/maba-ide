@@ -379,7 +379,7 @@ public class MainWindow extends JFrame {
 
         DefaultMenuItem addPluginMenuItem = new DefaultMenuItem("Add Snippet");
         snippetMenu.AddMenuItem(addPluginMenuItem);
-        AddPlugin addPlugin = new AddPlugin(frame);
+        AddPlugin addPlugin = new AddPlugin(frame, snippetMenu, defaultTextArea);
         addPluginMenuItem.SetCommand(addPlugin);
 
         snippetMenu.addSeparator();
@@ -399,6 +399,15 @@ public class MainWindow extends JFrame {
                 }
             });
         }
+
+        /*for (int i = 0 ; i < snippetMenu.getItemCount();i++){
+            Component component = snippetMenu.getMenuComponent(i);
+            if(component instanceof DefaultMenuItem){
+                System.out.println(i);
+                DefaultMenuItem item = (DefaultMenuItem) component;
+                System.out.println(item.getText());
+            }
+        }*/
 
         /*DefaultMenuItem bubbleSortMenuItem= new DefaultMenuItem("Bubble Sort");
         snippetMenu.AddMenuItem(bubbleSortMenuItem);

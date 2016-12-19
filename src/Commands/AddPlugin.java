@@ -1,6 +1,10 @@
 package Commands;
 
+import Editor.ITextArea;
 import Observer.FrameObserver;
+import MenuBar.DefaultMenu;
+import MenuBar.DefaultMenuItem;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +16,30 @@ import java.io.*;
  * Created by Hanif Sudira on 12/18/2016.
  */
 public class AddPlugin implements ICommand {
-    String temp;
-    FrameObserver frameObserver;
-    public  AddPlugin(FrameObserver frameObserver){
+    private RSyntaxTextArea textArea;
+    private String temp;
+    private FrameObserver frameObserver;
+    DefaultMenu defaultMenu;
+    DefaultMenuItem defaultMenuItem;
+
+    public  AddPlugin(FrameObserver frameObserver, DefaultMenu defaultMenu,RSyntaxTextArea textArea){
         this.frameObserver = frameObserver;
+        this.defaultMenu = defaultMenu;
+        this.textArea = textArea;
     }
+
     @Override
     public void execute() throws FileNotFoundException {
+        /*for (int i = 2 ; i < defaultMenu.getItemCount();i++){
+            Component component = defaultMenu.getMenuComponent(i);
+            if(component instanceof JMenuItem){
+                System.out.println(i);
+                JMenuItem item = (JMenuItem) component;
+                System.out.println(item.getText());
+            }
+        }*/
+
         JPanel panel = new JPanel(new GridLayout(0,1));
-        JTextField fieldNameSnippet = new JTextField();
-        panel.add(new JLabel("Snippet Name"));
-        panel.add(fieldNameSnippet);
         panel.add(new JLabel("Code"));
         Button showFileDialogButton = new Button("Choose File");
         panel.add(showFileDialogButton);
@@ -55,7 +72,13 @@ public class AddPlugin implements ICommand {
             catch (IOException e) {
                 e.printStackTrace();
             }
-
+            String file = fileDialog.getFile().toString().split("\\.")[0];
+            System.out.println(file);
+            DefaultMenuItem defaultMenuItem = new DefaultMenuItem(file);
+            defaultMenu.AddMenuItem(defaultMenuItem);
+            Snippet snippet = new Snippet(this.textArea,file);
+            defaultMenuItem.SetCommand(snippet);
+            defaultMenu.validate();
         }
     }
 }
