@@ -14,7 +14,7 @@ public class Compile extends ShellCommand{
     }
     
     @Override
-    public void UpdateCommand(){
+    public boolean UpdateCommand(){
         super.UpdateCommand();
         Save save = new Save();
         save.execute();
@@ -26,5 +26,7 @@ public class Compile extends ShellCommand{
         String command = "gcc \""+path+"\\"+fileName+"\" -o \""+outputExe+"\"";
         this.SetOutputExe(outputExe);
         this.SetCommand(command);
+        this.SetCommandMessage("Compile");
+        return true;
     }
 }

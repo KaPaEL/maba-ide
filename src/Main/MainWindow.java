@@ -197,7 +197,7 @@ public class MainWindow extends JFrame {
            ===========================================================================================================
         */
         JTextPane terminalText = new JTextPane();
-        terminalText.setEnabled(false);
+        terminalText.setEnabled(true);
         JScrollPane terminalPanel = new JScrollPane(terminalText);
 
         /*
