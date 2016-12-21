@@ -28,6 +28,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
     private SuggestionPanel suggestion;
     private JTextArea textarea;
     static Timer timer;
+    public ArrayList<String> template = new ArrayList<String>();
 
     public DefaultTextArea() {
         this.subject = DefaultTabSubject.getInstance();
@@ -152,11 +153,11 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
         private JPopupMenu popupMenu;
         private String subWord;
         private final int insertionPosition;
-        private JTextArea textarea;
+        //private JTextArea textarea;
 
 
         public SuggestionPanel(JTextArea textarea, int position, String subWord, Point location) {
-            this.textarea = textarea;
+            //this.textarea = textarea;
             this.insertionPosition = position;
             this.subWord = subWord;
             popupMenu = new JPopupMenu();
@@ -178,7 +179,7 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
         private JList createSuggestionList(final int position, final String subWord) {
             ArrayList<String> data = new ArrayList<String>();
             String temp = textarea.getText();
-            ArrayList<String> template = new ArrayList<String>();
+            template.clear();
             String[] splitted = temp.split("\\W+");
             template.add("char ");
             template.add("int ");
@@ -191,23 +192,31 @@ public class DefaultTextArea extends RSyntaxTextArea implements ITextArea, ITabO
             {
                 template.add(splitted[i]+" ");
             }
+            System.out.println("ukuran suggestion = "+template.size()+"");
             for (int a = 0;a<template.size();a++)
             {
-                //System.out.println(template.toArray()[a]);
-                if(template.toArray()[a].toString().toLowerCase().substring(0,subWord.length()).equals(subWord.toLowerCase()))
+                System.out.println(template.toArray()[a].toString());
+                if(subWord.length() > template.toArray()[a].toString().length())
                 {
-                    int flag = 0;
-                    for (int b = 0;b<data.size();b++)
+                    continue;
+                }
+                else
+                {
+                    if(template.toArray()[a].toString().toLowerCase().substring(0,subWord.length()).equals(subWord.toLowerCase()))
                     {
-                        if(template.toArray()[a].toString().equals(data.toArray()[b]))
+                        int flag = 0;
+                        for (int b = 0;b<data.size();b++)
                         {
-                            flag = 1;
-                            break;
+                            if(template.toArray()[a].toString().equals(data.toArray()[b]))
+                            {
+                                flag = 1;
+                                break;
+                            }
                         }
-                    }
-                    if(flag == 0)
-                    {
-                        data.add(template.toArray()[a].toString());
+                        if(flag == 0)
+                        {
+                            data.add(template.toArray()[a].toString());
+                        }
                     }
                 }
             }
