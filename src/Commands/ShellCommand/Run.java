@@ -18,26 +18,34 @@ public class Run extends ShellCommand{
     }
     
     @Override
-    public void UpdateCommand(){
+    public boolean UpdateCommand(){
         super.UpdateCommand();
         URL url = MainWindow.class.getProtectionDomain().getCodeSource().getLocation(); //Gets the path
         String jarPath = null;
-        try {
+        try{
             jarPath = URLDecoder.decode(url.getFile(), "UTF-8"); //Should fix it to be read correctly by the system
-        } catch (UnsupportedEncodingException e) {
+        }catch(UnsupportedEncodingException e){
             e.printStackTrace();
         }
-
+        
         String parentPath = new File(jarPath).getParentFile().getPath(); //Path of the jar
-
-
         String path = this.GetPath();
-        if(path=="")
-            path=".";
+        if(path==""){
+            path = ".";
+        }
+        
         String fileName = this.GetFileName();
+        
+        String checkPath = path+"\\"+fileName.split("\\.c")[0]+".exe";
+        File f = new File(checkPath);
+        if(!(f.exists() && !f.isDirectory())){
+            return false;
+        }
         String outputExe = "cmd /c start cmd /c (\""+parentPath+"\\ConsolePauser.exe\" \""+path+"\\"+fileName.split("\\.c")[0]+"\")";
-//        String outputExe = "cmd /c start cmd /c (\"C:\\Program Files (x86)\\Dev-Cpp\\ConsolePauser.exe\" \""+path+"\\"+fileName.split("\\.c")[0]+"\")";
+        //        String outputExe = "cmd /c start cmd /c (\"C:\\Program Files (x86)\\Dev-Cpp\\ConsolePauser.exe\" \""+path+"\\"+fileName.split("\\.c")[0]+"\")";
         this.SetOutputExe(outputExe);
         this.SetCommand(outputExe);
+        this.SetCommandMessage("Running");
+        return true;
     }
 }

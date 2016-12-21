@@ -27,7 +27,7 @@ public class DefaultTabSubject implements ITabSubject {
     }
 
     public DefaultTextArea getTextArea() {
-        if (this.observers.size() >= 1) return (DefaultTextArea) this.observers.get(0);
+        if (this.observers.size() >= 2) return (DefaultTextArea) this.observers.get(1);
         else return null;
     }
 

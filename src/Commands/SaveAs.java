@@ -56,11 +56,12 @@ public class SaveAs extends JFileChooser implements ICommand {
                 BufferedWriter bw = new BufferedWriter(fw);
                 bw.write(content);
                 bw.close();
-                newPath = fileChooser.getSelectedFile().getAbsolutePath();
+                newPath = fileChooser.getSelectedFile().getParentFile().getAbsolutePath();
                 newFileName = fileChooser.getSelectedFile().getName();
                 DefaultTabEditor tabEditor = new DefaultTabEditor(newFileName + ".c");
                 tabEditor.setTextContent(content);
                 tabEditor.setFilePath(newPath);
+                System.out.println("File " + newPath);
                 DefaultTabBar.getInstance().addTab(tabEditor);
                 this.subject.attachObserver(tabEditor);
                 this.subject.setActiveTab(tabEditor);
